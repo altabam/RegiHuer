@@ -1,0 +1,1 @@
+cat tokendjango.txt| git pull https://github.com/altabam/RegiHuer.git -u altabam -password-stdin
