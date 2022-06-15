@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Hortelanos</title>
+</head>
+<body>
+    <h1> Listado de Hortelanos</h1>
+    <table>
+        <thead>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Apodo</th>
+        </thead>
+        {%for hortelano in hortelanos%}
+        <tr>
+            <td>{{hortelano.nombre}}</td>
+            <td>{{hortelano.apellido}}</td>
+            <td>{hortelano.apodo}}</td>
+        </tr>
+        {%end for%}
+        <tbody>
+    
+        </tbody>
+    
+    </table>
+</body>
+</html>
