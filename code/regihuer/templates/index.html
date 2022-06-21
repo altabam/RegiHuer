@@ -8,19 +8,21 @@
 </head>
 <body>
     <h1> Listado de Hortelanos</h1>
-    <table>
+    <table border="1">
         <thead>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Apodo</th>
+            <th>Email</th>
         </thead>
-        {%for hortelano in hortelanos%}
+        {%for hortelano in listaHortelanos%}
         <tr>
             <td>{{hortelano.nombre}}</td>
             <td>{{hortelano.apellido}}</td>
-            <td>{hortelano.apodo}}</td>
+            <td>{{hortelano.apodo}}</td>
+            <td>{{hortelano.mail}}</td>
         </tr>
-        {%end for%}
+        {%endfor%}
         <tbody>
     
         </tbody>

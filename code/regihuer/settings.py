@@ -55,7 +55,7 @@ ROOT_URLCONF = 'regihuer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./RegiHuer/templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
