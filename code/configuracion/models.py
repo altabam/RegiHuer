@@ -7,6 +7,7 @@ from django.dispatch import receiver
 
 # Create your models here.
 class Hortelano(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE )
     nombre = models.CharField(max_length=80)
     apodo = models.CharField(max_length=30)
     mail = models.EmailField(max_length=254, blank=True )
@@ -30,6 +31,8 @@ class Canteros(models.Model):
     nombre = models.CharField(max_length=80)
     ancho = models.SmallIntegerField()
     largo = models.SmallIntegerField()
+    ubicacion_x = models.SmallIntegerField()
+    ubicacion_y = models.SmallIntegerField()
     
     def __str__(self):
         return self.nombre

@@ -1,0 +1,53 @@
+@import url("base.css");
+
+.titulo-login{
+  margin: 1%;
+  padding: 1%;
+  color: azure;
+}
+.contenedor-form{
+  margin: 1%;
+  padding: 1%;
+  width: 40%;
+  height: 80%;
+  background-color: blueviolet;
+  position: relative;
+  border-radius: 20px;
+  left: 30%;
+}
+
+.datos-login{
+  margin: 1%;
+  padding: 1%;
+  border-color: rgb(80, 5, 99);
+  height: 20%;
+  
+}
+.boton-largo{
+  margin: 0.1em;
+  padding: 0.5em 0.5em;
+  height: 20%;
+  width: 8em;
+  border-radius: 10px;
+  border-color: rgb(132, 121, 134);
+  text-decoration-color:black;
+}
+
+.boton-largo:hover {
+  margin: 0.1em;
+  padding: 0.5em 0.5em;
+  background-color: rgb(228, 228, 88);
+  text-decoration: underline;
+  font-weight: bolder;
+  width: 8em;
+}
+#id_username{
+  margin: 1%;
+  padding: 1%;
+  width: 40%;
+} 
+#id_password{
+  margin: 1%;
+  padding: 1%;
+  width: 40%;
+}

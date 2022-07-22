@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{% block title %} {% endblock %}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- CSS only -->
+    {% block style %}  
+    <link rel='stylesheet' href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+</head>
+
+<body>
+    <header class="cabecera" once="cabecera" id="cabecera">
+        <div class="itemCabecera">
+            <img src="{% static 'img/regihuer.png' %}" alt="RegiHuer" title="Logo RegiHuer">
+    
+        </div>
+        <div class="itemCabecera">
+            <h1 class="tituloCabecera">Actividades de la Huerta</h1>
+    
+        </div>
+        <div class="itemCabecera">
+                <a class="contacto-mail" href="mailto:info@cohuertas.com">info @ regihuer.com.ar</a>
+        </div>
+
+    </header>
+    <hr>
+    {% block nav %}
+    {% endblock %}
+
+    <section class="container">
+        {% block body %}
+        {% endblock %}
+
+    </section>
+    <footer>
+        <section>
+            <p> Copyright RegiHuer</p>
+        </section>
+    </footer>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+
+</body>
+
+</html>

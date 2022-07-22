@@ -6,11 +6,12 @@ services:
     ports: 
       - 5432:5432
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - "./data/db:/var/lib/postgresssql/data:rw"
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+ 
 
   web:
     build: .
@@ -21,7 +22,8 @@ services:
       - "8000:8000"
     depends_on:
       - db
+
+  
 networks:
   default:
     name: red_regihuer
-

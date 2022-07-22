@@ -1,0 +1,56 @@
+{% extends "./base.html"%}
+{% block title %} Editar Huerta {% endblock %}
+{% block body %} 
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Huerta</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/configuracion/huerta_modificar/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <label for="id"></label>
+                        <input type="text" name="txtId" id="txtId" value="{{huerta.id}}" class="form-control" placeholder="id"
+                             aria-describedby="helpId" required readonly>
+                        <small id="helpId" class="text-muted">Help text</small>
+                    </div>                    
+                    <div class="form-group">
+                        <label for="Nombre"></label>
+                        <input type="text" name="txtNombre" id="txtNombre" value="{{huerta.nombre}}" class="form-control" placeholder="Nombre"
+                            minlength="2" maxlength="50" aria-describedby="helpId" required>
+                        <small id="helpId" class="text-muted">Help text</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="coord_x">Coord X</label>
+                        <input type="text" name="txtCoordX" id="txtCoordX" value="{{huerta.coord_x}}" class="form-control" placeholder="Coord. X"
+                            minlength="2" maxlength="60" required aria-describedby="helpId">
+                        <small id="helpId" class="text-muted">Help text</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Coord Y</label>
+                        <input type="text" name="txtCoordY" id="txtCoordY" value="{{huerta.coord_y}}" class="form-control" placeholder="Coord. Y"
+                            minlength="1" maxlength="50" aria-describedby="helpId" required>
+                        <small id="helpId" class="text-muted">Help text</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Ancho</label>
+                        <input type="text" name="txtAncho" id="txtAncho" value="{{huerta.ancho}}" class="form-control" placeholder="Ancho"
+                            minlength="1" maxlength="50" aria-describedby="helpId" required>
+                        <small id="helpId" class="text-muted">Help text</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Largo</label>
+                        <input type="text" name="txtLargo" id="txtLargo" value="{{huerta.largo}}" class="form-control" placeholder="Largo"
+                            minlength="1" maxlength="50" aria-describedby="helpId" required>
+                        <small id="helpId" class="text-muted">Help text</small>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white ">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}  

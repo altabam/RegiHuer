@@ -1,32 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Hortelanos</title>
-</head>
-<body>
-    <h1> Listado de Hortelanos</h1>
-    <table border="1">
-        <thead>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Apodo</th>
-            <th>Email</th>
-        </thead>
-        {%for hortelano in listaHortelanos%}
-        <tr>
-            <td>{{hortelano.nombre}}</td>
-            <td>{{hortelano.apellido}}</td>
-            <td>{{hortelano.apodo}}</td>
-            <td>{{hortelano.mail}}</td>
-        </tr>
-        {%endfor%}
-        <tbody>
-    
-        </tbody>
-    
-    </table>
-</body>
-</html>
+{% extends "base_nav.html"%}
+{% block title %} Registro para Huertas {% endblock %}
+{% block body %}     
+{% load static %} 
+<section class="imgCabecera">
+<img src="{% static 'img/imgCabecera.png' %}  " class="imgCab"></img> 
+
+
+</section>
+
+    <h2> Una aplicación para facilitar su planificación en la huerta</h2>
+
+{% endblock %}

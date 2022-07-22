@@ -1,9 +1,8 @@
-{% extends "./base.html"%}
+{% extends "baseConfiguracion.html"%}
 {% block title %} List. Hortelanos {% endblock %}
 {% block body %} 
-   
-
-<div class="row">
+ <div class="row">
+    <h3>Usuario:</h3>{{user}}
     <div class="col-sm-12 col-md-8 col-lg-4 col-xl-4">
         {% if messages %}
             {% for message in messages %}
@@ -15,23 +14,29 @@
         {% endif %}
         <div class="card">
             <div class="card-body">
-                <form action="registrarHortelano/" method="POST">{% csrf_token %}
+                <form action="/configuracion/registrarHortelano/" method="POST">{% csrf_token %}
                     <div class="form-group">
                         <label for="Nombre"></label>
                         <input type="text" name="txtNombre" id="txtNombre" class="form-control" placeholder="Nombre"
                             minlength="2" maxlength="50" aria-describedby="helpId" required>
-                        <small id="helpId" class="text-muted">Help text</small>
+                        <small id="helpId" class="text-muted">Nombre del Hortelano</small>
                     </div>
                     <div class="form-group">
                         <label for="Apodo"></label>
                         <input type="text" name="txtApodo" id="txtApodo" class="form-control" placeholder="Apodo"
                             minlength="2" maxlength="60" required aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Help text</small>
+                        <small id="helpId" class="text-muted">Apodo del Hortelano</small>
                     </div>
                     <div class="form-group">
                         <label for="">E-mail</label>
                         <input type="text" name="txtMail" id="txtMail" class="form-control" placeholder="Mail"
                             minlength="6" maxlength="50" aria-describedby="helpId" required>
+                        <small id="helpId" class="text-muted">Help text</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="Usuario"></label>
+                        <input type="text" name="txtUsuario" id="txtUsuario" class="form-control" placeholder="Usuario" value="{{user}}"
+                            minlength="2" maxlength="50" aria-describedby="helpId" required>
                         <small id="helpId" class="text-muted">Help text</small>
                     </div>
                     <div class="form-group">
@@ -62,8 +67,8 @@
                         <td>{{listadoHortelano.nombre}}</td>
                         <td>{{listadoHortelano.apodo}}</td>
                         <td>{{listadoHortelano.mail}}</td>
-                        <td><a href="editarHortelano/{{listadoHortelano.id}}" class="btn btn-info">Editar</a></td>
-                        <td><a href="eliminarHortelano/{{listadoHortelano.id}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                        <td><a href="/configuracion/editarHortelano/{{listadoHortelano.id}}/" class="btn btn-info">Editar</a></td>
+                        <td><a href="/configuracion/eliminarHortelano/{{listadoHortelano.id}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
