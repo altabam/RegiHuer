@@ -1,0 +1,75 @@
+{% extends "./base.html"%}
+{% block title %} List. Hortelanos {% endblock %}
+{% block body %} 
+   
+
+<div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-4 col-xl-4">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong class="text-dark">{{ message }}</strong>
+            </div>
+            {% endfor %}
+        {% endif %}
+        <div class="card">
+            <div class="card-body">
+                <form action="registrarHortelano/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <label for="Nombre"></label>
+                        <input type="text" name="txtNombre" id="txtNombre" class="form-control" placeholder="Nombre"
+                            minlength="2" maxlength="50" aria-describedby="helpId" required>
+                        <small id="helpId" class="text-muted">Help text</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="Apodo"></label>
+                        <input type="text" name="txtApodo" id="txtApodo" class="form-control" placeholder="Apodo"
+                            minlength="2" maxlength="60" required aria-describedby="helpId">
+                        <small id="helpId" class="text-muted">Help text</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="">E-mail</label>
+                        <input type="text" name="txtMail" id="txtMail" class="form-control" placeholder="Mail"
+                            minlength="6" maxlength="50" aria-describedby="helpId" required>
+                        <small id="helpId" class="text-muted">Help text</small>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white ">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-8 col-xl-8">
+        <h1>configuracion de Huertas</h1>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Apodo</th>
+                        <th>Mail</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for listadoHortelano in listadoHortelano%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{listadoHortelano.nombre}}</td>
+                        <td>{{listadoHortelano.apodo}}</td>
+                        <td>{{listadoHortelano.mail}}</td>
+                        <td><a href="editarHortelano/{{listadoHortelano.id}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarHortelano/{{listadoHortelano.id}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}  
