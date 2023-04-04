@@ -1,5 +1,3 @@
-from distutils.text_file import TextFile
-from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -20,24 +18,46 @@ class Huerta(models.Model):
     nombre = models.CharField(max_length=80)
     coord_x = models.FloatField(blank=True)
     coord_y = models.FloatField(blank=True)
-    ancho = models.SmallIntegerField(blank=True)
-    largo = models.SmallIntegerField(blank=True)
+    ancho = models.FloatField(blank=True)
+    largo = models.FloatField(blank=True)
     def __str__(self):
-        return self.nombre
+        return self.nombre  
 
 
 class Canteros(models.Model):
     huerta = models.ForeignKey(Huerta,on_delete=models.CASCADE)
     nombre = models.CharField(max_length=80)
-    ancho = models.SmallIntegerField()
-    largo = models.SmallIntegerField()
-    ubicacion_x = models.SmallIntegerField()
-    ubicacion_y = models.SmallIntegerField()
+    ancho = models.FloatField(blank=True)
+    largo = models.FloatField(blank=True)
+    ubicacion_x = models.FloatField(blank=True)
+    ubicacion_y = models.FloatField(blank=True)
     
     def __str__(self):
-        return self.nombre
+        return self.nombre +" "+ self.huerta
 
 
+class Tierras_Cultivo(models.Model):
+    desc_corta = models.CharField(max_length=25, blank=True)
+    descripcion = models.CharField(max_length=255, blank=True)
+
+class Plagas(models.Model):
+    nombre = models.CharField(max_length=50, blank=True)
+    descripcion = models.CharField(max_length=255, blank=True)
+    tratamiento = models.CharField(max_length=255, blank=True)
+
+class Enfermedades(models.Model):
+    AGENTE_CAUSAL = (
+        ('HON', 'Hongos'),
+        ('BAC', 'Bacterias'),
+        ('NEM', 'Nematodos'),
+        ('VIR', 'Virus'),
+        ('PAR', 'Plantas Parasitas'),
+    )
+    nombre = models.CharField(max_length=50, blank=True)
+    descripcion = models.CharField(max_length=255, blank=True)
+    tratamiento = models.CharField(max_length=255, blank=True)
+    agente_causal = models.CharField(max_length=3, choices=AGENTE_CAUSAL)
+    sintomas = models.CharField(max_length=255, blank=True)
 
 class Perfil(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -48,6 +68,70 @@ class Perfil(models.Model):
     def __str__(self): 
         return self.usuario.username
 
+class Luz_Necesaria_Cultivo(models.Model):
+    cantidad = models.SmallIntegerField()
+    descripcion = models.CharField(max_length=255, blank=True)
+
+class Ph_Suelo(models.Model):
+    valores = models.CharField(max_length=50, blank=True)
+    descripcion = models.CharField(max_length=255, blank=True)
+
+class Temperaturas_Cultivos(models.Model):
+    nombre = models.CharField(max_length=50, blank=True)
+    valores = models.CharField(max_length=50, blank=True)
+    descripcion = models.CharField(max_length=255, blank=True)
+
+class Cultivos(models.Model):
+    TIPOS_SIEMBRA = (
+        ('D', 'Directa'),
+        ('S', 'Semillero'),
+        ('T', 'Directa / Semillero'),
+    )
+    LUNA =(
+        ('C','Cuarto Creciente'),
+        ('M','Cuarto Menguante'),
+        ('L','Llena'),
+        ('N','Nueva'),
+    )
+    FAMILIA =(
+        ('COM','Compuestas'),
+        ('CRU','Cruciferas (Brásicas)'),
+        ('UMB','Cruciferas'),
+        ('SOL','Solanaceas'),
+        ('GRA','Gramineas'),
+        ('LEG','Leguminosas'),
+        ('QUE','Quenopoidaceas'),
+        ('ALL','Alliaceas'),
+        ('CUC','Cucurbitaceas'),
+        
+    )
+    familia = models.CharField(max_length=3, choices=FAMILIA)
+    nombre_cientifico = models.CharField(max_length=50, blank=True)
+    nombre = models.CharField(max_length=50)
+    variedad = models.CharField(max_length=50, blank=True)
+    descripcion = models.CharField(max_length=255, blank=True)
+    tierra = models.ForeignKey(Tierras_Cultivo,on_delete=models.CASCADE, null=True, blank=True)
+    tipo_siembra = models.CharField(max_length=1, choices=TIPOS_SIEMBRA)
+    luna_siembra = models.CharField(max_length=1, choices=LUNA)
+    distancia =  models.FloatField(blank=True)
+    luz = models.ForeignKey(Luz_Necesaria_Cultivo,on_delete=models.CASCADE, null=True, blank=True)
+    plagas =   models.ForeignKey(Plagas,on_delete=models.CASCADE,  null=True, blank=True)
+    enfermedades  = models.ForeignKey(Enfermedades,on_delete=models.CASCADE, null=True, blank=True)
+    dias_germinacion = models.CharField(max_length=50, blank=True)
+    temperaturas = models.ForeignKey(Temperaturas_Cultivos,on_delete=models.CASCADE, null=True, blank=True)
+    asociacion_beneficiosa = models.ForeignKey('self',related_name='asosiacion_beneficiosa',  on_delete=models.CASCADE, null=True, blank=True)
+    asociacion_no_beneficiosa = models.ForeignKey('self',related_name='asosiacion_no_beneficiosa', on_delete=models.CASCADE, null=True, blank=True)
+    ph = models.ForeignKey(Ph_Suelo,on_delete=models.CASCADE, null=True, blank=True)
+    imagen = models.ImageField(upload_to='cultivos')
+    
+
+class Cantero_Cultivos(models.Model):
+    cantero = models.ForeignKey(Canteros,on_delete=models.CASCADE)
+    cultivo = models.ForeignKey(Cultivos,on_delete=models.CASCADE)
+    fechaSiembra = models.DateField()
+    fechaCosecha = models.DateField()
+
+
 @receiver(post_save, sender=User)
 def crear_usuario_perfil(sender, instance, created, **kwargs):
     if created:
@@ -56,3 +140,5 @@ def crear_usuario_perfil(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def guardar_usuario_perfil(sender, instance, **kwargs):
     instance.perfil.save()
+
+

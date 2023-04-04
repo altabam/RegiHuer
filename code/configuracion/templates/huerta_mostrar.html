@@ -1,8 +1,21 @@
 {% extends "baseConfiguracion.html"%}
 {% block title %} Mostrar Huerta {% endblock %}
+{% load static %}
+{% block style %} 
+    <link rel='stylesheet' href="{% static 'css/canteros.css' %}" type="text/css">
+ {% endblock %}
+
+{% block nav %}
+ <div class="hortelano-mostrar">
+    <h3>Hortelano : {{ hortelano.nombre }} {{ hortelano.apodo }} mail:{{ hortelano.mail }}</h3>
+</div>
+<div class="huerta-mostrar">
+    <h3>Huerta: {{ huerta.nombre }} Ubicacion: {{ huerta.coordX }} :{{ huerta.coordX  }} Dimensiones: L:{{ huerta.largo  }} A:{{ huerta.ancho  }}</h3>
+</div>
+{% endblock %}
+
 {% block body %} 
  <div class="row">
-    <h3>Usuario:</h3>{{user}}
     <div class="col-sm-12 col-md-8 col-lg-4 col-xl-4">
         {% if messages %}
             {% for message in messages %}
@@ -12,50 +25,16 @@
             </div>
             {% endfor %}
         {% endif %}
-        <div class="card">
-            <div class="card-body">
-                <form action="/configuracion/cantero_registrar/" method="POST">{% csrf_token %}
-                    <input type="text" name="txtHuertaId" id="txtHuertaId"  value="{{huerta.id}}"/>
-
-                    <div class="form-group">
-                        <label for="">Nombre del Cantero</label>
-                        <input type="text" name="txtCanteroNombre" id="txtCanteroNombre" class="form-control" placeholder="Nombre del Cantero"
-                            minlength="2" maxlength="60" required aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Apodo del Hortelano</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Coord. X</label>
-                        <input type="text" name="txtUbicacionX" id="txtUbicacionX" class="form-control" placeholder="Ubicacion X"
-                            minlength="1" maxlength="50" aria-describedby="helpId" required>
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Coord. Y</label>
-                        <input type="text" name="txtUbicacionY" id="txtUbicacionY" class="form-control" placeholder="Ubicacion Y"
-                            minlength="1" maxlength="50" aria-describedby="helpId" required>
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Ancho</label>
-                        <input type="text" name="txtAncho" id="txtAncho" class="form-control" placeholder="Ancho" 
-                            minlength="1" maxlength="50" aria-describedby="helpId" required>
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <label for="">Largo</label>
-                    <input type="text" name="txtLargo" id="txtLargo" class="form-control" placeholder="Largo" 
-                        minlength="1" maxlength="50" aria-describedby="helpId" required>
-                    <small id="helpId" class="text-muted">Help text</small>
-                </div>
-                <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-block text-white ">Guardar</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
     </div>
     <div class="col-sm-12 col-md-4 col-lg-8 col-xl-8">
-        <h1>configuracion de Huertas</h1>
+        <h1>Configuracion de Canteros</h1>
+        <div class="agregar">
+            <a href="{% url 'configuracion:cantero_agregar' huerta.id %}">
+                <img src="{% static 'img/agregar.png' %}" alt="agregar" title="agregar">
+            </a>
+
+        </div>
+
         <div class="table-responsive ">
             <table class="table table-striped">
                 <thead>
@@ -80,6 +59,7 @@
                         <td>{{listadoCanteros.largo}}</td>
                         <td><a href="/configuracion/cantero_editar/{{listadoCanteros.id}}/" class="">Editar</a></td>
                         <td><a href="/configuracion/cantero_eliminar/{{listadoCanteros.id}}" class="">Eliminar</a></td>
+                        <td><a href="/configuracion/cantero_mostrar/{{listadoCanteros.id}}/" class="">Mostrar</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

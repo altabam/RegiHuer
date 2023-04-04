@@ -1,1 +1,28 @@
 {% extends "base.html"%}
+{% block nav %}
+<nav class="barraMenu">
+    <div class="menuPrincipal collapse navbar-collapse" id="navbarNav">
+        <ul class="ulMenuPrincipal">
+            <li class="liMenuPrincipal">
+                <a class="linkMenu" href="/cultivos_listar">Cultivos</a>
+            </li>
+            <li class="liMenuPrincipal">
+                <a class="linkMenu" href="/huertas_listar">Huertas</a>
+            </li>
+            <li class="liMenuPrincipal">
+                <a class="linkMenu" href="/tierras_cultivo_listar">Tierras Cultivo</a>
+            </li>
+            <li class="liMenuPrincipal">
+                <a class="linkMenu" href="/enfermedades_listar">Enfermedades</a>
+            </li>
+            <li class="liMenuPrincipal">
+                <a class="linkMenu" href="/plagas_listar">Plagas</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="hortelano-mostrar">
+    <h3>Hortelano : {{ hortelano.nombre }} {{ hortelano.apodo }} mail:{{ hortelano.mail }}</h3>
+</div>
+
+{% endblock %}

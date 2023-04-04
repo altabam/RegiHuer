@@ -1,0 +1,12 @@
+//Para levantar y bajar la aplicacion.
+docker-compose up -d
+docker-compose down
+
+// para migrar los datos
+docker exec -it regihuer_web_1 bash
+python manage.py makemigrations
+python manage.py migrate
+
+
+
+

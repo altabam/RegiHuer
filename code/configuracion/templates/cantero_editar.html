@@ -1,51 +1,26 @@
-{% extends "./base.html"%}
-{% block title %} Editar Cantero {% endblock %}
+{% extends "./baseConfiguracion.html"%}
+{% block title %} {{accion}} Canteros {% endblock %}
+{% load static %}
+{% block style %} 
+    <link rel='stylesheet' href="{% static 'css/canteros.css' %}" type="text/css">
+ {% endblock %}
+ {% block nav %}
+ <div class="hortelano-mostrar">
+    <h3>Hortelano : {{ hortelano.nombre }} {{ hortelano.apodo }} mail:{{ hortelano.mail }}</h3>
+</div>
+<div class="huerta-mostrar">
+    <h3>Huerta: {{ huerta.nombre }} Ubicacion: {{ huerta.coordX }} :{{ huerta.coordX  }} Dimensiones: L:{{ huerta.largo  }} A:{{ huerta.ancho  }}</h3>
+</div>
+{% endblock %}
 {% block body %} 
 <div class="row">
     <div class="col-md-4 offset-md-4">
-        <h2>Editar Huerta</h2>
+        <h2>{{accion}} Cantero</h2>
         <div class="card">
             <div class="card-body">
-                <form action="/configuracion/cantero_modificar/" method="POST">{% csrf_token %}
-                    <div class="form-group">
-                        <label for="id"></label>
-                        <input type="text" name="txtId" id="txtId" value="{{cantero.id}}" class="form-control" placeholder="id"
-                             aria-describedby="helpId" required readonly>
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>                    
-                    <div class="form-group">
-                        <label for="Nombre"></label>
-                        <input type="text" name="txtNombre" id="txtNombre" value="{{cantero.nombre}}" class="form-control" placeholder="Nombre"
-                            minlength="2" maxlength="50" aria-describedby="helpId" required>
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="ubicacion_x">Coord X</label>
-                        <input type="text" name="txtUbicacionX" id="txtUbicacionX" value="{{cantero.ubicacion_x}}" class="form-control" placeholder="Ubicacion X"
-                            minlength="2" maxlength="60" required aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Ubicacion Y</label>
-                        <input type="text" name="txtUbicacionY" id="txtUbicacionY" value="{{cantero.ubicacion_y}}" class="form-control" placeholder="Ubicacion Y"
-                            minlength="1" maxlength="50" aria-describedby="helpId" required>
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Ancho</label>
-                        <input type="text" name="txtAncho" id="txtAncho" value="{{cantero.ancho}}" class="form-control" placeholder="Ancho"
-                            minlength="1" maxlength="50" aria-describedby="helpId" required>
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Largo</label>
-                        <input type="text" name="txtLargo" id="txtLargo" value="{{cantero.largo}}" class="form-control" placeholder="Largo"
-                            minlength="1" maxlength="50" aria-describedby="helpId" required>
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-block text-white ">Guardar</button>
-                    </div>
+                <form  method="POST">{% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success btn-block text-white ">{{accion}}</button>
                 </form>
             </div>
 

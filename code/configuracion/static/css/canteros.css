@@ -1,0 +1,10 @@
+@import url("huertas.css");
+
+.huerta-mostrar{
+    width: 100%;
+    text-align: left;
+    background-color: #bef156;
+    padding: 10px;
+    color: rgb(138, 177, 115);
+ } 
+ 
