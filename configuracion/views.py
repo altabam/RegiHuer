@@ -18,8 +18,7 @@ from .forms import HuertaForm, CanteroForm, CultivosForm, Cantero_CultivosForm, 
 
 
 # Create your views here.
-def index(request):
-    return render(request, "index.html")
+
 
 @login_required
 def listadoHortelano(request):
