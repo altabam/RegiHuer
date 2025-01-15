@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib import messages
 from django.core.mail import EmailMessage
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.template.loader import render_to_string
 
 from .forms import RegistracionUsuarioForm
 
@@ -24,13 +26,14 @@ def registrar(request):
     return render(request, "registration/registracion.html", contexto)
 
 def enviarEmail(form):
+    token_generator = PasswordResetTokenGenerator()
+    token = token_generator.make_token(form)
     username = form.cleaned_data['username']
-  
+    
     # Renderizar la plantilla
     url_app = "https://"+ "/administracion/mailValidador"
     print(url_app)
-    mensaje = '<h1>Hola {username} </h1> <p>Gracias por registrarte en nuestro sitio.</p> '
-    # Enviar el correo
+    mensaje = render_to_string("templateEmail.html",{'toke':token, 'username':username})    # Enviar el correo
     email = EmailMessage(
       subject='Bienvenido a nuestro sitio',
       body=mensaje,
