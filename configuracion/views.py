@@ -208,6 +208,7 @@ def cantero_eliminar(request,id):
 
 def cultivos_listar(request):
     listadoCultivos = Cultivos.objects.all()
+    print("paso por aqui")
     messages.success(request,"¡Cultivos Listados!")
     contexto ={ "listadoCultivos": listadoCultivos,  } 
     return render(request, "cultivos_listar.html",  contexto)

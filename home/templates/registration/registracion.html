@@ -1,0 +1,12 @@
+{% extends "base.html"%}
+{% block title %} Autenticarse {% endblock %}
+{% load static %}
+{% block style %} 
+    <link rel='stylesheet' href="{% static 'css/login.css' %}" type="text/css">
+ {% endblock %}
+{% block body %} 
+<form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Registrarse</button>
+</form>
+{% endblock %}  

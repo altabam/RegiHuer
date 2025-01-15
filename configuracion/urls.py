@@ -21,8 +21,7 @@ urlpatterns= [
        path('configuracion/cantero_mostrar/<int:id>/', views.cantero_mostrar, name='cantero_mostrar'),
        
 
-       path('cultivos_listar/', views.cultivos_listar, name = 'cultivos_listar'),
-
+       path('cultivos_listar', views.cultivos_listar, name = 'cultivo_listar'),
        path('configuracion/cultivo_agregar/', views.cultivo_agregar, name='cultivo_agregar'),
        path('configuracion/cultivo_eliminar/<int:id>/', views.cultivo_eliminar, name='cultivo_eliminar'),
        path('configuracion/cultivo_editar/<int:id>/', views.cultivo_editar, name='cultivo_editar'),
