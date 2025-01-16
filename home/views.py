@@ -43,7 +43,7 @@ def enviarEmail(up):
     )
     
     email.content_subtype = 'html'  # Define el tipo como HTML
-   # email.send()
+    email.send()
 def generarUsuarioPromesa(form):
     form.save()
     un = form.cleaned_data['username']
