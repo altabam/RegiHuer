@@ -39,7 +39,7 @@ def enviarEmail(up):
       subject='Bienvenido a nuestro sitio',
       body=mensaje,
       from_email='altabam@gmail.com',
-      to=['altabam@yahoo.com.ar'],
+      to=[up.email],
     )
     
     email.content_subtype = 'html'  # Define el tipo como HTML
