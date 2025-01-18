@@ -59,7 +59,7 @@ def generarUsuarioPromesa(request,form):
     
     if(bandera):
         form.save()
-        up = UsuarioPromesa.objects.get(username = un)
+        up = UsuarioPromesa.objects.get(username = upun)
         alea = str(random.random())
         text = up.first_name + alea + up.username +str(up.fecha) + up.email + str(up.pk) + up.last_name 
         print(text)
