@@ -48,6 +48,7 @@ def enviarEmail(up):
 def generarUsuarioPromesa(request,form):
     upun = User.objects.filter(username=form.cleaned_data['username'])
     upem = User.objects.filter(email = form.cleaned_data['email'])
+    bandera = True
     print("no se si paso por aca")
     if(upun):
         messages.error(request, 'El nombre de usuario se encuentra registrado')
