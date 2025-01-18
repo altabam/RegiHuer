@@ -1,5 +1,19 @@
-Hola {{username}}, bienvenido a RegiHuer, para terminar con la generación del usuario debes ingresar al siguiente link:
+<!DOCTYPE html>
+<html>
+    {% load static %}
+<body>
+<img src="{% static 'img/regihuer.png' %}">
 
-{{url_app}}
+<h1>RegiHuer</h1>
+
+<p>Hola {{username}}, bienvenido </p>
+
+<p>Esta a un paso para terminar con el registro del usuario</p>
+
+<a href="{{url_app}}">Ingrese aqui para terminar el registro</a>
 
 
+
+</body>
+
+</html>

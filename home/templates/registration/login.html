@@ -16,6 +16,13 @@
             <p>Tu usuario y contraseña no coinciden. Por favor ingrese correctamente</p>
         </div>
         {% endif %}
+        {% if messages %}
+          <ul class="messages">
+          {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+           {% endfor %}
+           </ul>
+        {% endif %}
         <form id="form-login" method="post" action="">
             {% csrf_token %}
 
