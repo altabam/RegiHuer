@@ -46,8 +46,8 @@ def enviarEmail(up):
     email.content_subtype = 'html'  # Define el tipo como HTML
   #  email.send()
 def generarUsuarioPromesa(request,form):
-    upun = User.objects.filter(username=form.cleaned_data['username'])
-    upem = User.objects.filter(email = form.cleaned_data['email'])
+    upun = User.objects.filter(username=form.cleaned_data['username']).first()
+    upem = User.objects.filter(email = form.cleaned_data['email']).first()
     bandera = True
     print("no se si paso por aca")
     if(upun):
@@ -59,7 +59,7 @@ def generarUsuarioPromesa(request,form):
     
     if(bandera):
         form.save()
-        up = UsuarioPromesa.objects.get(username = upun)
+        up = UsuarioPromesa.objects.get(username = upun).first()
         alea = str(random.random())
         text = up.first_name + alea + up.username +str(up.fecha) + up.email + str(up.pk) + up.last_name 
         print(text)
