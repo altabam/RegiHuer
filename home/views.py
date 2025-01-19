@@ -46,20 +46,20 @@ def enviarEmail(up):
     email.content_subtype = 'html'  # Define el tipo como HTML
   #  email.send()
 def generarUsuarioPromesa(request,form):
-    upun = User.objects.filter(username=form.cleaned_data['username']).first()
-    upem = User.objects.filter(email = form.cleaned_data['email']).first()
     bandera = True
+    if(User.objects.filter(username=form.cleaned_data['username']).exists()):
+      upun = User.objects.filter(username=form.cleaned_data['username']).first()
+      messages.error(request, 'El nombre de usuario se encuentra registrado')
+      bandera = False
+    if(User.objects.filter(username=form.cleaned_data['email']).exists()):
+      upem = User.objects.filter(email = form.cleaned_data['email']).first()
+      messages.error(request, 'El email de usuario se encuentra registrado')
+      bandera = False
     print("no se si paso por aca")
-    if(upun):
-        messages.error(request, 'El nombre de usuario se encuentra registrado')
-        bandera = False
-    if(upem):
-        messages.error(request, 'El email de usuario se encuentra registrado')
-        bandera = False
     
     if(bandera):
         form.save()
-        up = UsuarioPromesa.objects.get(username = upun).first()
+        up = UsuarioPromesa.objects.get(username = form.cleaned_data['username']).first()
         alea = str(random.random())
         text = up.first_name + alea + up.username +str(up.fecha) + up.email + str(up.pk) + up.last_name 
         print(text)
