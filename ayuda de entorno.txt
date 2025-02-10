@@ -9,4 +9,12 @@ python manage.py migrate
 
 
 
+//en el host anywhere
+django123
+
+mysql
+RegiHuer
+
+
+
 

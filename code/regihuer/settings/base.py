@@ -27,12 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
-INSTALLED_APPS = [
-    'autenticacion.apps.AutenticacionConfig',
-    'configuracion.apps.ConfiguracionConfig',
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+#THIRDS_APPS = []
+
+LOCAL_APPS = [
+    'autenticacion.apps.AutenticacionConfig',
+    'configuracion.apps.ConfiguracionConfig',
+
+]
+
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS #+ THIRDS_APPS 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -74,22 +81,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'regihuer.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': '5432',
-        
-    }
-}
 
 
 # Password validation
@@ -138,5 +129,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL='/'
 LOGIN_REDIRECT_URL = '/huertas_listar/'
 
-MEDIA_URL ='/archivos/'
-MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'archivos')

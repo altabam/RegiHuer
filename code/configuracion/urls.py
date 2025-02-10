@@ -15,20 +15,30 @@ urlpatterns= [
        path('configuracion/huerta_agregar/<int:id>/', views.huerta_agregar, name='huerta_agregar'),
        path('configuracion/huerta_eliminar/<int:id>/', views.huerta_eliminar,name='huerta_eliminar'),
        path('configuracion/huerta_editar/<int:id>/', views.huerta_editar,name='huerta_editar'),
-       path('configuracion/huerta_mostrar/<int:id>/', views.huerta_mostrar,name='huerta_mostrar'),
-
+       path('configuracion/huerta_canteros_mostrar/<int:id>/', views.huerta_canteros_mostrar,name='huerta_canteros_mostrar'),
+       
+       path('configuracion/huerta_cultivos_mostrar/<int:id>/', views.huerta_cultivos_mostrar,name='huerta_cultivos_mostrar'),
+       path('configuracion/huerta_cultivos_agregar/<int:id>/', views.huerta_cultivos_agregar, name='huerta_cultivos_agregar'),
+       
        path('configuracion/cantero_agregar/<int:id>/', views.cantero_agregar, name='cantero_agregar'),
        path('configuracion/cantero_eliminar/<int:id>/', views.cantero_eliminar),
        path('configuracion/cantero_editar/<int:id>/', views.cantero_editar),
        path('configuracion/cantero_mostrar/<int:id>/', views.cantero_mostrar, name='cantero_mostrar'),
        
+       path('configuracion/canteros_listar/', views.canteros_listar, name='canteros_listar'),
+       
 
-       path('cultivos_listar/', views.cultivos_listar, name = 'cultivos_listar'),
+       path('configuracion/cantero_cultivos_agregar/<int:id>/', views.cantero_cultivos_agregar, name='cantero_cultivos_agregar'),
+       path('configuracion/cantero_cultivos_eliminar/<int:id>/', views.cantero_cultivos_eliminar),
+       path('configuracion/cantero_cultivos_editar/<int:id>/', views.cantero_cultivos_editar),
+       path('configuracion/cantero_cultivos_mostrar/<int:id>/', views.cantero_cultivos_mostrar, name='cantero_cultivos_mostrar'),
+
 
        path('configuracion/cultivo_agregar/', views.cultivo_agregar, name='cultivo_agregar'),
        path('configuracion/cultivo_eliminar/<int:id>/', views.cultivo_eliminar, name='cultivo_eliminar'),
        path('configuracion/cultivo_editar/<int:id>/', views.cultivo_editar, name='cultivo_editar'),
        url(r'^configuracion/cultivo_buscar/', views.cultivo_buscar, name ='cultivo_buscar'),
+       path('cultivos_listar/', views.cultivos_listar, name = 'cultivos_listar'),
 
 
        path('tierras_cultivo_listar/', views.tierras_cultivo_listar, name = 'tierras_cultivos_listar'),

@@ -1,0 +1,30 @@
+{% extends "./baseConfiguracion.html"%}
+{% block title %} {{accion}} Cultivos Canteros {% endblock %}
+{% load static %}
+{% block style %} 
+    <link rel='stylesheet' href="{% static 'css/canteros.css' %}" type="text/css">
+ {% endblock %}
+ {% block nav %}
+ <div class="hortelano-mostrar">
+    <h3>Hortelano : {{ hortelano.nombre }} {{ hortelano.apodo }} mail:{{ hortelano.mail }}</h3>
+    <h3>Huerta: {{ huerta.nombre }} Ubicacion: {{ huerta.coordX }} :{{ huerta.coordX  }} Dimensiones: L:{{ huerta.largo  }} A:{{ huerta.ancho  }}</h3>
+    <h3>Cantero: {{ cantero.nombre }} </h3>
+</div>
+{% endblock %}
+{% block body %} 
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>{{accion}} Cultivos Cantero</h2>
+        <div class="card">
+            <div class="card-body">
+                <form  method="POST">{% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success btn-block text-white ">{{accion}}</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}  

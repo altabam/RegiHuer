@@ -1,22 +1,18 @@
-from contextlib import ContextDecorator
-from django.shortcuts import render
+
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from django.http import HttpResponseBadRequest, HttpResponse, HttpRequest
+from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
 from django.core import serializers
 
-
-from django.http import HttpResponseRedirect
-from django.views.generic import CreateView
 
 
 from .models import Cultivos, Hortelano, Huerta, Canteros, Cantero_Cultivos, Tierras_Cultivo, Enfermedades, Plagas
 from .forms import HuertaForm, CanteroForm, CultivosForm, Cantero_CultivosForm, Tierras_CultivoForm, EnfermedadesForm, PlagasForm
 
-
+import json
 # Create your views here.
 def index(request):
     return render(request, "index.html")
@@ -128,7 +124,7 @@ def huerta_eliminar(request,id):
     huerta.delete()
     return redirect('/huertas_listar')
 
-def huerta_mostrar(request, id):
+def huerta_canteros_mostrar(request, id):
     huerta = Huerta.objects.get(id=id)
     try:
         canteros = Canteros.objects.filter(huerta= huerta)
@@ -140,21 +136,56 @@ def huerta_mostrar(request, id):
         "hortelano": huerta.hortelano,
        
         }
-    return render(request, "huerta_mostrar.html",contexto)
+    return render(request, "huerta_canteros_mostrar.html",contexto)
 
-def cantero_mostrar(request, id):
-    cantero_cultivos = Cantero_Cultivos.objects.get(id=id)
+def huerta_cultivos_mostrar(request, id):
+    huerta = Huerta.objects.get(id=id)
     try:
         canteros = Canteros.objects.filter(huerta= huerta)
+        listadoCultivos = Cantero_Cultivos.objects.filter(cantero__in = canteros).distinct('cultivo_id')
     except Canteros.DoesNotExist:
         canteros=""
     contexto={
         "huerta":huerta,
-        "listadoCanteros":canteros,
+        "listadoCultivos":listadoCultivos,
         "hortelano": huerta.hortelano,
        
         }
-    return render(request, "huerta_mostrar.html",contexto)
+    return render(request, "huerta_cultivos_mostrar.html",contexto)
+
+def huerta_cultivos_agregar(request, id):
+    huerta = Huerta.objects.get(id=id)
+    if request.method == 'POST':
+        form= Cantero_CultivosForm(request.POST )
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/huerta_cultivos_mostrar/'+str(huerta.id)+'/')
+    else:
+        form = Cantero_CultivosForm( )
+
+    contexto ={ 
+            "accion":"Agregar", 
+            "form": form,
+            "hortelano": huerta.hortelano,
+            "huerta": huerta,
+         } 
+    return render(request, "huerta_cultivos_editar.html", contexto )
+
+def cantero_mostrar(request, id):
+    cantero = Canteros.objects.get(id=id)
+    huerta = Huerta.objects.get(id=cantero.huerta.id)
+    try:
+        cantero_cultivos = Cantero_Cultivos.objects.filter(cantero= cantero)
+    except Canteros.DoesNotExist:
+        cantero=""
+    contexto={
+        "huerta":huerta,
+        "cantero": cantero,
+        "listadoCanteroCultivos":cantero_cultivos,
+        "hortelano": huerta.hortelano,
+       
+        }
+    return render(request, "cantero_mostrar.html",contexto)
 
 
 def cantero_editar(request,id):
@@ -169,7 +200,7 @@ def cantero_agregar(request, id):
         form= CanteroForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/configuracion/huerta_mostrar/'+str(huerta.id)+'/')
+            return redirect('/configuracion/huerta_canteros_mostrar/'+str(huerta.id)+'/')
     else:
         form = CanteroForm(initial= {'huerta': huerta})
 
@@ -187,7 +218,7 @@ def cantero_editar(request,id):
         form= CanteroForm(request.POST, instance=cantero)
         if form.is_valid():
             form.save()
-            return redirect('/configuracion/huerta_mostrar/'+str(cantero.huerta.id)+'/')
+            return redirect('/configuracion/huerta_canteros_mostrar/'+str(cantero.huerta.id)+'/')
     else:
             form = CanteroForm( instance=cantero)
     
@@ -205,7 +236,7 @@ def cantero_editar(request,id):
 def cantero_eliminar(request,id):
     cantero = Canteros.objects.get(id=id)
     cantero.delete()
-    return redirect('/configuracion/huerta_mostrar/'+str(cantero.huerta.id)+"/")
+    return redirect('/configuracion/huerta_canteros_mostrar/'+str(cantero.huerta.id)+"/")
 
 def cultivos_listar(request):
     listadoCultivos = Cultivos.objects.all()
@@ -268,18 +299,28 @@ def cultivo_buscar(request):
     #verificamos si el termino de busqueda es un documento de identidad
     cultivos = Cultivos.objects.filter(nombre__contains=q)
     # generamos la query
-
-    user_fields = (
+    print(cultivos  )
+    cultivo_fields = (
+        'id',
+        'familia',
         'nombre',
-        'especie',
-        'descripcion'
+        'nombre_cientifico',
+        'descripcion',
+        'variedad',
+        'imagen'
     )
-
-    # to json!
-    data = serializers.serialize('json', cultivos, fields=user_fields)
-
-    # eso es todo por hoy ^^
-    return HttpResponse(data, content_type="application/json")    
+    
+def canteros_listar(request):
+    
+    if request.method =='POST':
+        # definimos el termino de busqueda
+        data = json.load(request)
+        q = data.get('id')
+        #verificamos si el termino de busqueda es un documento de identidad
+        canteros = list(Canteros.objects.filter(huerta =q).values())
+        return JsonResponse({'context': canteros})
+    else:
+        return HttpResponseBadRequest()
 
 
 def tierras_cultivo_listar(request):
@@ -502,3 +543,69 @@ def plagas_buscar(request):
 
     # eso es todo por hoy ^^
     return HttpResponse(data, content_type="application/json") 
+
+def cantero_cultivos_editar(request,id):
+
+     cantero_cultivos = Cantero_Cultivos.objects.get(id=id)
+     return render(request, "cantero_cultivos_editar.html",{"cantero_cultivos":cantero_cultivos})
+
+
+def cantero_cultivos_agregar(request, id):
+    cantero = Canteros.objects.get(id=id)
+    if request.method == 'POST':
+        form= Cantero_CultivosForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/cantero_mostrar/'+str(cantero.id)+'/')
+    else:
+        form = Cantero_CultivosForm(initial= {'cantero': cantero})
+
+    contexto ={ 
+            "accion":"Agregar", 
+            "form": form,
+            "cantero": cantero,
+            "huerta": cantero.huerta,
+            "hortelano": cantero.huerta.hortelano,
+         } 
+    return render(request, "cantero_cultivos_editar.html", contexto )
+
+def cantero_cultivos_editar(request,id):
+    cantero_cultivos = Cantero_Cultivos.objects.get(id = id)
+    if request.method == 'POST':
+        form= Cantero_CultivosForm(request.POST, instance=cantero_cultivos)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/cantero_mostrar/'+str(cantero_cultivos.cantero.id)+'/')
+    else:
+            form = Cantero_CultivosForm( instance=cantero_cultivos)
+    
+    contexto ={ 
+            "accion":"Modificar", 
+            "form": form,
+            "hortelano": cantero_cultivos.cantero.huerta.hortelano,
+            "huerta": cantero_cultivos.cantero.huerta,
+
+         } 
+    return render(request, "cantero_cultivos_editar.html",contexto)
+
+
+
+def cantero_cultivos_eliminar(request,id):
+    cantero = Canteros.objects.get(id=id)
+    cantero.delete()
+    return redirect('/configuracion/huerta_canteros_mostrar/'+str(cantero.huerta.id)+"/")
+
+def cantero_cultivos_mostrar(request, id):
+    cantero = Canteros.objects.get(id=id)
+    try:
+        cantero_cultivos = Cantero_Cultivos.objects.filter(cantero= cantero)
+    except Canteros.DoesNotExist:
+        canteros=""
+    contexto={
+        "cantero":cantero,
+        "huerta":cantero.huerta,
+        "hortelano": cantero.huerta.hortelano,
+        "listadoCanteroCultivos":cantero_cultivos,
+       
+        }
+    return render(request, "cantero_cultivos_mostrar.html",contexto)
