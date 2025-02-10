@@ -1,0 +1,41 @@
+{% extends "base.html"%}
+{% block title %} Autenticarse {% endblock %}
+{% load static %}
+{% block style %} 
+    <link rel='stylesheet' href="{% static 'css/login.css' %}" type="text/css">
+ {% endblock %}
+{% block body %} 
+
+    <div class="contenedor-form">
+        <h3 class="titulo-login">Autenticarse</h3>
+        <br>
+        <hr>
+        <br>
+        {% if form.errors %}
+        <div class="alert alert_danger">
+            <p>Tu usuario y contraseña no coinciden. Por favor ingrese correctamente</p>
+        </div>
+        {% endif %}
+        {% if messages %}
+          <ul class="messages">
+          {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+           {% endfor %}
+           </ul>
+        {% endif %}
+        <form id="form-login" method="post" action="">
+            {% csrf_token %}
+
+            <div class="datos-login" id="username"> 
+                {{ form.username }}
+            </div>
+            <div class="datos-login" id="password">
+                {{ form.password }}
+            </div>
+            <button class="boton-largo" id="btn-registrar">Entrar</button>
+            <div class="clearfix"></div>
+            <a href="/registracion">Registrarme</a>
+        </form>
+    </div>
+   
+{% endblock %}  

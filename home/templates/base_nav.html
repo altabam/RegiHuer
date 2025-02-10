@@ -1,0 +1,21 @@
+{% extends "base.html"%}
+    {% block nav %}
+    <nav class="barraMenu">
+        <div class="menuPrincipal collapse navbar-collapse" id="navbarNav">
+            <ul class="ulMenuPrincipal">
+                <li class="liMenuPrincipal">
+                    <a class="linkMenu active" aria-current="page" href="#">Principal</a>
+                </li>
+                <li class="liMenuPrincipal">
+                    <a class="linkMenu" href="#">Features</a>
+                </li>
+                <li class="liMenuPrincipal">
+                    <a class="linkMenu" href="configuracion/cultivos_listar">Cultivos</a>
+                </li>
+                <li class="liMenuPrincipal">
+                    <a class="linkMenu " href="/accounts/login/">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% endblock %}

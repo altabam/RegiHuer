@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{% block title %} {% endblock %}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- CSS only -->
+    {% block style %}  
+    <link rel='stylesheet' href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+</head>
+
+<body>
+    <header class="cabecera" once="cabecera" id="cabecera">
+        <div class="itemCabecera">
+            <img src="{% static 'img/logo.jpg' %}" alt="RegiHuer" title="Logo Newbery">
+    
+        </div>
+        <div class="itemCabecera">
+            <h1 class="tituloCabecera">Actividades de Newbery</h1>
+    
+        </div>
+        <div class="itemCabecera">
+<<<<<<< HEAD:code/regihuer/templates/base.html
+                <a class="contacto-mail" href="mailto:info@newbery.com.ar">info @ newbery.com.ar</a>
+=======
+                <a class="contacto-mail" href="mailto:info@regihuer.com">info @ regihuer.com.ar</a>
+>>>>>>> 2c7bf022197078b280da787bf8c29fa877a6f587:home/templates/base.html
+        </div>
+
+    </header>
+    <hr>
+    {% block nav %}
+    {% endblock %}
+
+    <section class="container">
+        {% block body %}
+        {% endblock %}
+
+    </section>
+    <footer>
+        <section>
+            <p> Copyright RegiHuer</p>
+        </section>
+    </footer>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+
+</body>
+
+</html>
