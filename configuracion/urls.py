@@ -31,20 +31,11 @@ urlpatterns= [
        path('configuracion/cantero_cultivos_editar/<int:id>/', views.cantero_cultivos_editar),
        path('configuracion/cantero_cultivos_mostrar/<int:id>/', views.cantero_cultivos_mostrar, name='cantero_cultivos_mostrar'),
 
-<<<<<<< HEAD:code/configuracion/urls.py
-
-       path('configuracion/cultivo_agregar/', views.cultivo_agregar, name='cultivo_agregar'),
-       path('configuracion/cultivo_eliminar/<int:id>/', views.cultivo_eliminar, name='cultivo_eliminar'),
-       path('configuracion/cultivo_editar/<int:id>/', views.cultivo_editar, name='cultivo_editar'),
-       url(r'^configuracion/cultivo_buscar/', views.cultivo_buscar, name ='cultivo_buscar'),
-       path('cultivos_listar/', views.cultivos_listar, name = 'cultivos_listar'),
-=======
        path('cultivos_listar', views.cultivos_listar, name = 'cultivo_listar'),
        path('configuracion/cultivo_agregar/', views.cultivo_agregar, name='cultivo_agregar'),
        path('configuracion/cultivo_eliminar/<int:id>/', views.cultivo_eliminar, name='cultivo_eliminar'),
        path('configuracion/cultivo_editar/<int:id>/', views.cultivo_editar, name='cultivo_editar'),
        re_path(r'^configuracion/cultivo_buscar/', views.cultivo_buscar, name ='cultivo_buscar'),
->>>>>>> 2c7bf022197078b280da787bf8c29fa877a6f587:configuracion/urls.py
 
 
        path('tierras_cultivo_listar/', views.tierras_cultivo_listar, name = 'tierras_cultivos_listar'),
