@@ -14,6 +14,7 @@ load_dotenv()
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'regihuer.settings.local')
+#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'regihuer.settings.local')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", os.getenv("SETTING"))
 
 application = get_wsgi_application()
