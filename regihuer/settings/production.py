@@ -21,7 +21,6 @@ CSRF_TRUSTED_ORIGINS = [
 
 
 
-
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
