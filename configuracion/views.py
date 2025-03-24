@@ -250,7 +250,7 @@ def cultivo_agregar(request):
         form= CultivosForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/cultivos_listar/')
+            return redirect('/configuracion/cultivos_listar')
     else:
         form =CultivosForm()
 
@@ -266,7 +266,7 @@ def cultivo_editar(request,id):
         form= CultivosForm(request.POST, request.FILES, instance=culitvo)
         if form.is_valid():
             form.save()
-            return redirect('/cultivos_listar/')
+            return redirect('/configuracion/cultivos_listar')
     else:
             form = CultivosForm( instance=culitvo)
     
@@ -283,7 +283,7 @@ def cultivo_eliminar(request,id):
     listadoCultivos = Cultivos.objects.all()
     messages.success(request,"¡Huertas Listadas!")
     contexto ={ "listadoCultivos": listadoCultivos,  } 
-    return redirect('/cultivos_listar/', contexto)
+    return redirect('/configuracion/cultivos_listar', contexto)
 
 
 

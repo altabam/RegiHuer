@@ -65,7 +65,7 @@
                     {% for listadoCultivos in listadoCultivos%}
                     <tr>
                         <td>{{forloop.counter}}</td>
-                        <td>{{listadoCultivos.familia}}</td>
+                        <td>{{listadoCultivos.get_familia_display }}</td>
                         <td>{{listadoCultivos.nombre}}</td>
                         <td>{{listadoCultivos.nombre_cientifico}}</td>
                         <td>

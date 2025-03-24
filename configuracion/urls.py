@@ -26,16 +26,16 @@ urlpatterns= [
        path('configuracion/canteros_listar/', views.canteros_listar, name='canteros_listar'),
        
 
-       path('configuracion/cantero_cultivos_agregar/<int:id>/', views.cantero_cultivos_agregar, name='cantero_cultivos_agregar'),
-       path('configuracion/cantero_cultivos_eliminar/<int:id>/', views.cantero_cultivos_eliminar),
-       path('configuracion/cantero_cultivos_editar/<int:id>/', views.cantero_cultivos_editar),
-       path('configuracion/cantero_cultivos_mostrar/<int:id>/', views.cantero_cultivos_mostrar, name='cantero_cultivos_mostrar'),
+       path('/configuracion/cantero_cultivos_agregar/<int:id>/', views.cantero_cultivos_agregar, name='cantero_cultivos_agregar'),
+       path('/configuracion/cantero_cultivos_eliminar/<int:id>/', views.cantero_cultivos_eliminar),
+       path('/configuracion/cantero_cultivos_editar/<int:id>', views.cantero_cultivos_editar),
+       path('/configuracion/cantero_cultivos_mostrar/<int:id>/', views.cantero_cultivos_mostrar, name='cantero_cultivos_mostrar'),
 
-       path('cultivos_listar/', views.cultivos_listar, name = 'cultivo_listar'),
-       path('configuracion/cultivo_agregar/', views.cultivo_agregar, name='cultivo_agregar'),
-       path('configuracion/cultivo_eliminar/<int:id>/', views.cultivo_eliminar, name='cultivo_eliminar'),
-       path('configuracion/cultivo_editar/<int:id>/', views.cultivo_editar, name='cultivo_editar'),
-       re_path(r'^configuracion/cultivo_buscar/', views.cultivo_buscar, name ='cultivo_buscar'),
+       path('cultivos_listar', views.cultivos_listar, name = 'cultivos_listar'),
+       path('cultivo_agregar', views.cultivo_agregar, name='cultivo_agregar'),
+       path('cultivo_eliminar/<int:id>', views.cultivo_eliminar, name='cultivo_eliminar'),
+       path('cultivo_editar/<int:id>', views.cultivo_editar, name='cultivo_editar'),
+       re_path(r'^configuracion/cultivo_buscar', views.cultivo_buscar, name ='cultivo_buscar'),
 
 
        path('tierras_cultivo_listar/', views.tierras_cultivo_listar, name = 'tierras_cultivos_listar'),
