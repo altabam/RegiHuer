@@ -57,12 +57,12 @@ body {
 .barraMenu{
     background-color: #333;
     border: 1px solid #333;
-    color: #fff;
+    color: brown;
     display: block;
     margin: 0;
-    overflow: hidden;
+  /*  overflow: hidden;*/
 }
-
+/*
 .ulMenuPrincipal {
   padding: 0em;
   margin: 0em;
@@ -97,3 +97,49 @@ body {
   font-weight: bolder;
   width: 8em;
 }
+*/
+ul{
+  list-style: none;
+
+}
+ul li {
+  width: 120px; 
+  background:rgb(138, 177, 115) ;
+  float: left;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  margin-right: 2px;
+  position: relative;
+}
+ul li:hover {background-color: #bef156;}
+ul li a {
+  border-radius: 30px;
+  color: blueviolet;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+}
+
+ul li ul li{
+  border-top:1px solid #fff ;
+}
+
+ul li ul {
+  display: none;
+}
+
+ul li:hover ul{
+  display: block;
+}
+
+ul li ul .item-2{
+  position: relative;
+  left: 122px;
+  top: 0px;
+  display: none;
+}
+ul li ul li:last-child:hover .item-2{
+  display: block;
+}
+
