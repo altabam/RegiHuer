@@ -54,4 +54,8 @@ urlpatterns= [
        path('configuracion/plagas_editar/<int:id>/', views.plagas_editar, name='plagas_editar'),
 
 
+       path('gestionar_img_galeria_principal', views.gestionar_img_galeria_principal, name='gestionar_img_galeria_principal'),
+
+
+
 ]

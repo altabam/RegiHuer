@@ -9,7 +9,7 @@ from django.core import serializers
 
 
 
-from .models import Cultivos, Hortelano, Huerta, Canteros, Cantero_Cultivos, Tierras_Cultivo, Enfermedades, Plagas
+from .models import Cultivos, Hortelano, Huerta, Canteros, Cantero_Cultivos, Tierras_Cultivo, Enfermedades, Plagas, GaleriaImagen
 from .forms import HuertaForm, CanteroForm, CultivosForm, Cantero_CultivosForm, Tierras_CultivoForm, EnfermedadesForm, PlagasForm
 
 import json
@@ -609,3 +609,10 @@ def cantero_cultivos_mostrar(request, id):
        
         }
     return render(request, "cantero_cultivos_mostrar.html",contexto)
+
+
+def gestionar_img_galeria_principal(request):
+    listadoGalerias = GaleriaImagen.objects.all()
+    messages.success(request,"¡Galerias Listadas!")
+    contexto ={ "galeria": listadoGalerias,  } 
+    return render(request, "gestion_galerias.html",  contexto)
