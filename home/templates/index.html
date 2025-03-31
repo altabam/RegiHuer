@@ -10,4 +10,21 @@
 
     <h2> Una aplicación para facilitar su planificación en la huerta</h2>
 
+    <div class="contenedor-galeria">
+        <div class="galeria">
+         {% if listadoGalerias %}
+            {% for listadoGaleria in listadoGalerias%}
+
+            <div class="contenedor-imagen">
+                <figure>
+                    {% if listadoGaleria.imagen %}
+                      <img  src="{{listadoGaleria.imagen.url}}"  >
+                    {% endif %}
+             </figure>
+            </div>
+          {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+
 {% endblock %}

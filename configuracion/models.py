@@ -177,3 +177,12 @@ def guardar_usuario_perfil(sender, instance, **kwargs):
     instance.perfil.save()
 
 
+class Galeria(models.Model):
+    nombre = models.CharField(max_length=60)
+    
+
+class GaleriaImagen(models.Model):
+    nombre = models.CharField(max_length=60)
+    imagen = models.ImageField(upload_to='galeriaPrincipal',blank=True)
+    leyenda = models.CharField(max_length=255,blank=True)
+    galeria = models.ForeignKey(Galeria,on_delete=models.CASCADE)

@@ -9,8 +9,8 @@ from django.core import serializers
 
 
 
-from .models import Cultivos, Hortelano, Huerta, Canteros, Cantero_Cultivos, Tierras_Cultivo, Enfermedades, Plagas
-from .forms import HuertaForm, CanteroForm, CultivosForm, Cantero_CultivosForm, Tierras_CultivoForm, EnfermedadesForm, PlagasForm
+from .models import Cultivos, Hortelano, Huerta, Canteros, Cantero_Cultivos, Tierras_Cultivo, Enfermedades, Plagas, GaleriaImagen
+from .forms import HuertaForm, CanteroForm, CultivosForm, Cantero_CultivosForm, Tierras_CultivoForm, EnfermedadesForm, PlagasForm,GaleriaImagenForm
 
 import json
 # Create your views here.
@@ -609,3 +609,48 @@ def cantero_cultivos_mostrar(request, id):
        
         }
     return render(request, "cantero_cultivos_mostrar.html",contexto)
+
+
+def gestionar_img_galeria_principal(request):
+    listadoGalerias = GaleriaImagen.objects.all()
+    print("listadoGalerias",listadoGalerias)
+    messages.success(request,"¡Galerias Listadas!")
+    contexto ={ "listadoGalerias": listadoGalerias,  } 
+    return render(request, "gestion_galerias.html",  contexto)
+
+
+def galeria_imagenes_agregar(request):
+    if request.method == 'POST':
+        form= GaleriaImagenForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestionar_img_galeria_principal')
+    else:
+        form =GaleriaImagenForm()
+
+    contexto ={ 
+            "accion":"Agregar", 
+            "form": form,
+         } 
+    return render(request, "galeria_imagenes_editar.html", contexto )
+
+def galeria_imagenes_editar(request,id):
+    galeria = GaleriaImagen.objects.get(id = id)
+    if request.method == 'POST':
+        form= GaleriaImagenForm(request.POST, instance=galeria)
+        if form.is_valid():
+            print("edito imagen", id, galeria.imagen.url)
+            form.save()
+            return redirect('/configuracion/gestionar_img_galeria_principal')
+    else:
+            form = GaleriaImagenForm( instance=galeria)
+    
+    contexto ={ 
+            "accion":"Editar", 
+            "form": form,
+         } 
+    return render(request, "galeria_imagenes_editar.html",contexto)
+
+def galeria_imagenes_eliminar(request):
+    return gestionar_img_galeria_principal(request)
+

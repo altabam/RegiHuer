@@ -6,9 +6,13 @@ from django.contrib.auth.models import User
 import hashlib, datetime, random, os
 from .models import UsuarioPromesa
 from .forms import RegistracionUsuarioForm, UsuarioPromesaForm
+from configuracion.models import GaleriaImagen,Galeria
 # Create your views here.
 def index(request):
-    return render(request, "index.html")
+    galeria = Galeria.objects.get(id=1)
+    galeriaImagen = GaleriaImagen.objects.filter(galeria= galeria)
+    contexto = {'listadoGalerias': galeriaImagen,}
+    return render(request, "index.html", contexto)
 
 def registrar(request):
     #up = UsuarioPromesa.objects.all().delete()

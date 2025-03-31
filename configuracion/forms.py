@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
-from .models import Huerta, Canteros, Cultivos, Cantero_Cultivos, Tierras_Cultivo, Enfermedades, Plagas
+from .models import Huerta, Canteros, Cultivos, Cantero_Cultivos, Tierras_Cultivo, Enfermedades, Plagas,GaleriaImagen
 
 
 class SignUpForm(UserCreationForm):
@@ -91,3 +91,7 @@ class PlagasForm(forms.ModelForm):
         model = Plagas
         fields = '__all__'
 
+class GaleriaImagenForm(forms.ModelForm):
+    class Meta:
+        model = GaleriaImagen
+        fields = '__all__'

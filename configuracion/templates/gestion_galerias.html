@@ -1,0 +1,72 @@
+{% extends "baseConfiguracion.html"%}
+{% block title %} Gestión Galeria Imagenes {% endblock %}
+{% load static %}
+{% block style %} 
+    <link rel='stylesheet' href="{% static 'css/huertas.css' %}" type="text/css">
+ {% endblock %}
+ 
+{% block body %} 
+{% load static %}
+<div class="row">
+    <div class="alertas">
+        {% if messages %}
+        {% for message in messages %}
+        <div>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="datos-cuerpo-cabecera">
+    </div>
+    <div class="datos-cuerpo-listado">
+        <h1>Gestion Galeria de Imagenes</h1>
+        <div class="tabla-listar">
+            <div class="agregar">
+                <a href="{% url 'configuracion:galeria_imagenes_agregar' %}">
+                    <img src="{% static 'img/agregar.png' %}" alt="agregar" title="agregar">
+                </a>
+
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Galeria</th>
+                        <th>Nombre</th>
+                        <th>imagen</th>
+                        <th>Leyenda</th>
+                        <th colspan="3">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if listadoGalerias %}
+                    {% for listadoGaleria in listadoGalerias%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{listadoGaleria.galeria.nombre}}</td>
+                        <td>{{listadoGaleria.nombre}}</td>
+                        <td> 
+                            {% if listadoGaleria.imagen %}
+                            <img  src="{{listadoGaleria.imagen.url}}" width="70" height="70" >
+                            {% endif %}
+                        </td>
+                        <td>{{listadoGaleria.leyenda}}</td>
+                        <td colspan="3"><a href="{% url 'configuracion:galeria_imagenes_editar' listadoGaleria.pk %}" class=""><img
+                                    src="{% static 'img/editar.png' %}" alt="Editar Imagenes" title="Editar"></a>
+                            <a href="{% url 'configuracion:galeria_imagenes_eliminar' listadoGaleria.pk %}" class=""><img
+                                    src="{% static 'img/eliminar.png' %}" alt="Eliminar" title="Eliminar"></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+            <p id="message"></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}  

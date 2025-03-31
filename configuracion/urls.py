@@ -9,7 +9,7 @@ urlpatterns= [
        path('configuracion/editarHortelano/<int:id>/', views.editarHortelano),
        path('configuracion/modificarHortelano/', views.modificarHortelano),
        path('configuracion/eliminarHortelano/<int:id>', views.eliminarHortelano),
-       path('huertas_listar/', views.huertas_listar, name = 'huerta_listar'),
+       path('huertas_listar', views.huertas_listar, name = 'huerta_listar'),
        path('configuracion/huerta_agregar/<int:id>/', views.huerta_agregar, name='huerta_agregar'),
        path('configuracion/huerta_eliminar/<int:id>/', views.huerta_eliminar,name='huerta_eliminar'),
        path('configuracion/huerta_editar/<int:id>/', views.huerta_editar,name='huerta_editar'),
@@ -52,6 +52,13 @@ urlpatterns= [
        path('configuracion/plagas_agregar/', views.plagas_agregar, name='plagas_agregar'),
        path('configuracion/plagas_eliminar/<int:id>/', views.plagas_eliminar, name='plagas_eliminar'),
        path('configuracion/plagas_editar/<int:id>/', views.plagas_editar, name='plagas_editar'),
+
+
+       path('gestionar_img_galeria_principal', views.gestionar_img_galeria_principal, name='gestionar_img_galeria_principal'),
+       path('configuracion/galeria_imagenes_agregar/', views.galeria_imagenes_agregar, name='galeria_imagenes_agregar'),
+       path('configuracion/galeria_imagenes_eliminar/<int:id>/', views.galeria_imagenes_eliminar, name='galeria_imagenes_eliminar'),
+       path('configuracion/galeria_imagenes_editar/<int:id>/', views.galeria_imagenes_editar, name='galeria_imagenes_editar'),
+
 
 
 ]
