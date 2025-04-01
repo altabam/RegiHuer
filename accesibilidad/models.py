@@ -4,9 +4,15 @@ from django.contrib.auth.models import Group
 
 # Create your models here.
 class Menu(models.Model):
-    url = models.CharField(max_length=250, blank=False,unique=True)
+    TIPO = (
+        ('P', 'Padre'),
+        ('I', 'Intermedio'),
+        ('H', 'Hoja'),
+    )
+    url = models.CharField(max_length=250, blank=False,unique=True,null=True)
     nombre = models.CharField(max_length=250,unique=True)
-    nivel = models.SmallIntegerField()
+    tipo = models.CharField(max_length=1, choices=TIPO)
+    menuPadre = models.ForeignKey("self",related_name="subMenu",on_delete=models.CASCADE,blank=True,null=True, )
 
     # no es el mejor modo de retornar la URL pero es facil de entender :D
     def get_absolute_url(self):

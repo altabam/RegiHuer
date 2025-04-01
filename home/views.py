@@ -8,10 +8,43 @@ from .models import UsuarioPromesa
 from .forms import RegistracionUsuarioForm, UsuarioPromesaForm
 from configuracion.models import GaleriaImagen,Galeria
 # Create your views here.
+
+def generarMenu(user):
+  #menu = ["<a href='/configuracion/cultivos_listar' class='menu'>"]
+  tag = []
+  tag.append({'tag':'<a>','href':'/configuracion/cultivos_listar', 'class':'menu'})
+  menu = [tag]
+
+ # menu.append('<h2 class="menu-title">Cultivos</h2>')
+  tag =[]
+  tag.append({'tag':'<h2>', 'class':'menu-title', 'descripcion':'Cultivos'})
+  menu.append(tag)
+
+ # menu.append('<ul class="menu-dropdown"></ul>')
+  tag =[]
+  tag.append({'tag':'<ul>', 'class':'menu-dropdown', })
+  menu.append(tag)
+
+  tag =[]
+  tag.append({'tag':'</ul>'})
+  menu.append(tag)
+ # menu.append('</a>"')
+  tag =[]
+  tag.append({'tag':'</a>'})
+  menu.append(tag)
+
+  print("menu generado:",menu)
+  return menu
+
 def index(request):
-    galeria = Galeria.objects.get(id=1)
-    galeriaImagen = GaleriaImagen.objects.filter(galeria= galeria)
-    contexto = {'listadoGalerias': galeriaImagen,}
+    contexto={}
+    menu = generarMenu("hola")
+    if Galeria.objects.filter(id=1).exists():
+        galeria = Galeria.objects.get(id=1)
+        galeriaImagen = GaleriaImagen.objects.filter(galeria= galeria)
+        contexto = {'listadoGalerias': galeriaImagen,}
+
+    contexto["menu"]=menu
     return render(request, "index.html", contexto)
 
 def registrar(request):

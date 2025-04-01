@@ -1,28 +1,62 @@
 {% extends "base.html"%}
     {% block nav %}
     <nav class="barraMenu">
-        <div class="menuPrincipal collapse navbar-collapse" id="navbarNav">
-            <ul class="ulMenuPrincipal">
-                <li class="liMenuPrincipal">
-                    <a class="linkMenu active" aria-current="page" href="#">Principal <span>&rarr;</span></a>
-                    <ul class="item-2">
-                        <li> <a class="linkMenu active" aria-current="page" href="#">prueba</a></li>
-                        <li>reprueba</li>
-                    </ul>
-                </li>
-                <li class="liMenuPrincipal">
-                    <a class="linkMenu" href="#">Features</a>
-                </li>
-                <li class="liMenuPrincipal">
-                    <a class="linkMenu" href="/configuracion/cultivos_listar">Cultivos</a>
-                </li>
-                <li class="liMenuPrincipal">
-                    <a class="linkMenu " href="/accounts/login/">Login</a>
-                </li>
-                <li class="liMenuPrincipal">
-                    <a class="linkMenu " href="/configuracion/gestionar_img_galeria_principal">Galeria Imag</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    
+        <ul class="hList">
+            <li>
+            {%for me in menu %}
+             {% if me.0.tag == "<a>" %}
+                  <a href="{{me.0.href}}" class="{{me.0.class}}">
+                {% elif  me.0.tag == "</a>" %}
+                  </a>
+                {% elif  me.0.tag == "<h2>" %}
+                  <h2 class="{{me.0.class}}">{{me.0.descripcion}} </h2>
+                {% elif  me.0.tag == "<ul>" %}
+                    <ul class="{{me.0.class}}"> 
+                {% elif  me.0.tag == "</ul>" %}
+                    </ul> 
+                {% endif%}
+  
+            {%endfor%}
+            </li>
+            <li>
+              <div  class="menu">
+                <h2 class="menu-title menu-title_2nd">Otros</h2>
+                <ul class="menu-dropdown">
+                  <li><a href="/configuracion/gestionar_img_galeria_principal">Galeria Imag</a></li>
+                  <li>Jim</li>
+                  <li>Andy</li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="#click" class="menu">
+                <h2 class="menu-title menu-title_3rd">things</h2>
+                <ul class="menu-dropdown">
+                  <li>bench</li>
+                  <li>pizza</li>
+                  <li>Honda CB125</li>
+                  <li>space</li>
+                  <li>black matter</li>
+                  <li>apple</li>
+                  <li>philodendron</li>
+                  <li>liver</li>
+                  <li>brass</li>
+                </ul>
+              </a>
+            </li>
+            <li>
+              <a href="#click" class="menu">
+                <h2 class="menu-title menu-title_4th">Movies</h2>
+                <ul class="menu-dropdown">
+                  <li>Godzilla</li>
+                  <li>Man on Wire</li>
+                  <li>Spirited Away</li>
+                  <li>Interstellar</li>
+                </ul>
+              </a>
+            </li>
+          </ul>  
+        </nav>
+          
     {% endblock %}
