@@ -3,27 +3,33 @@
     <nav class="barraMenu">
     
         <ul class="hList">
-            <li>
             {%for me in menu %}
              {% if me.0.tag == "<a>" %}
                   <a href="{{me.0.href}}" class="{{me.0.class}}">
                 {% elif  me.0.tag == "</a>" %}
                   </a>
+                {% elif  me.0.tag == "<li>" %}
+                <li>
+                {% elif  me.0.tag == "</li>" %}
+                  </li>
                 {% elif  me.0.tag == "<h2>" %}
                   <h2 class="{{me.0.class}}">{{me.0.descripcion}} </h2>
                 {% elif  me.0.tag == "<ul>" %}
                     <ul class="{{me.0.class}}"> 
                 {% elif  me.0.tag == "</ul>" %}
                     </ul> 
+                {% elif  me.0.tag == "<div>" %}
+                  <div class="{{me.0.class}}"> 
+                {% elif  me.0.tag == "</div>" %}
+                  </div> 
                 {% endif%}
   
             {%endfor%}
-            </li>
             <li>
               <div  class="menu">
-                <h2 class="menu-title menu-title_2nd">Otros</h2>
+                <h2 class="menu-title menu-title_2">Otros</h2>
                 <ul class="menu-dropdown">
-                  <li><a href="/configuracion/gestionar_img_galeria_principal">Galeria Imag</a></li>
+                  <li><a href="/configuracion/gestion_img_galeria_principal">Galeria Imag</a></li>
                   <li>Jim</li>
                   <li>Andy</li>
                 </ul>
@@ -31,7 +37,7 @@
             </li>
             <li>
               <a href="#click" class="menu">
-                <h2 class="menu-title menu-title_3rd">things</h2>
+                <h2 class="menu-title menu-title_3">things</h2>
                 <ul class="menu-dropdown">
                   <li>bench</li>
                   <li>pizza</li>
@@ -47,7 +53,7 @@
             </li>
             <li>
               <a href="#click" class="menu">
-                <h2 class="menu-title menu-title_4th">Movies</h2>
+                <h2 class="menu-title menu-title_4">Movies</h2>
                 <ul class="menu-dropdown">
                   <li>Godzilla</li>
                   <li>Man on Wire</li>

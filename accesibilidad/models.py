@@ -9,7 +9,7 @@ class Menu(models.Model):
         ('I', 'Intermedio'),
         ('H', 'Hoja'),
     )
-    url = models.CharField(max_length=250, blank=False,unique=True,null=True)
+    url = models.CharField(max_length=250, blank=True,null=True)
     nombre = models.CharField(max_length=250,unique=True)
     tipo = models.CharField(max_length=1, choices=TIPO)
     menuPadre = models.ForeignKey("self",related_name="subMenu",on_delete=models.CASCADE,blank=True,null=True, )
@@ -22,7 +22,7 @@ class Menu(models.Model):
         return u'%s' % self.nombre
 
     def __str__(self):
-      return f"{self.url} {self.nombre}"
+      return f"{self.url} {self.nombre} {self.tipo}"
     
 
 class MenuGroup(models.Model):

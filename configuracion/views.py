@@ -17,7 +17,7 @@ import json
 
 
 @login_required
-def listadoHortelano(request):
+def gestionHortelano(request):
     
     listadoHortelano = Hortelano.objects.filter(usuario=request.user)
     messages.success(request,"¡Hortelanos Listados!")
@@ -40,12 +40,12 @@ def registrarHortelano(request):
         apodo= apodo, nombre = nombre, mail = mail, usuario = usuario
     )
     messages.success(request,"¡Hortelano Creado!")
-    return redirect('/listadoHortelano')
+    return redirect('/gestionHortelano')
 
 def eliminarHortelano(request,id):
     hortelano = Hortelano.objects.get(id=id)
     hortelano.delete()
-    return redirect('/listadoHortelano')
+    return redirect('/gestionHortelano')
     
 def editarHortelano(request,id):
      hortelano = Hortelano.objects.get(id=id)
@@ -61,7 +61,7 @@ def modificarHortelano(request):
     hortelano.nombre = nombre 
     hortelano.mail = mail
     hortelano.save()
-    return redirect('/listadoHortelano')
+    return redirect('/gestionHortelano')
 
 
 @login_required
@@ -611,7 +611,7 @@ def cantero_cultivos_mostrar(request, id):
     return render(request, "cantero_cultivos_mostrar.html",contexto)
 
 
-def gestionar_img_galeria_principal(request):
+def gestion_img_galeria_principal(request):
     listadoGalerias = GaleriaImagen.objects.all()
     print("listadoGalerias",listadoGalerias)
     messages.success(request,"¡Galerias Listadas!")
@@ -624,7 +624,7 @@ def galeria_imagenes_agregar(request):
         form= GaleriaImagenForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/configuracion/gestionar_img_galeria_principal')
+            return redirect('/configuracion/gestion_img_galeria_principal')
     else:
         form =GaleriaImagenForm()
 
@@ -641,7 +641,7 @@ def galeria_imagenes_editar(request,id):
         if form.is_valid():
             print("edito imagen", id, galeria.imagen.url)
             form.save()
-            return redirect('/configuracion/gestionar_img_galeria_principal')
+            return redirect('/configuracion/gestion_img_galeria_principal')
     else:
             form = GaleriaImagenForm( instance=galeria)
     
@@ -652,5 +652,5 @@ def galeria_imagenes_editar(request,id):
     return render(request, "galeria_imagenes_editar.html",contexto)
 
 def galeria_imagenes_eliminar(request):
-    return gestionar_img_galeria_principal(request)
+    return gestion_img_galeria_principal(request)
 

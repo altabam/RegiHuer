@@ -273,20 +273,20 @@ ul li ul li:last-child:hover .item-2{
   transition: 0.2s 0.2s border-bottom-width ease-out;
 }
 
-.menu-title_2nd { background: #4e96b3; }
-.menu-title_2nd:hover { background: #3e86a3; }
-.menu-title_2nd:before { border-top-color: #4e96b3; }
-.menu-title_2nd:hover:before { border-top-color: #3e86a3; }
+.menu-title_2 { background: #4e96b3; }
+.menu-title_2:hover { background: #3e86a3; }
+.menu-title_2:before { border-top-color: #4e96b3; }
+.menu-title_2:hover:before { border-top-color: #3e86a3; }
 
-.menu-title_3rd { background: #c97676; }
-.menu-title_3rd:hover { background: #b96666; }
-.menu-title_3rd:before { border-top-color: #c97676; }
-.menu-title_3rd:hover:before { border-top-color: #b96666; }
+.menu-title_3 { background: #c97676; }
+.menu-title_3:hover { background: #b96666; }
+.menu-title_3:before { border-top-color: #c97676; }
+.menu-title_3:hover:before { border-top-color: #b96666; }
 
-.menu-title_4th { background: #dbab58; }
-.menu-title_4th:hover { background: #cb9b48; }
-.menu-title_4th:before { border-top-color: #dbab58; }
-.menu-title_4th:hover:before { border-top-color: #cb9b48; }
+.menu-title_4 { background: #dbab58; }
+.menu-title_4:hover { background: #cb9b48; }
+.menu-title_4:before { border-top-color: #dbab58; }
+.menu-title_4:hover:before { border-top-color: #cb9b48; }
 
 .menu-dropdown {
   min-width: 100%;

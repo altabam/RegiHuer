@@ -3,8 +3,8 @@ from django.urls import include, re_path
 from . import views
 app_name = 'configuracion'
 urlpatterns= [ 
-       path('listadoHortelano/', views.listadoHortelano,name='listadoHortelano'),
-       path('<int:persona_id>/', views.consultaPersona, name='consultaPersona'),
+       path('configuracion/gestionHortelano/', views.gestionHortelano,name='gestionHortelano'),
+       path('configuracion/consultaPersona/<int:persona_id>/', views.consultaPersona, name='consultaPersona'),
        path('configuracion/registrarHortelano/', views.registrarHortelano),
        path('configuracion/editarHortelano/<int:id>/', views.editarHortelano),
        path('configuracion/modificarHortelano/', views.modificarHortelano),
@@ -54,7 +54,7 @@ urlpatterns= [
        path('configuracion/plagas_editar/<int:id>/', views.plagas_editar, name='plagas_editar'),
 
 
-       path('gestionar_img_galeria_principal', views.gestionar_img_galeria_principal, name='gestionar_img_galeria_principal'),
+       path('gestion_img_galeria_principal', views.gestion_img_galeria_principal, name='gestion_img_galeria_principal'),
        path('configuracion/galeria_imagenes_agregar/', views.galeria_imagenes_agregar, name='galeria_imagenes_agregar'),
        path('configuracion/galeria_imagenes_eliminar/<int:id>/', views.galeria_imagenes_eliminar, name='galeria_imagenes_eliminar'),
        path('configuracion/galeria_imagenes_editar/<int:id>/', views.galeria_imagenes_editar, name='galeria_imagenes_editar'),
