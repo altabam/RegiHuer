@@ -63,9 +63,26 @@ def generarTagPrincipalPadre(menu,orden):
     tag =[]
     tag.append({'tag':'<ul>', 'class':'menu-dropdown', })
     me.append(tag)
+    menuHijos = Menu.objects.filter(menuPadre = menu)
+    print("menu hijo:", menuHijos)
+    for mh in menuHijos:
+        tag=[]
+        if mh.tipo=='H':
+            print('tag hijo mh:', mh)
+            tag.append({'tag':'<li>'})
+            me.append(tag)
+ 
+            tag=[]
+            tag.append({'tag':'<a>','href':mh.url, 'class':'menu', 'descripcion':mh.nombre})
+            me.append(tag)
+        
+            tag =[]
+            tag.append({'tag':'</a>'})
+            me.append(tag)
 
-
-
+            tag=[]
+            tag.append({'tag':'</li>'})
+            me.append(tag)
     tag =[]
     tag.append({'tag':'</ul>'})
     me.append(tag)

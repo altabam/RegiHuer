@@ -61,6 +61,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% if listadoHortelano %}
                     {% for listadoHortelano in listadoHortelano%}
                     <tr>
                         <td>{{forloop.counter}}</td>
@@ -71,6 +72,7 @@
                         <td><a href="/configuracion/eliminarHortelano/{{listadoHortelano.id}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
                     </tr>
                     {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>

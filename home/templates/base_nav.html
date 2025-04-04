@@ -5,11 +5,11 @@
         <ul class="hList">
             {%for me in menu %}
              {% if me.0.tag == "<a>" %}
-                  <a href="{{me.0.href}}" class="{{me.0.class}}">
+                  <a href="{{me.0.href}}" class="{{me.0.class}}">{{me.0.descripcion}}
                 {% elif  me.0.tag == "</a>" %}
                   </a>
                 {% elif  me.0.tag == "<li>" %}
-                <li>
+                  <li>
                 {% elif  me.0.tag == "</li>" %}
                   </li>
                 {% elif  me.0.tag == "<h2>" %}

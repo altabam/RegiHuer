@@ -3,13 +3,14 @@ from django.urls import include, re_path
 from . import views
 app_name = 'configuracion'
 urlpatterns= [ 
-       path('configuracion/gestionHortelano/', views.gestionHortelano,name='gestionHortelano'),
+       path('gestion_hortelanos', views.gestion_hortelanos,name='gestion_hortelanos'),
        path('configuracion/consultaPersona/<int:persona_id>/', views.consultaPersona, name='consultaPersona'),
        path('configuracion/registrarHortelano/', views.registrarHortelano),
        path('configuracion/editarHortelano/<int:id>/', views.editarHortelano),
        path('configuracion/modificarHortelano/', views.modificarHortelano),
        path('configuracion/eliminarHortelano/<int:id>', views.eliminarHortelano),
-       path('huertas_listar', views.huertas_listar, name = 'huerta_listar'),
+
+       path('gestion_huertas', views.gestion_huertas, name = 'gestion_huertas'),
        path('configuracion/huerta_agregar/<int:id>/', views.huerta_agregar, name='huerta_agregar'),
        path('configuracion/huerta_eliminar/<int:id>/', views.huerta_eliminar,name='huerta_eliminar'),
        path('configuracion/huerta_editar/<int:id>/', views.huerta_editar,name='huerta_editar'),
@@ -26,12 +27,12 @@ urlpatterns= [
        path('configuracion/canteros_listar/', views.canteros_listar, name='canteros_listar'),
        
 
-       path('/configuracion/cantero_cultivos_agregar/<int:id>/', views.cantero_cultivos_agregar, name='cantero_cultivos_agregar'),
-       path('/configuracion/cantero_cultivos_eliminar/<int:id>/', views.cantero_cultivos_eliminar),
-       path('/configuracion/cantero_cultivos_editar/<int:id>', views.cantero_cultivos_editar),
-       path('/configuracion/cantero_cultivos_mostrar/<int:id>/', views.cantero_cultivos_mostrar, name='cantero_cultivos_mostrar'),
+       path('configuracion/cantero_cultivos_agregar/<int:id>/', views.cantero_cultivos_agregar, name='cantero_cultivos_agregar'),
+       path('configuracion/cantero_cultivos_eliminar/<int:id>/', views.cantero_cultivos_eliminar),
+       path('configuracion/cantero_cultivos_editar/<int:id>', views.cantero_cultivos_editar),
+       path('configuracion/cantero_cultivos_mostrar/<int:id>/', views.cantero_cultivos_mostrar, name='cantero_cultivos_mostrar'),
 
-       path('cultivos_listar', views.cultivos_listar, name = 'cultivos_listar'),
+       path('gestion_cultivos', views.gestion_cultivos, name = 'gestion_cultivos'),
        path('cultivo_agregar', views.cultivo_agregar, name='cultivo_agregar'),
        path('cultivo_eliminar/<int:id>', views.cultivo_eliminar, name='cultivo_eliminar'),
        path('cultivo_editar/<int:id>', views.cultivo_editar, name='cultivo_editar'),

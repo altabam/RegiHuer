@@ -16,14 +16,14 @@ import json
 # Create your views here.
 
 
-@login_required
-def gestionHortelano(request):
-    
+#@login_required
+def gestion_hortelanos(request):
     listadoHortelano = Hortelano.objects.filter(usuario=request.user)
     messages.success(request,"¡Hortelanos Listados!")
-    contexto =[
-        { "listadoHortelano": listadoHortelano }
-    ]
+    contexto ={ 
+        "listadoHortelano": listadoHortelano, 
+    }
+    
     return render(request, "configuracionHortelano.html",  contexto)
 
 
@@ -65,7 +65,7 @@ def modificarHortelano(request):
 
 
 @login_required
-def huertas_listar(request):
+def gestion_huertas(request):
     hortelano = Hortelano.objects.get(usuario=request.user)
     listadoHuertas = Huerta.objects.filter(hortelano=hortelano)
     messages.success(request,"¡Huertas Listadas!")
@@ -88,7 +88,7 @@ def huerta_agregar(request, id):
         form= HuertaForm(request.POST )
         if form.is_valid():
             form.save()
-            return redirect('/huertas_listar')
+            return redirect('configuracion/gestion_huertas')
     else:
         form = HuertaForm( )
 
@@ -105,7 +105,7 @@ def huerta_editar(request,id):
         form= HuertaForm(request.POST, instance=huerta)
         if form.is_valid():
             form.save()
-            return redirect('/huertas_listar')
+            return redirect('configuracion/gestion_huertas')
     else:
             form = HuertaForm( instance=huerta)
     
@@ -121,7 +121,7 @@ def huerta_editar(request,id):
 def huerta_eliminar(request,id):
     huerta = Huerta.objects.get(id=id)
     huerta.delete()
-    return redirect('/huertas_listar')
+    return redirect('configuracion/gestion_huertas')
 
 def huerta_canteros_mostrar(request, id):
     huerta = Huerta.objects.get(id=id)
@@ -237,7 +237,7 @@ def cantero_eliminar(request,id):
     cantero.delete()
     return redirect('/configuracion/huerta_canteros_mostrar/'+str(cantero.huerta.id)+"/")
 
-def cultivos_listar(request):
+def gestion_cultivos(request):
     listadoCultivos = Cultivos.objects.all()
     print("paso por aqui")
     messages.success(request,"¡Cultivos Listados!")
@@ -250,7 +250,7 @@ def cultivo_agregar(request):
         form= CultivosForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/configuracion/cultivos_listar')
+            return redirect('/configuracion/gestion_cultivos')
     else:
         form =CultivosForm()
 
@@ -266,7 +266,7 @@ def cultivo_editar(request,id):
         form= CultivosForm(request.POST, request.FILES, instance=culitvo)
         if form.is_valid():
             form.save()
-            return redirect('/configuracion/cultivos_listar')
+            return redirect('/configuracion/gestion_cultivos')
     else:
             form = CultivosForm( instance=culitvo)
     
@@ -283,7 +283,7 @@ def cultivo_eliminar(request,id):
     listadoCultivos = Cultivos.objects.all()
     messages.success(request,"¡Huertas Listadas!")
     contexto ={ "listadoCultivos": listadoCultivos,  } 
-    return redirect('/configuracion/cultivos_listar', contexto)
+    return redirect('/configuracion/gestion_cultivos', contexto)
 
 
 
