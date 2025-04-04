@@ -158,7 +158,6 @@ def registrar(request):
     return render(request, "registration/registracion.html", contexto)
 
 def enviarEmail(up):
-    
     # Renderizar la plantilla
     url_app = "https://"+os.getenv("URL_APP")+ "/validacion?tk="+up.token
     print(url_app)
@@ -172,9 +171,10 @@ def enviarEmail(up):
       from_email='altabam@gmail.com',
       to=[up.email],
     )
-    
     email.content_subtype = 'html'  # Define el tipo como HTML
-  #  email.send()
+    email.send()
+    print ("email enviado")
+
 def generarUsuarioPromesa(request,form):
     bandera = True
     if(User.objects.filter(username=form.cleaned_data['username']).exists()):
