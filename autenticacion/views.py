@@ -4,4 +4,9 @@ from urllib import response, request
 
 # Create your views here.
 def login(request):
-    return render(request, "login.html")
+    contexto = {
+        "ocultarLogin":"true"
+
+    }
+    print("login", contexto)
+    return render(request, "login.html",contexto)

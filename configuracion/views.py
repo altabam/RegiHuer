@@ -16,7 +16,7 @@ import json
 # Create your views here.
 
 
-#@login_required
+@login_required
 def gestion_hortelanos(request):
     listadoHortelano = Hortelano.objects.filter(usuario=request.user)
     messages.success(request,"¡Hortelanos Listados!")
@@ -32,36 +32,31 @@ def consultaPersona(request, persona_id):
 
 def registrarHortelano(request):
     apodo =request.POST['txtApodo']
-    nombre = request.POST['txtNombre']
-    mail = request.POST['txtMail']
     usuario = User.objects.get(username=request.POST['txtUsuario'])
     
     hortelano = Hortelano.objects.create(
-        apodo= apodo, nombre = nombre, mail = mail, usuario = usuario
+        apodo= apodo,  
+        usuario = usuario
     )
     messages.success(request,"¡Hortelano Creado!")
-    return redirect('/gestionHortelano')
+    return redirect('/configuracion/gestion_hortelanos')
 
-def eliminarHortelano(request,id):
+def hortelano_eliminar(request,id):
     hortelano = Hortelano.objects.get(id=id)
     hortelano.delete()
-    return redirect('/gestionHortelano')
+    return redirect('/configuracion/gestion_hortelanos')
     
-def editarHortelano(request,id):
+def hortelano_editar(request,id):
      hortelano = Hortelano.objects.get(id=id)
-     return render(request, "editarHortelano.html",{"hortelano":hortelano})
+     return render(request, "hortelano_editar.html",{"hortelano":hortelano})
 
-def modificarHortelano(request):
+def hortelano_modificar(request):
     id =request.POST['txtId']
     apodo =request.POST['txtApodo']
-    nombre = request.POST['txtNombre']
-    mail = request.POST['txtMail']
     hortelano = Hortelano.objects.get(id=id)
     hortelano.apodo= apodo
-    hortelano.nombre = nombre 
-    hortelano.mail = mail
     hortelano.save()
-    return redirect('/gestionHortelano')
+    return redirect('/configuracion/gestion_hortelanos')
 
 
 @login_required

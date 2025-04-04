@@ -68,6 +68,16 @@ a {
   
 }
 
+.linkRegistracion{
+ font-size: 20px;
+ padding:30px;
+ color: #dddddd;
+}
+.linkRegistracion:hover{
+  font-size: 20px;
+  color:black;
+  font-style: italic;
+}
 .barraMenu{
     background-color: #333;
     border: 1px solid #333;
@@ -76,90 +86,6 @@ a {
     margin: 0;
     overflow: hidden;*/
 }
-/*
-.ulMenuPrincipal {
-  padding: 0em;
-  margin: 0em;
-  list-style: none;
-}
-.liMenuPrincipal {
-  margin: 0.1em;
-  padding: 0.5em 0.5em;
-  display: inline-block;
-  list-style-type: none;
-  transition: all 0.2s;
-  width: 8em;
-  text-align: center;
-
-}
-.linkMenu {
-  margin: 0.1em ;
-  border-radius: 30px;
-  padding: 0.5em 0.5em;
-  color: #aaa;
-  display: inline-block;
-  list-style-type: none;
-  text-decoration: none;
-  width: 8em;
-}
-
-.linkMenu:hover {
-  margin: 0.1em;
-  padding: 0.5em 0.5em;
-  background-color: beige;
-  text-decoration: underline;
-  font-weight: bolder;
-  width: 8em;
-}
-*/
-/*
-ul{
-  list-style: none;
-
-}
-ul li {
-  width: 120px; 
-  background:rgb(138, 177, 115) ;
-  float: left;
-  height: 35px;
-  line-height: 35px;
-  text-align: center;
-  margin-right: 2px;
-  position: relative;
-}
-ul li:hover {background-color: #bef156;}
-ul li a {
-  border-radius: 30px;
-  color: blueviolet;
-  text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  display: block;
-}
-
-ul li ul li{
-  border-top:1px solid #fff ;
-}
-
-ul li ul {
-  display: none;
-}
-
-ul li:hover ul{
-  display: block;
-}
-
-ul li ul .item-2{
-  position: relative;
-  left: 122px;
-  top: 0px;
-  display: none;
-}
-ul li ul li:last-child:hover .item-2{
-  display: block;
-}
-
-
-*/
 
 .contenedor-galeria {
   display: grid;

@@ -6,9 +6,9 @@ urlpatterns= [
        path('gestion_hortelanos', views.gestion_hortelanos,name='gestion_hortelanos'),
        path('configuracion/consultaPersona/<int:persona_id>/', views.consultaPersona, name='consultaPersona'),
        path('configuracion/registrarHortelano/', views.registrarHortelano),
-       path('configuracion/editarHortelano/<int:id>/', views.editarHortelano),
-       path('configuracion/modificarHortelano/', views.modificarHortelano),
-       path('configuracion/eliminarHortelano/<int:id>', views.eliminarHortelano),
+       path('hortelano_editar/<int:id>/', views.hortelano_editar, name='hortelano_editar'),
+       path('hortelano_modificar/', views.hortelano_modificar),
+       path('hortelano_eliminar/<int:id>', views.hortelano_eliminar),
 
        path('gestion_huertas', views.gestion_huertas, name = 'gestion_huertas'),
        path('configuracion/huerta_agregar/<int:id>/', views.huerta_agregar, name='huerta_agregar'),

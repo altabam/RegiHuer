@@ -6,28 +6,16 @@
         <h2>Editar Hortelano</h2>
         <div class="card">
             <div class="card-body">
-                <form action="/configuracion/modificarHortelano/" method="POST">{% csrf_token %}
+                <form action="/configuracion/hortelano_modificar/" method="POST">{% csrf_token %}
                     <div class="form-group">
                         <label for="id"></label>
                         <input type="text" name="txtId" id="txtId" value="{{hortelano.id}}" class="form-control" placeholder="id"
                              aria-describedby="helpId" required readonly>
                         <small id="helpId" class="text-muted">Help text</small>
-                    </div>                    <div class="form-group">
-                        <label for="Nombre"></label>
-                        <input type="text" name="txtNombre" id="txtNombre" value="{{hortelano.nombre}}" class="form-control" placeholder="Nombre"
-                            minlength="2" maxlength="50" aria-describedby="helpId" required>
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
                     <div class="form-group">
                         <label for="Apodo"></label>
                         <input type="text" name="txtApodo" id="txtApodo" value="{{hortelano.apodo}}" class="form-control" placeholder="Apodo"
                             minlength="2" maxlength="60" required aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="">E-mail</label>
-                        <input type="text" name="txtMail" id="txtMail" value="{{hortelano.mail}}" class="form-control" placeholder="Mail"
-                            minlength="6" maxlength="50" aria-describedby="helpId" required>
                         <small id="helpId" class="text-muted">Help text</small>
                     </div>
                     <div class="form-group">

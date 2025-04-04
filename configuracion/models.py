@@ -28,11 +28,9 @@ SEMANA = (
 
 class Hortelano(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE )
-    nombre = models.CharField(max_length=80)
-    apodo = models.CharField(max_length=30)
-    mail = models.EmailField(max_length=254, blank=True )
+    apodo = models.CharField(max_length=30, blank=True)
     def __str__(self):
-        return self.nombre +' '+ self.apodo
+        return self.usuario.first_name+" "+self.usuario.last_name +' '+ self.apodo
 
 
 class Huerta(models.Model):

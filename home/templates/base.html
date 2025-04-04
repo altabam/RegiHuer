@@ -16,16 +16,31 @@
 <body>
     <header class="cabecera" once="cabecera" id="cabecera">
         <div class="itemCabecera">
-            <img src="{% static 'img/regihuer.png' %}" alt="RegiHuer" title="Logo Newbery">
+            <a href="{% url 'index' %}"><img src="{% static 'img/regihuer.png' %}" alt="RegiHuer" title="Volver a Inicio"></a>
     
         </div>
         <div class="itemCabecera">
             <h1 class="tituloCabecera">Actividades de la Huerta</h1>
     
         </div>
-        <div class="itemCabecera">
-            <a class="linkLogin" href="/accounts/login/">Login</a>
-        </div>
+
+        {%if request.path == "/accounts/login/"%}
+
+        {%else%}
+            {% if user.is_authenticated  %}
+            <div class="itemCabecera">
+                <div >
+                    <p><i>{{user.first_name}}{{user.last_name}}</i> - <b>{{user.username}}</b></p> 
+                    <br>
+                    <a class="linkLogin" href="{% url 'logout' %}">Logout</a>
+                </div>
+            </div>
+            {% else %}
+            <div class="itemCabecera">
+                <a class="linkLogin" href="{% url 'login' %}">Login</a>
+            </div>
+            {%endif%}
+        {%endif%}
 
     </header>
     <hr>
