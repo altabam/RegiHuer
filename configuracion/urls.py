@@ -14,15 +14,15 @@ urlpatterns= [
        path('configuracion/huerta_agregar/<int:id>/', views.huerta_agregar, name='huerta_agregar'),
        path('configuracion/huerta_eliminar/<int:id>/', views.huerta_eliminar,name='huerta_eliminar'),
        path('configuracion/huerta_editar/<int:id>/', views.huerta_editar,name='huerta_editar'),
-       path('configuracion/huerta_canteros_mostrar/<int:id>/', views.huerta_canteros_mostrar,name='huerta_canteros_mostrar'),
+       path('huerta_canteros_mostrar/<int:id>/', views.huerta_canteros_mostrar,name='huerta_canteros_mostrar'),
        
        path('configuracion/huerta_cultivos_mostrar/<int:id>/', views.huerta_cultivos_mostrar,name='huerta_cultivos_mostrar'),
        path('configuracion/huerta_cultivos_agregar/<int:id>/', views.huerta_cultivos_agregar, name='huerta_cultivos_agregar'),
        
-       path('configuracion/cantero_agregar/<int:id>/', views.cantero_agregar, name='cantero_agregar'),
-       path('configuracion/cantero_eliminar/<int:id>/', views.cantero_eliminar),
-       path('configuracion/cantero_editar/<int:id>/', views.cantero_editar),
-       path('configuracion/cantero_mostrar/<int:id>/', views.cantero_mostrar, name='cantero_mostrar'),
+       path('cantero_agregar/<int:id>/', views.cantero_agregar, name='cantero_agregar'),
+       path('cantero_eliminar/<int:id>/', views.cantero_eliminar),
+       path('cantero_editar/<int:id>/', views.cantero_editar),
+       path('cantero_mostrar/<int:id>/', views.cantero_mostrar, name='cantero_mostrar'),
        
        path('configuracion/canteros_listar/', views.canteros_listar, name='canteros_listar'),
        

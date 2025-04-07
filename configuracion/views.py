@@ -11,6 +11,7 @@ from django.core import serializers
 
 from .models import Cultivos, Hortelano, Huerta, Canteros, Cantero_Cultivos, Tierras_Cultivo, Enfermedades, Plagas, GaleriaImagen
 from .forms import HuertaForm, CanteroForm, CultivosForm, Cantero_CultivosForm, Tierras_CultivoForm, EnfermedadesForm, PlagasForm,GaleriaImagenForm
+from accesibilidad.views import generarMenu
 
 import json
 # Create your views here.
@@ -18,10 +19,12 @@ import json
 
 @login_required
 def gestion_hortelanos(request):
+    menu = generarMenu("hola")
     listadoHortelano = Hortelano.objects.filter(usuario=request.user)
     messages.success(request,"¡Hortelanos Listados!")
     contexto ={ 
         "listadoHortelano": listadoHortelano, 
+        "menu": menu
     }
     
     return render(request, "configuracionHortelano.html",  contexto)
@@ -83,7 +86,7 @@ def huerta_agregar(request, id):
         form= HuertaForm(request.POST )
         if form.is_valid():
             form.save()
-            return redirect('configuracion/gestion_huertas')
+            return redirect('/configuracion/gestion_huertas')
     else:
         form = HuertaForm( )
 
@@ -100,7 +103,7 @@ def huerta_editar(request,id):
         form= HuertaForm(request.POST, instance=huerta)
         if form.is_valid():
             form.save()
-            return redirect('configuracion/gestion_huertas')
+            return redirect('/configuracion/gestion_huertas')
     else:
             form = HuertaForm( instance=huerta)
     
@@ -116,9 +119,10 @@ def huerta_editar(request,id):
 def huerta_eliminar(request,id):
     huerta = Huerta.objects.get(id=id)
     huerta.delete()
-    return redirect('configuracion/gestion_huertas')
+    return redirect('/configuracion/gestion_huertas')
 
 def huerta_canteros_mostrar(request, id):
+    print("pasa por huerta canteros mostrar")
     huerta = Huerta.objects.get(id=id)
     try:
         canteros = Canteros.objects.filter(huerta= huerta)

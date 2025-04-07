@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import Group
-from .models import MenuGroup
+from .models import MenuGroup, Menu
+import csv
+
 # Create your views here.
 def ObtenerMenu(user):
     print(user)
@@ -12,3 +14,133 @@ def ObtenerMenu(user):
   #  print(permisos)
    # return Menu.objects.all()
     return menuUsuario
+
+
+def generarTagPrincipalHoja(menu, orden):
+    if orden > 1:
+      menuTitle = 'menu-title_'+str(orden)
+    else:
+        menuTitle=''
+    me =[]
+    tag = [{'tag':'<li>'}]
+    me = [tag]
+    
+    tag = []
+    tag.append({'tag':'<a>','href':menu.url, 'class':'menu'})
+    me.append(tag)
+    
+    tag =[]
+    tag.append({'tag':'<h2>', 'class':'menu-title '+menuTitle, 'descripcion':menu.nombre})
+    me.append(tag)
+    
+    tag =[]
+    tag.append({'tag':'<ul>', 'class':'menu-dropdown', })
+    me.append(tag)
+
+    tag =[]
+    tag.append({'tag':'</ul>'})
+    me.append(tag)
+    
+    tag =[]
+    tag.append({'tag':'</a>'})
+    me.append(tag)
+    
+    tag =[]
+    tag.append({'tag':'</li>'})
+    me.append(tag)
+  
+    return me
+def generarTagPrincipalPadre(menu,orden):
+    if orden > 1:
+      menuTitle = 'menu-title_'+str(orden)
+    else:
+        menuTitle=''
+    me =[]
+    tag = [{'tag':'<li>'}]
+    me = [tag]
+    
+    tag = []
+    tag.append({'tag':'<div>','class':'menu'})
+    me.append(tag)
+    tag =[]
+
+    tag.append({'tag':'<h2>', 'class':'menu-title '+menuTitle, 'descripcion':menu.nombre})
+    me.append(tag)
+    tag =[]
+    tag.append({'tag':'<ul>', 'class':'menu-dropdown', })
+    me.append(tag)
+    menuHijos = Menu.objects.filter(menuPadre = menu)
+    print("menu hijo:", menuHijos)
+    for mh in menuHijos:
+        tag=[]
+        if mh.tipo=='H':
+            print('tag hijo mh:', mh)
+            tag.append({'tag':'<li>'})
+            me.append(tag)
+ 
+            tag=[]
+            tag.append({'tag':'<a>','href':mh.url, 'class':'menu', 'descripcion':mh.nombre})
+            me.append(tag)
+        
+            tag =[]
+            tag.append({'tag':'</a>'})
+            me.append(tag)
+
+            tag=[]
+            tag.append({'tag':'</li>'})
+            me.append(tag)
+    tag =[]
+    tag.append({'tag':'</ul>'})
+    me.append(tag)
+    tag =[]
+    tag.append({'tag':'</div>'})
+    me.append(tag)
+    tag =[]
+    tag.append({'tag':'</li>'})
+    me.append(tag)
+  
+
+
+    return me
+def generarMenu(user):
+  menu =[]
+  menues = Menu.objects.filter( menuPadre__isnull = True )
+  orden = 1
+  for me in menues:
+      if me.tipo=="H":
+          menu.extend(generarTagPrincipalHoja(me,orden))
+      elif me.tipo == 'P':
+          menu.extend(generarTagPrincipalPadre(me,orden))
+      if orden == 4:
+       orden =1
+      else:
+        orden +=1
+      
+  
+  print(menues)
+  print("menu generado:",menu)
+  return menu
+
+
+def cargaInicialMenu(request):
+    template_name = "accesibilidad/migrations/menues.csv"
+    model = Menu()
+    #Disciplinas.objects.all().delete()
+    with open (template_name) as f:
+        reader = csv.reader(f )
+        for row in reader:
+           print("row:",row)
+           if  not Menu.objects.filter(nombre = row[1]).exists():
+               if  Menu.objects.filter(nombre = row[3]).exists():
+                   print("dentro de Menu Padre:", row[3])
+                   menuP = Menu.objects.get(nombre = row[3])
+                   model.menuPadre = menuP
+                   Menu.objects.create(url = row[0], nombre =row[1] ,tipo = row[2],menuPadre = menuP)
+               else:
+                   Menu.objects.create(url = row[0], nombre =row[1], tipo = row[2])
+           else:
+                print(row, "Linea de Menu Existe")
+    mensaje ="carga con exito"
+    contexto ={  "mensaje":mensaje ,                  "menu": ObtenerMenu(request.user), 
+    } 
+    return render (request, "index.html",contexto)
