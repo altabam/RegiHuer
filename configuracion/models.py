@@ -106,7 +106,6 @@ class Cultivos(models.Model):
     familia = models.CharField(max_length=3, choices=FAMILIA)
     nombre_cientifico = models.CharField(max_length=50, blank=True)
     nombre = models.CharField(max_length=50)
-    variedad = models.CharField(max_length=50, blank=True)
     descripcion = models.CharField(max_length=255, blank=True)
     tierra = models.ForeignKey(Tierras_Cultivo,on_delete=models.CASCADE, null=True, blank=True)
     tipo_siembra = models.CharField(max_length=1, choices=TIPOS_SIEMBRA)
@@ -127,9 +126,14 @@ class Cultivos(models.Model):
     imagen = models.ImageField(upload_to='cultivos',blank=True)
 
     def __str__(self):
-        return self.familia +"-"+ self.nombre+"-"+ self.variedad
+        return self.familia +"-"+ self.nombre
 
 
+
+class Variedad_Cultivo(models.Model):
+    nombre = models.CharField(max_length=50, blank=True)
+    cultivo = models.ForeignKey(Temperaturas_Cultivos,on_delete=models.CASCADE, null=True, blank=True)
+    descripcion = models.CharField(max_length=255, blank=True)
 
 
 class Galeria(models.Model):

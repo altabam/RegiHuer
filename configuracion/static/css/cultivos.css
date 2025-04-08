@@ -1,0 +1,33 @@
+@layer setupPage;
+details {
+    border: 1px solid;
+    padding: 0 1rem;
+    background: cadetblue;
+    text-align: left;
+    border-radius: 0.5rem;
+
+  }
+
+  details[open] {
+    padding-bottom: 1em;
+}  
+
+summary {
+    padding: 1rem 2em 1rem 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+
+  @layer setupPage {
+  
+        
+        aside {
+        width: 38em;
+        max-width: 98vw;
+        }
+    }
+    slot:not([name]) {
+      display: revert;
+    }
