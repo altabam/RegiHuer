@@ -53,6 +53,7 @@ LOCAL_APPS = [
     "autenticacion",
     "accesibilidad",
     "home",
+    "huertas"
 ]
 
 LOGIN_REDIRECT_URL= "/"

@@ -1,5 +1,5 @@
 {% extends "baseConfiguracion.html"%}
-{% block title %} Mostrar Canteros de la Huerta {% endblock %}
+{% block title %} Mostrar Cultivos del Cantero {% endblock %}
 {% load static %}
 {% block style %} 
     <link rel='stylesheet' href="{% static 'css/canteros.css' %}" type="text/css">
@@ -10,7 +10,7 @@
     <h3>Hortelano : {{ hortelano.nombre }} {{ hortelano.apodo }} mail:{{ hortelano.mail }}</h3>
     <h3>Huerta: {{ huerta.nombre }} Ubicacion: {{ huerta.coordX }} :{{ huerta.coordX  }} Dimensiones: L:{{ huerta.largo  }} A:{{ huerta.ancho  }}</h3>
     <h3>Cantero: {{ cantero.nombre }} Largo: {{ cantero.largo }}  Ancho: {{ cantero.ancho  }}</h3>
-
+    
 </div>
 {% endblock %}
 
@@ -29,7 +29,7 @@
     <div class="col-sm-12 col-md-4 col-lg-8 col-xl-8">
         <h1>Detalle de Canteros</h1>
         <div class="agregar">
-            <a href="{% url 'configuracion:cantero_cultivos_agregar' cantero.id %}">
+            <a href="{% url 'huertas:cantero_cultivos_agregar' cantero.id %}">
                 <img src="{% static 'img/agregar.png' %}" alt="agregar" title="agregar">
             </a>
 
@@ -50,20 +50,16 @@
                     {% for listadoCanteroCultivos in listadoCanteroCultivos%}
                     <tr>
                         <td>{{forloop.counter}}</td>
-                        <td>{{listadoCanteroCultivos.cultivo.familia}} {{listadoCanteroCultivos.cultivo.nombre}} {{listadoCanteroCultivos.cultivo.variedad}} 
-                            <img  src="{{listadoCanteroCultivos.cultivo.imagen.url}}" width="70" height="70" ></td>
+                        <td>{{listadoCanteroCultivos.cultivo.nombre}}</td>
                         <td>{{listadoCanteroCultivos.fechaSiembra}}</td>
                         <td>{{listadoCanteroCultivos.fechaCosecha}}</td>
-                        <td colspan="3"><a href="/configuracion/cantero_cultivos_editar/{{listadoCanteroCultivos.id}}/" class="">Editar</a>
-                                        <a href="/configuracion/cantero_cultivos_eliminar/{{listadoCanteroCultivos.id}}" class="">Eliminar</a>
-                                        <a href="/configuracion/cantero_cultivos_mostrar/{{listadoCanteroCultivos.id}}/" class="">Mostrar</a>
-                        </td>
+                        <td><a href="/huertas/cantero_cultivos_editar/{{listadoCanteroCultivos.id}}/" class="">Editar</a></td>
+                        <td><a href="/huertas/cantero_cultivos_eliminar/{{listadoCanteroCultivos.id}}" class="">Eliminar</a></td>
+                        <td><a href="/huertas/cantero_cultivos_mostrar/{{listadoCanteroCultivos.id}}/" class="">Mostrar</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-
-
         </div>
     </div>
 </div>

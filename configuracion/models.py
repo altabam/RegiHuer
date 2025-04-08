@@ -33,29 +33,6 @@ class Hortelano(models.Model):
         return self.usuario.first_name+" "+self.usuario.last_name +' '+ self.apodo
 
 
-class Huerta(models.Model):
-    hortelano = models.ForeignKey(Hortelano,on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=80)
-    coord_x = models.FloatField(blank=True)
-    coord_y = models.FloatField(blank=True)
-    ancho = models.FloatField(blank=True)
-    largo = models.FloatField(blank=True)
-    def __str__(self):
-        return self.nombre  
-
-
-class Canteros(models.Model):
-    huerta = models.ForeignKey(Huerta,on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=80)
-    ancho = models.FloatField(blank=True)
-    largo = models.FloatField(blank=True)
-    ubicacion_x = models.FloatField(blank=True)
-    ubicacion_y = models.FloatField(blank=True)
-    
-    def __str__(self):
-        return self.nombre +" "+ self.huerta.nombre
-
-
 class Tierras_Cultivo(models.Model):
     desc_corta = models.CharField(max_length=25, blank=True)
     descripcion = models.CharField(max_length=255, blank=True)
@@ -153,26 +130,6 @@ class Cultivos(models.Model):
         return self.familia +"-"+ self.nombre+"-"+ self.variedad
 
 
-class Cantero_Cultivos(models.Model):
-    cantero = models.ForeignKey(Canteros,on_delete=models.CASCADE)
-    cultivo = models.ForeignKey(Cultivos,on_delete=models.CASCADE)
-    fechaSiembra = models.DateField(blank=True, null=True)
-    fechaCosecha = models.DateField(blank=True, null=True)
-    cantidad_sembrada = models.SmallIntegerField(blank=True, null=True)
-    observaciones = models.CharField(max_length=255, null=True, blank=True)
-    
-    def __str__(self):
-        return self.cantero.nombre +"-"+ self.cultivo.nombre
-
-
-@receiver(post_save, sender=User)
-def crear_usuario_perfil(sender, instance, created, **kwargs):
-    if created:
-        Perfil.objects.create(usuario=instance)
-
-@receiver(post_save, sender=User)
-def guardar_usuario_perfil(sender, instance, **kwargs):
-    instance.perfil.save()
 
 
 class Galeria(models.Model):
@@ -184,3 +141,12 @@ class GaleriaImagen(models.Model):
     imagen = models.ImageField(upload_to='galeriaPrincipal',blank=True)
     leyenda = models.CharField(max_length=255,blank=True)
     galeria = models.ForeignKey(Galeria,on_delete=models.CASCADE)
+
+@receiver(post_save, sender=User)
+def crear_usuario_perfil(sender, instance, created, **kwargs):
+    if created:
+        Perfil.objects.create(usuario=instance)
+
+@receiver(post_save, sender=User)
+def guardar_usuario_perfil(sender, instance, **kwargs):
+    instance.perfil.save()

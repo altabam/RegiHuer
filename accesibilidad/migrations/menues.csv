@@ -1,4 +1,11 @@
 ,Huertas,P,,
-/configuracion/gestion_huertas,Gestionar Huertas,H,Huertas,
+/huertas/gestion_huertas,Gestionar Huertas,H,Huertas,
 ,General,P,,
-/configuracion/gestion_huertas,Gestionar Huertas,H,General,
+/configuracion/gestion_img_galeria_principal,Galeria Imag.,H,General
+,Configuracion,P,,
+/configuracion/gestion_cultivos,Cultivos,H,Configuracion,
+/configuracion/gestion_hortelanos,Hortelanos,H,Configuracion
+/configuracion/gestion_plagas,Plagas,H,Configuracion
+/configuracion/gestion_enfermedades,Enfermedades,H,Configuracion
+/configuracion/gestion_tierras_cultivo,Tierras Cultivo,H,Configuracion
+,Informacion,P,,

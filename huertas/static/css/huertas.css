@@ -1,0 +1,142 @@
+@import url("base.css");
+
+.form-group{
+    align-items: center;
+    width: 100%;
+}
+
+.form-group label{
+    width: 30%;
+    text-align: right ;
+
+}
+
+.form-group input{
+    width: 70%;
+}
+
+
+.alertas{
+    background-color: rgba(136, 12, 105, 0.692);
+    width: 100%;
+    vertical-align: inherit;
+    text-align: left;
+    padding: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 1px #942779;
+    border: 1px solid #4c065e;
+
+}
+.agregar{
+    text-align: left;
+}
+.datos-cuerpo-listado{
+    background-color: rgb(54, 21, 21);
+    color: #fff;
+    text-shadow: 1px 1px 1px #942779;
+    border: 1px solid #4c065e;
+}
+.tabla-listar{
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(95, 235, 31);
+    width: 50%;
+}
+table, thead, tbody{
+    width: 100%;
+}
+tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+      }
+th {
+    background-color: rgb(12, 136, 105);
+    color: #fff;
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+    padding: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 1px #568f23;
+    border: 1px solid #93CE37;
+    border-bottom: 3px solid #9ED929;
+    background-color: #9DD929;
+    background: -webkit-gradient( linear, left bottom, left top, color-stop(0.02, rgb(123,192,67)), color-stop(0.51, rgb(139,198,66)), color-stop(0.87, rgb(158,217,41)) );
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+td{
+    padding: 5px;
+    text-align: center;
+    background-color: #DEF3CA;
+    border: 2px solid #E7EFE0;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    color: #666;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+form{
+	width:700px;
+	padding:16px;
+	border: 2px solid #E7EFE0;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px; 
+	margin:auto;
+    background-color: #DEF3CA;
+    font-weight: bold;
+    text-align: -internal-center;
+    padding: 5px;
+    color: #666;
+    text-shadow: 1px 1px 1px #fff;
+
+    ;
+}
+form label{
+	width:200px;
+	font-weight:bold;
+	display:inline-block;
+    align-items: right;
+}
+*{box-sizing:border-box;}
+form input[type="text"],
+form input[type="email"]{
+	width:180px;
+	padding:3px 10px;
+	border:1px solid #f6f6f6;
+	border-radius:3px;
+	background-color:#f6f6f6;
+	margin:8px 0;
+	display:inline-block;
+}
+
+.btn{
+	width:20%;
+	margin-top:32px;
+	border-radius:5px;
+    color: #fff;
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    padding: 5px;
+    text-shadow: 1px 1px 1px #568f23;
+    border: 1px solid #93CE37;
+    border-bottom: 3px solid #9ED929;
+    background: -webkit-gradient( linear, left bottom, left top, color-stop(0.02, rgb(123,192,67)), color-stop(0.51, rgb(139,198,66)), color-stop(0.87, rgb(158,217,41)) );
+} 
+
+form input[type="submit"]:hover{
+	cursor:pointer;
+}
+
+ .hortelano-mostrar{
+    width: 100%;
+    text-align: left;
+    background-color: #9DD929;
+    padding: 10px;
+    color: #666;
+ } 
+ 
