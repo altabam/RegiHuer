@@ -50,7 +50,7 @@
 
             {% if listadoCultivos %}
             {% for listadoCultivos in listadoCultivos%}
-                <details>
+                <details open>
                     <summary>
                         {{forloop.counter}} - {{listadoCultivos.nombre}}
                         <a href="{% url 'configuracion:cultivo_editar' listadoCultivos.id %}" class=""><img
@@ -58,19 +58,64 @@
                         <a href="{% url 'configuracion:cultivo_eliminar' listadoCultivos.id %}" class=""><img
                             src="{% static 'img/eliminar.png' %}" alt="Eliminar" title="Eliminar"></a>
                     </summary>
-                    <div>
+                    <div class="cultivos">
+                        <figure>
                             {% if listadoCultivos.imagen %}
-                              <img  src="{{ listadoCultivos.imagen.url}}" width="80" height="80" >
+                              <img  src="{{ listadoCultivos.imagen.url}}"  >
                             {% endif %}
-                            <span> Nombre Cientifico:  {{listadoCultivos.nombre_cientifico}} </span>
+                            <figcaption>
+                                <i> Nombre Cientifico:</i> <b>{{listadoCultivos.nombre_cientifico}}</b>
+                            </figcaption>
+                        </figure>
+                        <div class="descripcion_cultivos">
+                            <h2>Descripcion</h2>
+                            <span> Pertences a la familia: <b>{{listadoCultivos.get_familia_display }}</b> 
+                                {%if listadoCultivos.descripcion %}
+                                cuyas caracteristicas son :<b> {{listadoCultivos.descripcion}}</b>
+                                {%endif%}
+                            </span>
+                            <br><br>
+                            <H2>Epoca de Siembra</H2>
+                            <span></span>
                             <br>
-                            Fammilia: {{listadoCultivos.get_familia_display }}
+
+                            <H2>Requisitos de sol y temperatura</H2><br>
+                            <span></span>
                             <br>
-                            variedad: {{listadoCultivos.variedad}}
+                            <H2>Requisitos de suelo</H2>
+                            <span>
+                            {%if listadoCultivos.tierra %}
+
+                              {{listadoCultivos.tierra.desc_corta}}:
+                              {{listadoCultivos.tierra.descripcion}}
+                            {%endif%}
+                            </span>
+                            <br><br>
+                            <H2>Requisitos de riego</H2><br>
+                            <span></span>
                             <br>
-                            Descripcion: {{listadoCultivos.descripcion}}
-                        </span>
-                           
+                            <H2>¿Cuando plantar?</H2><br>
+                            <span></span>
+                            <br>
+                            <H2>¿Cómo plantar?</H2><br>
+                            <span></span>
+                            <br>
+                            <H2>¿Cuanto tarda?</H2><br>
+                            <span></span>
+                            <br>
+                            <H2>Asociacin beneficiosa</H2><br>
+                            <span></span>
+                            <br>
+                            <H2>Asociacin no beneficiosa</H2><br>
+                            <span></span>
+                            <br>
+                            <H2>Plagas y Enfermedades</H2><br>
+                            <span></span>
+                            <br>
+                            <H2>Variedades</H2><br>
+                            <span></span>
+                            <br>
+                        </div>  
                     </div>
                     </details>
             {% endfor %}

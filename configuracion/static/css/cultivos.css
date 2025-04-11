@@ -5,6 +5,7 @@ details {
     background: cadetblue;
     text-align: left;
     border-radius: 0.5rem;
+    width: 100%;
 
   }
 
@@ -31,3 +32,62 @@ summary {
     slot:not([name]) {
       display: revert;
     }
+
+
+    .cultivos{
+      border: thin #c0c0c0 solid;
+      width: 100%;
+      display: flex;
+      flex-flow: row;
+      color: rgb(189, 69, 69);
+      size: 15px;
+      text-decoration: none;
+      text-justify: distribute-all-lines;
+      
+
+    }
+
+    .descripcion_cultivos{
+      width: 100%;
+      padding-left: 30px;
+
+    }
+    figure {
+      display: flex;
+      flex-flow: column;
+      padding: 5px;
+      margin: auto;
+      text-align: center;
+      height: 100%;
+      width: 50%;
+    }
+
+    figcaption i{
+      display: flex;
+      flex-flow: column;
+      color: brown;
+      size: 15px;
+    }
+
+    figcaption b{
+      color: brown;
+      size: 15px;
+    }
+
+    .descripcion_cultivos h2{
+      padding: 15px 10px;
+      color: brown;
+
+    }
+
+    .descripcion_cultivos span{
+      padding: 0px 0px 0px 10px;
+      color: black;
+      text-align: justify;
+      font-family: Helvetica, Arial, sans-serif;
+      text-shadow: none;
+      font-size: 20px;
+
+
+    }
+
