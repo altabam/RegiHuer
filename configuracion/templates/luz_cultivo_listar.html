@@ -1,0 +1,78 @@
+{% extends "base_nav.html"%}
+{% block title %} List. Luz Cultivo {% endblock %}
+{% load static %}
+{% block style %} 
+    <link rel='stylesheet' href="{% static 'css/huertas.css' %}" type="text/css">
+    <link rel='stylesheet' href="{% static 'css/cultivos.css' %}" type="text/css">
+    <script type="text/javascript" src="{% static 'js/cultivos.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+{% endblock %}
+ 
+{% block body %} 
+{% load static %}
+<div class="row">
+    <div class="alertas">
+        {% if messages %}
+        {% for message in messages %}
+        <div>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="datos-cuerpo-cabecera">
+    </div>
+    <div class="datos-cuerpo-listado">
+        <h1>Gestion de Luz necesaria para los cultivos</h1>
+        <div id="container">
+            <div class="search">
+                <div class="searchbox">
+                    <label>Buscar:</label>
+                    <span class="info">(Puede ser un nombre, nombre cientifico, descripcion)</span>
+                    <input id="search_input" type="text" name="q">
+                    {% csrf_token %}
+                </div>
+                <div class="results">
+                    <h1 class="error"></h1>
+                    <div class="wrapper"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tabla-listar">
+            <div class="agregar">
+                <a href="{% url 'configuracion:luz_cultivos_agregar'  %}">
+                    <img src="{% static 'img/agregar.png' %}" alt="agregar" title="agregar">
+                </a>
+
+            </div>
+
+            {% if listado %}
+            {% for listado in listado%}
+                <details open>
+                    <summary>
+                        {{forloop.counter}} - {{listado.nombre}}
+                        <a href="{% url 'configuracion:luz_cultivos_editar' listado.id %}" class=""><img
+                            src="{% static 'img/editar.png' %}" alt="Editar" title="Editar"></a>
+                        <a href="{% url 'configuracion:luz_cultivos_eliminar' listado.id %}" class=""><img
+                            src="{% static 'img/eliminar.png' %}" alt="Eliminar" title="Eliminar"></a>
+                    </summary>
+                        <div class="descripcion_cultivos">
+                            <h2>Horas de Luz necesarias</h2>
+                            <span> {{listado.cantidad }} </span>
+                            <br><br>
+                            <H2>Descripcion</H2>
+                            <span>{{listado.descripcion}}</span>
+                            <br>
+                        </div>  
+                    </details>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(__init);
+</script>
+{% endblock %}  

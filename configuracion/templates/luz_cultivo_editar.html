@@ -1,0 +1,25 @@
+{% extends "base_nav.html"%}
+{% block title %} {{accion}} Luz Cultivos {% endblock %}
+{% load static %}
+{% block style %} 
+    <link rel='stylesheet' href="{% static 'css/huertas.css' %}" type="text/css">
+ {% endblock %}
+
+
+ {% block body %} 
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>{{accion}} Luz de Cultivo</h2>
+        <div class="card">
+            <div class="card-body">
+                <form  method="POST">{% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success btn-block text-white ">{{accion}}</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}  

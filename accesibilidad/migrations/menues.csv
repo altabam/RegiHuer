@@ -8,4 +8,7 @@
 /configuracion/gestion_plagas,Plagas,H,Configuracion
 /configuracion/gestion_enfermedades,Enfermedades,H,Configuracion
 /configuracion/gestion_tierras_cultivo,Tierras Cultivo,H,Configuracion
+/configuracion/gestion_temperaturas,Tipos de temperaturas,H,Configuracion
+/configuracion/gestion_luz_cultivos,Luz para Cultivo,H,Configuracion
+/configuracion/gestion_riego_cultivos,Riego para Cultivo,H,Configuracion
 ,Informacion,P,,

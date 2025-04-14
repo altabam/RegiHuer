@@ -76,16 +76,24 @@
                             </span>
                             <br><br>
                             <H2>Epoca de Siembra</H2>
-                            <span></span>
-                            <br>
+                            <span>
+                                &nbsp; &nbsp;desde : <b>{{listadoCultivos.get_semana_siembra_desde_display}}</b> de <b>{{listadoCultivos.get_mes_siembra_desde_display}}</b><br>
+                                &nbsp; &nbsp; &nbsp;hasta : <b>{{listadoCultivos.get_semana_siembra_hasta_display}}</b> de <b>{{listadoCultivos.get_mes_siembra_hasta_display}}</b>
+                            </span>
+                            <br><br>
 
                             <H2>Requisitos de sol y temperatura</H2><br>
-                            <span></span>
+                            <span>
+                               <b>{{listadoCultivos.temperaturas.nombre}}</b> y el rango <b>{{listadoCultivos.temperaturas.valores}}</b>
+                            </span>
                             <br>
+                            <span>
+                                necesita unas:<b>{{listadoCultivos.luz.descripcion}}</b> 
+                            </span>
+                            <br><br>
                             <H2>Requisitos de suelo</H2>
                             <span>
                             {%if listadoCultivos.tierra %}
-
                               {{listadoCultivos.tierra.desc_corta}}:
                               {{listadoCultivos.tierra.descripcion}}
                             {%endif%}
@@ -94,19 +102,16 @@
                             <H2>Requisitos de riego</H2><br>
                             <span></span>
                             <br>
-                            <H2>¿Cuando plantar?</H2><br>
-                            <span></span>
-                            <br>
                             <H2>¿Cómo plantar?</H2><br>
                             <span></span>
                             <br>
                             <H2>¿Cuanto tarda?</H2><br>
                             <span></span>
                             <br>
-                            <H2>Asociacin beneficiosa</H2><br>
+                            <H2>Asociaciones beneficiosas</H2><br>
                             <span></span>
                             <br>
-                            <H2>Asociacin no beneficiosa</H2><br>
+                            <H2>Asociaciones no beneficiosas</H2><br>
                             <span></span>
                             <br>
                             <H2>Plagas y Enfermedades</H2><br>

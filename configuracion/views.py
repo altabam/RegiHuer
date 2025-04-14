@@ -9,8 +9,8 @@ from django.core import serializers
 
 
 
-from .models import Cultivos, Hortelano,  Tierras_Cultivo, Enfermedades, Plagas, GaleriaImagen
-from .forms import  CultivosForm, Tierras_CultivoForm, EnfermedadesForm, PlagasForm,GaleriaImagenForm
+from .models import Cultivos, Hortelano,  Tierras_Cultivo, Enfermedades, Plagas, GaleriaImagen, Temperaturas_Cultivos, Luz_Necesaria_Cultivo, Riego_Cultivo
+from .forms import  CultivosForm, Tierras_CultivoForm, EnfermedadesForm, PlagasForm,GaleriaImagenForm, TemperaturasForm, LuzForm, RiegoForm
 from accesibilidad.views import generarMenu
 
 import json
@@ -90,14 +90,14 @@ def cultivo_agregar(request):
     return render(request, "cultivo_editar.html", contexto )
 
 def cultivo_editar(request,id):
-    culitvo = Cultivos.objects.get(id = id)
+    cultivo = Cultivos.objects.get(id = id)
     if request.method == 'POST':
-        form= CultivosForm(request.POST, request.FILES, instance=culitvo)
+        form= CultivosForm(request.POST, request.FILES, instance=cultivo)
         if form.is_valid():
             form.save()
             return redirect('/configuracion/gestion_cultivos')
     else:
-            form = CultivosForm( instance=culitvo)
+            form = CultivosForm( instance=cultivo)
     
     contexto ={ 
             "accion":"Editar", 
@@ -422,3 +422,159 @@ def galeria_imagenes_editar(request,id):
 def galeria_imagenes_eliminar(request):
     return gestion_img_galeria_principal(request)
 
+
+
+def gestion_temperaturas(request):
+    listadoTemperaturas = Temperaturas_Cultivos.objects.all()
+    messages.success(request,"¡Cultivos Listados!")
+    menu = generarMenu("hola")
+
+    contexto ={ "listadoTemperaturas": listadoTemperaturas,  
+               "menu":menu,
+    } 
+    return render(request, "temperaturas_listar.html",  contexto)
+
+
+def temperaturas_agregar(request):
+    if request.method == 'POST':
+        form= TemperaturasForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_temperaturas')
+    else:
+        form =TemperaturasForm()
+
+    contexto ={ 
+            "accion":"Agregar", 
+            "form": form,
+         } 
+    return render(request, "temperatura_editar.html", contexto )
+
+def temperaturas_editar(request,id):
+    temperatura = Temperaturas_Cultivos.objects.get(id = id)
+    if request.method == 'POST':
+        form= TemperaturasForm(request.POST, request.FILES, instance=temperatura)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_temperaturas')
+    else:
+            form = TemperaturasForm( instance=temperatura)
+    
+    contexto ={ 
+            "accion":"Editar", 
+            "form": form,
+         } 
+    return render(request, "temperatura_editar.html",contexto)
+
+
+def temperaturas_eliminar(request,id):
+    temperatura = Temperaturas_Cultivos.objects.get(id=id)
+    temperatura.delete()
+    listadoTemperaturas = Temperaturas_Cultivos.objects.all()
+    messages.success(request,"¡Temperaturas Listadas!")
+    contexto ={ "listadoTemperaturas": listadoTemperaturas,  } 
+    return redirect('/configuracion/gestion_temperaturas', contexto)
+
+
+def gestion_luz_cultivos(request):
+    listado = Luz_Necesaria_Cultivo.objects.all()
+    messages.success(request,"¡Luz Necesaria para cultivos Listadas!")
+    menu = generarMenu("hola")
+
+    contexto ={ "listado": listado,  
+               "menu":menu,
+    } 
+    return render(request, "luz_cultivo_listar.html",  contexto)
+
+
+def luz_cultivos_agregar(request):
+    if request.method == 'POST':
+        form= LuzForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_luz_cultivos')
+    else:
+        form =LuzForm()
+
+    contexto ={ 
+            "accion":"Agregar", 
+            "form": form,
+         } 
+    return render(request, "luz_cultivo_editar.html", contexto )
+
+def luz_cultivos_editar(request,id):
+    luz = Luz_Necesaria_Cultivo.objects.get(id = id)
+    if request.method == 'POST':
+        form= LuzForm(request.POST, request.FILES, instance=luz)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_luz_cultivos')
+    else:
+            form = TemperaturasForm( instance=luz)
+    
+    contexto ={ 
+            "accion":"Editar", 
+            "form": form,
+         } 
+    return render(request, "luz_cultivo_editar.html",contexto)
+
+
+def luz_cultivos_eliminar(request,id):
+    luz = Luz_Necesaria_Cultivo.objects.get(id=id)
+    luz.delete()
+    listado = Luz_Necesaria_Cultivo.objects.all()
+    messages.success(request,"¡Luz necesaria para los cultivos. Listadas!")
+    contexto ={ "listado": listado,  } 
+    return redirect('/configuracion/gestion_luz_cultivos', contexto)
+
+
+def gestion_riego_cultivos(request):
+    listado = Riego_Cultivo.objects.all()
+    messages.success(request,"¡Riego necesario para cultivos Listadas!")
+    menu = generarMenu("hola")
+
+    contexto ={ "listado": listado,  
+               "menu":menu,
+    } 
+    return render(request, "riego_cultivo_listar.html",  contexto)
+
+
+def riego_cultivos_agregar(request):
+    if request.method == 'POST':
+        form= RiegoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_riego_cultivos')
+    else:
+        form =RiegoForm()
+
+    contexto ={ 
+            "accion":"Agregar", 
+            "form": form,
+         } 
+    return render(request, "riego_cultivo_editar.html", contexto )
+
+def riego_cultivos_editar(request,id):
+    riego = Riego_Cultivo.objects.get(id = id)
+    if request.method == 'POST':
+        form= RiegoForm(request.POST, request.FILES, instance=riego)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_luz_cultivos')
+    else:
+            form = RiegoForm( instance=riego)
+    
+    contexto ={ 
+            "accion":"Editar", 
+            "form": form,
+         } 
+    return render(request, "riego_cultivo_editar.html",contexto)
+
+
+def riego_cultivos_eliminar(request,id):
+    riego = Riego_Cultivo.objects.get(id=id)
+    riego.delete()
+    listado = Riego_Cultivo.objects.all()
+    messages.success(request,"¡Luz necesaria para los Cultivos Listadas!")
+    contexto ={ "listado": listado,  } 
+    return redirect('/configuracion/gestion_riego_cultivos', contexto)

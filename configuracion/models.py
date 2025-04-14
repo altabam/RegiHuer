@@ -37,6 +37,10 @@ class Tierras_Cultivo(models.Model):
     desc_corta = models.CharField(max_length=25, blank=True)
     descripcion = models.CharField(max_length=255, blank=True)
 
+class Riego_Cultivo(models.Model):
+    cantidad = models.SmallIntegerField()
+    descripcion = models.CharField(max_length=255, blank=True)
+
 class Plagas(models.Model):
     nombre = models.CharField(max_length=50, blank=True)
     descripcion = models.CharField(max_length=255, blank=True)
@@ -112,18 +116,15 @@ class Cultivos(models.Model):
     luna_siembra = models.CharField(max_length=1, choices=LUNA, null=True, blank=True)
     distancia =  models.FloatField(null=True, blank=True)
     luz = models.ForeignKey(Luz_Necesaria_Cultivo,on_delete=models.CASCADE, null=True, blank=True)
-    plagas =   models.ForeignKey(Plagas,on_delete=models.CASCADE,  null=True, blank=True)
-    enfermedades  = models.ForeignKey(Enfermedades,on_delete=models.CASCADE, null=True, blank=True)
     semana_siembra_desde= models.CharField(max_length=1, choices=SEMANA, null=True)
     mes_siembra_desde= models.CharField(max_length=3, choices=MES, null=True)
     mes_siembra_hasta = models.CharField(max_length=3, choices=MES, null=True)
     semana_siembra_hasta = models.CharField(max_length=1, choices=SEMANA, null=True)
     dias_germinacion = models.CharField(max_length=50, null=True, blank=True)
     temperaturas = models.ForeignKey(Temperaturas_Cultivos,on_delete=models.CASCADE, null=True, blank=True)
-    asociacion_beneficiosa = models.ForeignKey('self',related_name='asosiacion_beneficiosa',  on_delete=models.CASCADE, null=True, blank=True)
-    asociacion_no_beneficiosa = models.ForeignKey('self',related_name='asosiacion_no_beneficiosa', on_delete=models.CASCADE, null=True, blank=True)
     ph = models.ForeignKey(Ph_Suelo,on_delete=models.CASCADE, null=True, blank=True)
     imagen = models.ImageField(upload_to='cultivos',blank=True)
+    riego = models.ForeignKey(Riego_Cultivo,on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.familia +"-"+ self.nombre
@@ -135,6 +136,18 @@ class Variedad_Cultivo(models.Model):
     cultivo = models.ForeignKey(Temperaturas_Cultivos,on_delete=models.CASCADE, null=True, blank=True)
     descripcion = models.CharField(max_length=255, blank=True)
 
+class Asociacion_Cultivo(models.Model):
+    cultivo = models.ForeignKey(Cultivos,on_delete=models.CASCADE, null=True, blank=True)
+    asociacion = models.ForeignKey(Cultivos,on_delete=models.CASCADE, null=True, blank=True,related_name='%(class)s_asociacion')
+    beneficiosa = models.BooleanField(max_length=255, blank=True)
+
+class Plagas_Cultivo(models.Model):
+    cultivo = models.ForeignKey(Cultivos,on_delete=models.CASCADE, null=True, blank=True)
+    plagas =   models.ForeignKey(Plagas,on_delete=models.CASCADE,  null=True, blank=True)
+
+class Enfermedades_Cultivo(models.Model):
+    cultivo = models.ForeignKey(Cultivos,on_delete=models.CASCADE, null=True, blank=True)
+    enfermedades  = models.ForeignKey(Enfermedades,on_delete=models.CASCADE, null=True, blank=True)
 
 class Galeria(models.Model):
     nombre = models.CharField(max_length=60)
