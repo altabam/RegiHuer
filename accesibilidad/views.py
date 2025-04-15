@@ -86,7 +86,7 @@ def generarTagPrincipalPadre(menu,orden):
     tag.append({'tag':'<ul>', 'class':'menu-dropdown', })
     me.append(tag)
     menuHijos = Menu.objects.filter(menuPadre = menu)
-    print("menu hijo:", menuHijos)
+    #print("menu hijo:", menuHijos)
     for mh in menuHijos:
         tag=[]
         if mh.tipo=='H':
@@ -131,10 +131,9 @@ def generarMenu(user):
        orden =1
       else:
         orden +=1
-      
-  
-  print(menues)
-  print("menu generado:",menu)
+   
+  #print(menues)
+  #print("menu generado:",menu)
   return menu
 
 
@@ -145,18 +144,16 @@ def menu_carga_inicial(request):
     with open (template_name) as f:
         reader = csv.reader(f )
         for row in reader:
-           print("row:",row)
+         #  print("row:",row)
            if  not Menu.objects.filter(nombre = row[1]).exists():
                if  Menu.objects.filter(nombre = row[3]).exists():
-                   print("dentro de Menu Padre:", row[3])
+                 #  print("dentro de Menu Padre:", row[3])
                    menuP = Menu.objects.get(nombre = row[3])
                    model.menuPadre = menuP
                    Menu.objects.create(url = row[0], nombre =row[1] ,tipo = row[2],menuPadre = menuP)
                else:
                    print("No hay de Menu Padre:", row[3])
                    Menu.objects.create(url = row[0], nombre =row[1], tipo = row[2])
-           else:
-                print(row, "Linea de Menu Existe")
     mensaje ="carga con exito"
     contexto ={  
         "mensaje":mensaje , 

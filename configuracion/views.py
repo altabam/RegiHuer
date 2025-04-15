@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
 from django.core import serializers
 
+import csv
 
 
 from .models import Cultivos, Hortelano,  Tierras_Cultivo, Enfermedades, Plagas, GaleriaImagen, Temperaturas_Cultivos, Luz_Necesaria_Cultivo, Riego_Cultivo
@@ -578,3 +579,56 @@ def riego_cultivos_eliminar(request,id):
     messages.success(request,"¡Luz necesaria para los Cultivos Listadas!")
     contexto ={ "listado": listado,  } 
     return redirect('/configuracion/gestion_riego_cultivos', contexto)
+
+
+def configuracion_carga_inicial(request):
+    listado = listadoCargaInicial()
+    mensaje ="carga con exito"
+    contexto ={  
+        "mensaje":mensaje , 
+        "menu": generarMenu(request.user),
+        "listado": listado , 
+    } 
+    return render (request, "carga_inicial.html",contexto)
+
+
+def carga_inicial_tierra_cultivo(request):
+    template_name = "configuracion/migrations/suelos.csv"
+    #Disciplinas.objects.all().delete()
+    with open (template_name) as f:
+        reader = csv.reader(f )
+        for row in reader:
+           print("row:",row)
+           print("Suelo:", row[0])
+           Tierras_Cultivo.objects.create( desc_corta= row[0], descripcion =row[1] )
+    mensaje ="carga con exito"
+    contexto ={  
+        "mensaje":mensaje , 
+        "menu": generarMenu(request.user),
+        "listado": listadoCargaInicial()
+
+    } 
+    return render (request, "carga_inicial.html",contexto)
+
+
+def listadoCargaInicial():
+    listado = [
+        {
+            'urlAgregar':"configuracion:carga_inicial_tierra_cultivo",
+            'urlEliminar':"configuracion:eliminar_todo_tierra_cultivo",
+            'nombre': "Carga Tipos de Suelos",
+        }
+        ]
+               
+    return listado
+
+def eliminar_todo_tierra_cultivo(request):
+    Tierras_Cultivo.objects.all().delete()
+    mensaje ="registrso borrados con exito"
+    contexto ={  
+        "mensaje":mensaje , 
+        "menu": generarMenu(request.user),
+        "listado": listadoCargaInicial()
+
+    } 
+    return render (request, "carga_inicial.html",contexto)

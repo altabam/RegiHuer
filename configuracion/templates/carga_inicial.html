@@ -1,0 +1,50 @@
+{% extends "base_nav.html"%}
+{% block title %} Mostrar Menu para Carga Inicial {% endblock %}
+{% load static %}
+{% block style %} 
+    <link rel='stylesheet' href="{% static 'css/huertas.css' %}" type="text/css">
+    <script type="text/javascript" src="{% static 'js/cultivos.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+{% endblock %}
+ 
+{% block body %} 
+{% load static %}
+<div class="row">
+    <div class="alertas">
+        {% if messages %}
+        {% for message in messages %}
+        <div>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="datos-cuerpo-cabecera">
+    </div>
+    <div class="datos-cuerpo-listado">
+        <h1>Configuracion de Menu</h1>
+    </div>
+    <div class="tabla-listar">
+         {% if listado %}
+           {% for lista in listado%}
+                {{lista.nombre}} 
+                <a href="{% url lista.urlEliminar  %}">
+                    <img src="{% static 'img/eliminar.png' %}" alt="eliminar" title="eliminar">
+                </a>
+
+                <a href="{% url lista.urlAgregar  %}">
+                    <img src="{% static 'img/agregar.png' %}" alt="cargar" title="cargar">
+                </a>
+
+
+             </a>
+           {% endfor %}
+         {% endif %}
+    </div>
+</div>
+<script>
+    $(document).ready(__init);
+</script>
+{% endblock %}  

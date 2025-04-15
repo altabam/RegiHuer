@@ -47,6 +47,9 @@ urlpatterns= [
        path('configuracion/plagas_eliminar/<int:id>/', views.plagas_eliminar, name='plagas_eliminar'),
        path('configuracion/plagas_editar/<int:id>/', views.plagas_editar, name='plagas_editar'),
 
+       path('configuracion_carga_inicial', views.configuracion_carga_inicial,name='configuracion_carga_inicial'),
+       path('carga_inicial_tierra_cultivo', views.carga_inicial_tierra_cultivo,name='carga_inicial_tierra_cultivo'),
+       path('eliminar_todo_tierra_cultivo', views.eliminar_todo_tierra_cultivo,name='eliminar_todo_tierra_cultivo'),
 
        path('gestion_img_galeria_principal', views.gestion_img_galeria_principal, name='gestion_img_galeria_principal'),
        path('configuracion/galeria_imagenes_agregar/', views.galeria_imagenes_agregar, name='galeria_imagenes_agregar'),
