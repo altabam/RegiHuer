@@ -37,6 +37,11 @@ urlpatterns= [
        path('configuracion/riego_cultivos_eliminar/<int:id>/', views.riego_cultivos_eliminar, name='riego_cultivos_eliminar'),
        path('configuracion/riego_cultivos_editar/<int:id>/', views.riego_cultivos_editar, name='riego_cultivos_editar'),
 
+       path('gestion_ph_suelo/', views.gestion_ph_suelo, name = 'gestion_ph_suelo'),
+       path('configuracion/ph_suelo_agregar/', views.ph_suelo_agregar, name='ph_suelo_agregar'),
+       path('configuracion/ph_suelo_eliminar/<int:id>/', views.ph_suelo_eliminar, name='ph_suelo_eliminar'),
+       path('configuracion/ph_suelo_editar/<int:id>/', views.ph_suelo_editar, name='ph_suelo_editar'),
+
        path('gestion_enfermedades/', views.gestion_enfermedades, name = 'gestion_enfermedades'),
        path('configuracion/enfermedades_agregar/', views.enfermedades_agregar, name='enfermedades_agregar'),
        path('configuracion/enfermedades_eliminar/<int:id>/', views.enfermedades_eliminar, name='enfermedades_eliminar'),
@@ -50,6 +55,19 @@ urlpatterns= [
        path('configuracion_carga_inicial', views.configuracion_carga_inicial,name='configuracion_carga_inicial'),
        path('carga_inicial_tierra_cultivo', views.carga_inicial_tierra_cultivo,name='carga_inicial_tierra_cultivo'),
        path('eliminar_todo_tierra_cultivo', views.eliminar_todo_tierra_cultivo,name='eliminar_todo_tierra_cultivo'),
+
+
+       path('carga_inicial_luz_cultivo', views.carga_inicial_luz_cultivo,name='carga_inicial_luz_cultivo'),
+       path('eliminar_todo_luz_cultivo', views.eliminar_todo_luz_cultivo,name='eliminar_todo_luz_cultivo'),
+
+       path('carga_inicial_temperaturas_cultivo', views.carga_inicial_temperaturas_cultivo,name='carga_inicial_temperaturas_cultivo'),
+       path('eliminar_toda_temperatura_cultivo', views.eliminar_toda_temperatura_cultivo,name='eliminar_toda_temperatura_cultivo'),
+
+       path('carga_inicial_ph_cultivo', views.carga_inicial_ph_cultivo,name='carga_inicial_ph_cultivo'),
+       path('eliminar_todo_ph_cultivo', views.eliminar_todo_ph_cultivo,name='eliminar_todo_ph_cultivo'),
+
+       path('carga_inicial_riegos_cultivo', views.carga_inicial_riegos_cultivo,name='carga_inicial_riegos_cultivo'),
+       path('eliminar_todo_riego_cultivo', views.eliminar_todo_riego_cultivo,name='eliminar_todo_riego_cultivo'),
 
        path('gestion_img_galeria_principal', views.gestion_img_galeria_principal, name='gestion_img_galeria_principal'),
        path('configuracion/galeria_imagenes_agregar/', views.galeria_imagenes_agregar, name='galeria_imagenes_agregar'),

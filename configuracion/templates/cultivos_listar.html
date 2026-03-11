@@ -81,15 +81,13 @@
                                 &nbsp; &nbsp; &nbsp;hasta : <b>{{listadoCultivos.get_semana_siembra_hasta_display}}</b> de <b>{{listadoCultivos.get_mes_siembra_hasta_display}}</b>
                             </span>
                             <br><br>
-
                             <H2>Requisitos de sol y temperatura</H2><br>
                             <span>
-                               <b>{{listadoCultivos.temperaturas.nombre}}</b> y el rango <b>{{listadoCultivos.temperaturas.valores}}</b>
+                             Luz:<b>{{listadoCultivos.luz.descripcion}}</b> <br>
                             </span>
-                            <br>
-                            <span>
-                                necesita unas:<b>{{listadoCultivos.luz.descripcion}}</b> 
-                            </span>
+                            <span>                            
+                             temperatura: <b>{{listadoCultivos.temperaturas.desc_corta}}</b> y el rango esta entre: <b>{{listadoCultivos.temperaturas.valor_minimo}} - {{listadoCultivos.temperaturas.valor_maximo}}</b><br>
+                             </span>
                             <br><br>
                             <H2>Requisitos de suelo</H2>
                             <span>

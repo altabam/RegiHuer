@@ -27,8 +27,10 @@
         <h1>Configuracion de Menu</h1>
     </div>
     <div class="tabla-listar">
+        <ul>
          {% if listado %}
            {% for lista in listado%}
+            <li>
                 {{lista.nombre}} 
                 <a href="{% url lista.urlEliminar  %}">
                     <img src="{% static 'img/eliminar.png' %}" alt="eliminar" title="eliminar">
@@ -40,8 +42,11 @@
 
 
              </a>
+            </li>
            {% endfor %}
          {% endif %}
+
+        </ul>
     </div>
 </div>
 <script>

@@ -10,8 +10,8 @@ from django.core import serializers
 import csv
 
 
-from .models import Cultivos, Hortelano,  Tierras_Cultivo, Enfermedades, Plagas, GaleriaImagen, Temperaturas_Cultivos, Luz_Necesaria_Cultivo, Riego_Cultivo
-from .forms import  CultivosForm, Tierras_CultivoForm, EnfermedadesForm, PlagasForm,GaleriaImagenForm, TemperaturasForm, LuzForm, RiegoForm
+from .models import Cultivos, Hortelano,  Tierras_Cultivo, Enfermedades, Plagas, GaleriaImagen, Temperaturas_Cultivos, Luz_Necesaria_Cultivo, Riego_Cultivo,Ph_Suelo
+from .forms import  CultivosForm, Tierras_CultivoForm, EnfermedadesForm, PlagasForm,GaleriaImagenForm, TemperaturasForm, LuzForm, RiegoForm, PhForm
 from accesibilidad.views import generarMenu
 
 import json
@@ -581,6 +581,60 @@ def riego_cultivos_eliminar(request,id):
     return redirect('/configuracion/gestion_riego_cultivos', contexto)
 
 
+
+def gestion_ph_suelo(request):
+    listado = Ph_Suelo.objects.all()
+    messages.success(request,"¡Ph suelo necesario para cultivos Listadas!")
+    menu = generarMenu("hola")
+
+    contexto ={ "listado": listado,  
+               "menu":menu,
+    } 
+    return render(request, "ph_suelo_listar.html",  contexto)
+
+
+def ph_suelo_agregar(request):
+    if request.method == 'POST':
+        form= PhForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_ph_suelo')
+    else:
+        form =PhForm()
+
+    contexto ={ 
+            "accion":"Agregar", 
+            "form": form,
+         } 
+    return render(request, "ph_suelo_listar.html", contexto )
+
+def ph_suelo_editar(request,id):
+    riego = Ph_Suelo.objects.get(id = id)
+    if request.method == 'POST':
+        form= PhForm(request.POST, request.FILES, instance=riego)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_ph_suelo')
+    else:
+            form = PhForm( instance=riego)
+    
+    contexto ={ 
+            "accion":"Editar", 
+            "form": form,
+         } 
+    return render(request, "ph_suelo_listar.html",contexto)
+
+
+def ph_suelo_eliminar(request,id):
+    riego = Ph_Suelo.objects.get(id=id)
+    riego.delete()
+    listado = Ph_Suelo.objects.all()
+    messages.success(request,"Ph necesario para los Cultivos Listados!")
+    contexto ={ "listado": listado,  } 
+    return redirect('/configuracion/gestion_ph_suelo', contexto)
+
+
+
 def configuracion_carga_inicial(request):
     listado = listadoCargaInicial()
     mensaje ="carga con exito"
@@ -617,7 +671,28 @@ def listadoCargaInicial():
             'urlAgregar':"configuracion:carga_inicial_tierra_cultivo",
             'urlEliminar':"configuracion:eliminar_todo_tierra_cultivo",
             'nombre': "Carga Tipos de Suelos",
-        }
+        },
+        {
+            'urlAgregar':"configuracion:carga_inicial_luz_cultivo",
+            'urlEliminar':"configuracion:eliminar_todo_luz_cultivo",
+            'nombre': "Carga Luz necesaria Cultivos",
+        },
+        {
+            'urlAgregar':"configuracion:carga_inicial_temperaturas_cultivo",
+            'urlEliminar':"configuracion:eliminar_toda_temperatura_cultivo",
+            'nombre': "Carga Temperatura Cultivos",
+        },
+        {
+            'urlAgregar':"configuracion:carga_inicial_ph_cultivo",
+            'urlEliminar':"configuracion:eliminar_todo_ph_cultivo",
+            'nombre': "Carga PH Cultivos",
+        },
+
+        {
+            'urlAgregar':"configuracion:carga_inicial_riegos_cultivo",
+            'urlEliminar':"configuracion:eliminar_todo_riego_cultivo",
+            'nombre': "Carga Riego Cultivos",
+        },
         ]
                
     return listado
@@ -625,6 +700,114 @@ def listadoCargaInicial():
 def eliminar_todo_tierra_cultivo(request):
     Tierras_Cultivo.objects.all().delete()
     mensaje ="registrso borrados con exito"
+    contexto ={  
+        "mensaje":mensaje , 
+        "menu": generarMenu(request.user),
+        "listado": listadoCargaInicial()
+
+    } 
+    return render (request, "carga_inicial.html",contexto)
+
+def eliminar_todo_luz_cultivo(request):
+    Luz_Necesaria_Cultivo.objects.all().delete()
+    mensaje ="registrso borrados con exito"
+    contexto ={  
+        "mensaje":mensaje , 
+        "menu": generarMenu(request.user),
+        "listado": listadoCargaInicial()
+
+    } 
+    return render (request, "carga_inicial.html",contexto)
+
+def carga_inicial_luz_cultivo(request):
+    template_name = "configuracion/migrations/luz.csv"
+    #Disciplinas.objects.all().delete()
+    with open (template_name) as f:
+        reader = csv.reader(f )
+        for row in reader:
+           Luz_Necesaria_Cultivo.objects.create( cantidad= row[0], desc_corta = row[1],descripcion =row[2] )
+    mensaje ="carga con exito"
+    contexto ={  
+        "mensaje":mensaje , 
+        "menu": generarMenu(request.user),
+        "listado": listadoCargaInicial()
+
+    } 
+    return render (request, "carga_inicial.html",contexto)
+
+
+def carga_inicial_temperaturas_cultivo(request):
+    template_name = "configuracion/migrations/temperaturas.csv"
+    #Disciplinas.objects.all().delete()
+    with open (template_name) as f:
+        reader = csv.reader(f )
+        for row in reader:
+           Temperaturas_Cultivos.objects.create( desc_corta= row[0], valor_minimo = row[1], valor_maximo =row[2] , descripcion =row[3] )
+    mensaje ="carga con exito"
+    contexto ={  
+        "mensaje":mensaje , 
+        "menu": generarMenu(request.user),
+        "listado": listadoCargaInicial()
+
+    } 
+    return render (request, "carga_inicial.html",contexto)
+
+def eliminar_toda_temperatura_cultivo(request):
+    Temperaturas_Cultivos.objects.all().delete()
+    mensaje ="registros borrados con exito"
+    contexto ={  
+        "mensaje":mensaje , 
+        "menu": generarMenu(request.user),
+        "listado": listadoCargaInicial()
+
+    } 
+    return render (request, "carga_inicial.html",contexto)
+
+def carga_inicial_ph_cultivo(request):
+    template_name = "configuracion/migrations/ph.csv"
+    #Disciplinas.objects.all().delete()
+    with open (template_name) as f:
+        reader = csv.reader(f )
+        for row in reader:
+           Ph_Suelo.objects.create( desc_corta= row[0], valor_minimo = row[1], valor_maximo =row[2] , descripcion =row[3] )
+    mensaje ="carga con exito"
+    contexto ={  
+        "mensaje":mensaje , 
+        "menu": generarMenu(request.user),
+        "listado": listadoCargaInicial()
+
+    } 
+    return render (request, "carga_inicial.html",contexto)
+
+def eliminar_todo_ph_cultivo(request):
+    Ph_Suelo.objects.all().delete()
+    mensaje ="registrso borrados con exito"
+    contexto ={  
+        "mensaje":mensaje , 
+        "menu": generarMenu(request.user),
+        "listado": listadoCargaInicial()
+
+    } 
+    return render (request, "carga_inicial.html",contexto)
+def carga_inicial_riegos_cultivo(request):
+    template_name = "configuracion/migrations/riego.csv"
+    #Disciplinas.objects.all().delete()
+    with open (template_name) as f:
+        reader = csv.reader(f )
+        for row in reader:
+           Riego_Cultivo.objects.create( desc_corta= row[0], cantidad = row[1], descripcion =row[2] )
+    mensaje ="carga con exito"
+    contexto ={  
+        "mensaje":mensaje , 
+        "menu": generarMenu(request.user),
+        "listado": listadoCargaInicial()
+
+    } 
+    return render (request, "carga_inicial.html",contexto)
+
+def eliminar_todo_riego_cultivo(request):
+    Riego_Cultivo.objects.all().delete()
+    mensaje ="registros borrados con exito"
     contexto ={  
         "mensaje":mensaje , 
         "menu": generarMenu(request.user),

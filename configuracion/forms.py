@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
-from .models import   Cultivos, Tierras_Cultivo, Enfermedades, Plagas,GaleriaImagen, Temperaturas_Cultivos, Luz_Necesaria_Cultivo, Riego_Cultivo
+from .models import   Cultivos, Tierras_Cultivo, Enfermedades, Plagas,GaleriaImagen, Temperaturas_Cultivos, Luz_Necesaria_Cultivo, Riego_Cultivo, Ph_Suelo
 
 
 class SignUpForm(UserCreationForm):
@@ -57,6 +57,12 @@ class PlagasForm(forms.ModelForm):
     class Meta:
         model = Plagas
         fields = '__all__'
+
+class PhForm(forms.ModelForm):
+    class Meta:
+        model = Ph_Suelo
+        fields = '__all__'
+
 
 class GaleriaImagenForm(forms.ModelForm):
     class Meta:
