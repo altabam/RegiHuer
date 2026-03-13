@@ -48,9 +48,10 @@
 
             </div>
 
+
             {% if listadoCultivos %}
             {% for listadoCultivos in listadoCultivos%}
-                <details open>
+                  <details open>
                     <summary>
                         {{forloop.counter}} - {{listadoCultivos.nombre}}
                         <a href="{% url 'configuracion:cultivo_editar' listadoCultivos.id %}" class=""><img
@@ -59,23 +60,20 @@
                             src="{% static 'img/eliminar.png' %}" alt="Eliminar" title="Eliminar"></a>
                     </summary>
                     <div class="cultivos">
-                        <figure>
-                            {% if listadoCultivos.imagen %}
-                              <img  src="{{ listadoCultivos.imagen.url}}"  >
-                            {% endif %}
-                            <figcaption>
-                                <i> Nombre Cientifico:</i> <b>{{listadoCultivos.nombre_cientifico}}</b>
-                            </figcaption>
-                        </figure>
-                        <div class="descripcion_cultivos">
-                            <h2>Descripcion</h2>
-                            <span> Pertences a la familia: <b>{{listadoCultivos.get_familia_display }}</b> 
-                                {%if listadoCultivos.descripcion %}
-                                cuyas caracteristicas son :<b> {{listadoCultivos.descripcion}}</b>
-                                {%endif%}
+                            <span>{%if listadoCultivos.descripcion %}  {{listadoCultivos.descripcion}}
+                                Pertenece a la familia: {{listadoCultivos.get_familia_display }} 
+                                {%endif%} <i> Nombre Cientifico:</i> {{listadoCultivos.nombre_cientifico}}
                             </span>
+
+                                <figure>
+                                    {% if listadoCultivos.imagen %}
+                                        <img  src="{{ listadoCultivos.imagen.url}}" height="200px" width="200px" >
+                                    {% endif %}
+                                    <figcaption>
+                                    </figcaption>
+                                </figure>
                             <br><br>
-                            <H2>Epoca de Siembra</H2>
+                <H2>Variedades</H2>
                             <span>
                                 &nbsp; &nbsp;desde : <b>{{listadoCultivos.get_semana_siembra_desde_display}}</b> de <b>{{listadoCultivos.get_mes_siembra_desde_display}}</b><br>
                                 &nbsp; &nbsp; &nbsp;hasta : <b>{{listadoCultivos.get_semana_siembra_hasta_display}}</b> de <b>{{listadoCultivos.get_mes_siembra_hasta_display}}</b>
@@ -118,9 +116,8 @@
                             <H2>Variedades</H2><br>
                             <span></span>
                             <br>
-                        </div>  
                     </div>
-                    </details>
+                </details>
             {% endfor %}
             {% endif %}
         </div>

@@ -9,7 +9,7 @@ details {
 
   }
 
-  details[open] {
+details[open] {
     padding-bottom: 1em;
 }  
 
@@ -22,9 +22,7 @@ summary {
 
 
   @layer setupPage {
-  
-        
-        aside {
+    aside {
         width: 38em;
         max-width: 98vw;
         }
@@ -38,8 +36,8 @@ summary {
       border: thin #c0c0c0 solid;
       width: 100%;
       display: flex;
-      flex-flow: row;
-      color: rgb(189, 69, 69);
+      flex-flow: column ;
+      color: rgb(72, 44, 136);
       size: 15px;
       text-decoration: none;
       text-justify: distribute-all-lines;
@@ -76,17 +74,24 @@ summary {
 
     .descripcion_cultivos h2{
       padding: 15px 10px;
-      color: brown;
+      color: rgb(8, 14, 49);
 
     }
 
-    .descripcion_cultivos span{
+    .cultivos span{
       padding: 0px 0px 0px 10px;
       color: black;
       text-align: justify;
       font-family: Helvetica, Arial, sans-serif;
       text-shadow: none;
-      font-size: 20px;
+      display: block;
+      font-size: 1.5em;
+      margin-block-start: 0.83em;
+      margin-block-end: 0.83em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      font-weight: bold;
+      unicode-bidi: isolate;
 
 
     }

@@ -3,8 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
-from .models import   Cultivos, Tierras_Cultivo, Enfermedades, Plagas,GaleriaImagen, Temperaturas_Cultivos, Luz_Necesaria_Cultivo, Riego_Cultivo, Ph_Suelo
-
+from .models import   Cultivos, Suelos, Enfermedades, Plagas,GaleriaImagen, Temperaturas_Cultivos, Luz_Necesaria_Cultivo, Riego_Cultivo
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=140, required=True)
@@ -43,9 +42,9 @@ class RiegoForm(forms.ModelForm):
         model = Riego_Cultivo
         fields = '__all__'
 
-class Tierras_CultivoForm(forms.ModelForm):
+class SuelosForm(forms.ModelForm):
     class Meta:
-        model = Tierras_Cultivo
+        model = Suelos
         fields = '__all__'
 
 class EnfermedadesForm(forms.ModelForm):
@@ -58,10 +57,6 @@ class PlagasForm(forms.ModelForm):
         model = Plagas
         fields = '__all__'
 
-class PhForm(forms.ModelForm):
-    class Meta:
-        model = Ph_Suelo
-        fields = '__all__'
 
 
 class GaleriaImagenForm(forms.ModelForm):
