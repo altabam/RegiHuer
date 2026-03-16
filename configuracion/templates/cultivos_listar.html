@@ -42,62 +42,58 @@
         </div>
         <div class="tabla-listar">
             <div class="agregar">
-                <a href="{% url 'configuracion:cultivo_agregar'  %}">
-                    <img src="{% static 'img/agregar.png' %}" alt="agregar" title="agregar">
-                </a>
+                <a href="{% url 'configuracion:cultivo_agregar'  %}" class="btn-agregar">➕</a>
 
             </div>
 
 
             {% if listadoCultivos %}
             {% for listadoCultivos in listadoCultivos%}
-                  <details open>
+                <details >
                     <summary>
-                        {{forloop.counter}} - {{listadoCultivos.nombre}}
-                        <a href="{% url 'configuracion:cultivo_editar' listadoCultivos.id %}" class=""><img
-                            src="{% static 'img/editar.png' %}" alt="Editar" title="Editar"></a>
-                        <a href="{% url 'configuracion:cultivo_eliminar' listadoCultivos.id %}" class=""><img
-                            src="{% static 'img/eliminar.png' %}" alt="Eliminar" title="Eliminar"></a>
+                        {{forloop.counter}} - {{listadoCultivos.nombre}} &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                        <a href="{% url 'configuracion:cultivo_editar' listadoCultivos.id %}" class="btn-editar">✏️</a>
+                        <a href="{% url 'configuracion:cultivo_eliminar' listadoCultivos.id %}" class="btn-eliminar">🗑</a>
                     </summary>
                     <div class="cultivos">
-                            <span>{%if listadoCultivos.descripcion %}  {{listadoCultivos.descripcion}}
-                                Pertenece a la familia: {{listadoCultivos.get_familia_display }} 
-                                {%endif%} <i> Nombre Cientifico:</i> {{listadoCultivos.nombre_cientifico}}
-                            </span>
+                        <span>{%if listadoCultivos.descripcion %}  {{listadoCultivos.descripcion}}
+                            Pertenece a la familia: {{listadoCultivos.get_familia_display }} 
+                            {%endif%} <i> Nombre Cientifico:</i> {{listadoCultivos.nombre_cientifico}}
+                        </span>
 
-                                <figure>
+                        <figure>
                                     {% if listadoCultivos.imagen %}
                                         <img  src="{{ listadoCultivos.imagen.url}}" height="200px" width="200px" >
                                     {% endif %}
                                     <figcaption>
                                     </figcaption>
-                                </figure>
-                            <br><br>
-                <H2>Variedades</H2>
-                            <span>
+                        </figure>
+                        <br><br>
+                        <H2>Variedades</H2>
+                        <span>
                                 &nbsp; &nbsp;desde : <b>{{listadoCultivos.get_semana_siembra_desde_display}}</b> de <b>{{listadoCultivos.get_mes_siembra_desde_display}}</b><br>
                                 &nbsp; &nbsp; &nbsp;hasta : <b>{{listadoCultivos.get_semana_siembra_hasta_display}}</b> de <b>{{listadoCultivos.get_mes_siembra_hasta_display}}</b>
-                            </span>
-                            <br><br>
-                            <H2>Requisitos de sol y temperatura</H2><br>
-                            <span>
+                        </span>
+                        <br><br>
+                        <H2>Requisitos de sol y temperatura</H2><br>
+                        <span>
                              Luz:<b>{{listadoCultivos.luz.descripcion}}</b> <br>
-                            </span>
-                            <span>                            
+                        </span>
+                        <span>                            
                              temperatura: <b>{{listadoCultivos.temperaturas.desc_corta}}</b> y el rango esta entre: <b>{{listadoCultivos.temperaturas.valor_minimo}} - {{listadoCultivos.temperaturas.valor_maximo}}</b><br>
                              </span>
                             <br><br>
                             <H2>Requisitos de suelo</H2>
-                            <span>
+                        <span>
                             {%if listadoCultivos.tierra %}
                               {{listadoCultivos.tierra.desc_corta}}:
                               {{listadoCultivos.tierra.descripcion}}
                             {%endif%}
-                            </span>
-                            <br><br>
-                            <H2>Requisitos de riego</H2><br>
-                            <span></span>
-                            <br>
+                        </span>
+                        <br><br>
+                        <H2>Requisitos de riego</H2><br>
+                        <span></span>
+                        <br>
                             <H2>¿Cómo plantar?</H2><br>
                             <span></span>
                             <br>
@@ -119,6 +115,7 @@
                     </div>
                 </details>
             {% endfor %}
+
             {% endif %}
         </div>
     </div>

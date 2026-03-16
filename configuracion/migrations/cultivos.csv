@@ -1,6 +1,6 @@
 CRU,Raphanus sativus,Rabanito,Hortaliza de raíz pequeña crecimiento muy rápido y sabor picante.,D,C
 CRU,Eruca sativa,Rúcula,Hortaliza de hoja con sabor intenso y algo picante.,D,C
-CRU,Brassica juncea,Mostaza roja / mostaza	Cultivo de hojas verdes o rojizas, sabor picante crecimiento rápido.,D,C
+CRU,Brassica juncea,Mostaza roja / mostaza,	Cultivo de hojas verdes o rojizas sabor picante crecimiento rápido.,D,C
 CRU,Brassica oleracea (var. capitata),Repollo,Forma una cabeza compacta de hojas grandes.,S,C
 CRU,Brassica oleracea (var. italica),Brócoli,Produce inflorescencias verdes comestibles.	,S,C
 CRU,Brassica oleracea (var. botrytis),Coliflor	,produce una inflorescencia blanca compacta.,S,C
@@ -8,3 +8,4 @@ CRU,Brassica oleracea (var. acephala),Kale / col rizada,Cultivo de hojas rizadas
 CRU,Brassica rapa,Nabo,Raíz comestible redondeada; también se consumen las hojas.,T,C
 CRU,Brassica rapa,Pak choi / bok choy,Hortaliza asiática con hojas y tallos carnosos.,T,C
 CRU,Brassica rapa,Mizuna,Hortaliza japonesa de hojas finas y sabor suave.,T,C
+API,Coriandrum sativum, Cilantro, hierba aromática muy utilizada en cocina. Es fácil de cultivar y crece bien en huertas familiares.,D,C

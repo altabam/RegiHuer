@@ -88,7 +88,6 @@ class Luz_Necesaria_Cultivo(models.Model):
         return self.desc_corta
 
 
-
 class Temperaturas_Cultivos(models.Model):
     desc_corta = models.CharField(max_length=30, blank=True)
     valor_minimo = models.IntegerField( blank=True, null=True)
@@ -122,6 +121,7 @@ class Cultivos(models.Model):
         ('CUC','Cucurbitaceas'),
         ('CON','Convolvulaceas'),
         ('ASP','Asparagaceae'),
+        ('API','Apiaceae'),
     )
     familia = models.CharField(max_length=3, choices=FAMILIA)
     nombre_cientifico = models.CharField(max_length=50, blank=True)

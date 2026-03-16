@@ -1,98 +1,149 @@
-@layer setupPage;
-details {
-    border: 1px solid;
-    padding: 0 1rem;
-    background: cadetblue;
+
+
+h1{
+    color:#2f6b2f;
+    margin-bottom:20px;
+}
+
+/* buscador */
+
+.searchbox{
+    background:#ffffff;
+    padding:15px;
+    border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+}
+
+#search_input{
+    width:300px;
+    padding:8px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+/* contenedor cultivo */
+
+.cultivos{
+    padding:25px;
+    background:white;
+    border-radius:10px;
+}
+.agregar{
+    margin-bottom:10px;
+
+}
+
+/* tarjeta */
+
+details{
+    margin-bottom:5px;
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid #dcdcdc;
+    background:#fff;
+    box-shadow:0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* cabecera */
+
+summary{
+    padding:5px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+    background:#3a7d3a;
+    color:white;
     text-align: left;
-    border-radius: 0.5rem;
-    width: 100%;
+}
 
-  }
+summary:hover{
+    background:#2f6b2f;
+}
 
-details[open] {
-    padding-bottom: 1em;
-}  
+/* imagen */
 
-summary {
-    padding: 1rem 2em 1rem 0;
-    font-size: 1.25rem;
-    font-weight: bold;
-    cursor: pointer;
-  }
+figure{
+    margin-top:10px;
+}
 
+figure img{
+    border-radius:10px;
+    border:1px solid #ddd;
+}
 
-  @layer setupPage {
-    aside {
-        width: 38em;
-        max-width: 98vw;
-        }
-    }
-    slot:not([name]) {
-      display: revert;
-    }
+/* secciones */
 
+h2{
+    color:#3a7d3a;
+    margin-top:10px;
+    font-size:18px;
+}
 
-    .cultivos{
-      border: thin #c0c0c0 solid;
-      width: 100%;
-      display: flex;
-      flex-flow: column ;
-      color: rgb(72, 44, 136);
-      size: 15px;
-      text-decoration: none;
-      text-justify: distribute-all-lines;
-      
+/* iconos editar eliminar */
 
-    }
+.agregar img{
+    width:40px;
+    margin-bottom:10px;
+}
 
-    .descripcion_cultivos{
-      width: 100%;
-      padding-left: 30px;
-
-    }
-    figure {
-      display: flex;
-      flex-flow: column;
-      padding: 5px;
-      margin: auto;
-      text-align: center;
-      height: 100%;
-      width: 50%;
-    }
-
-    figcaption i{
-      display: flex;
-      flex-flow: column;
-      color: brown;
-      size: 15px;
-    }
-
-    figcaption b{
-      color: brown;
-      size: 15px;
-    }
-
-    .descripcion_cultivos h2{
-      padding: 15px 10px;
-      color: rgb(8, 14, 49);
-
-    }
-
-    .cultivos span{
-      padding: 0px 0px 0px 10px;
-      color: black;
-      text-align: justify;
-      font-family: Helvetica, Arial, sans-serif;
-      text-shadow: none;
-      display: block;
-      font-size: 1.5em;
-      margin-block-start: 0.83em;
-      margin-block-end: 0.83em;
-      margin-inline-start: 0px;
-      margin-inline-end: 0px;
-      font-weight: bold;
-      unicode-bidi: isolate;
+.searchbox input{
+    width:350px;
+    padding:10px;
+    border-radius:20px;
+    border:1px solid #ccc;
+    outline:none;
+}
 
 
-    }
 
+.cultivos-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+gap:20px;
+}
+
+
+
+
+
+.cultivo-img{
+width:100%;
+border-radius:8px;
+margin-top:10px;
+}
+
+.cultivo-info{
+margin-top:10px;
+font-size:14px;
+}
+
+.cultivo-acciones{
+margin-top:12px;
+display:flex;
+gap:10px;
+}
+
+.btn-agregar{
+background:#3a7d3a;
+padding:6px 10px;
+border-radius:6px;
+text-decoration:none;
+color:rgb(253, 253, 255);
+}
+.btn-editar{
+background:#ffc107;
+padding:5px 6px;
+border-radius:3px;
+text-decoration:none;
+color:black;
+}
+
+.btn-eliminar{
+background:#dc3545;
+padding:5px 6px;
+border-radius:3px;
+text-decoration:none;
+color:white;
+text-align: right;
+}

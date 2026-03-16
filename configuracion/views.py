@@ -66,6 +66,7 @@ def hortelano_modificar(request):
 # Create your views here.
 def gestion_cultivos(request):
     listadoCultivos = Cultivos.objects.all()
+    listadoVariedades = Variedades_Cultivos.objects.all()
     messages.success(request,"¡Cultivos Listados!")
     menu = generarMenu("hola")
 
