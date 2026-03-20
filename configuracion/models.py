@@ -80,23 +80,9 @@ class Perfil(models.Model):
     def __str__(self): 
         return self.usuario.username
 
-class Luz_Necesaria_Cultivo(models.Model):
-    desc_corta = models.CharField(max_length=30, blank=True)
-    cantidad = models.SmallIntegerField()
-    descripcion = models.CharField(max_length=255, blank=True)
-    def __str__(self):
-        return self.desc_corta
 
 
-class Temperaturas_Cultivos(models.Model):
-    desc_corta = models.CharField(max_length=30, blank=True)
-    valor_minimo = models.IntegerField( blank=True, null=True)
-    valor_maximo = models.IntegerField( blank=True, null=True)
-    descripcion = models.CharField(max_length=255, blank=True)
-    def __str__(self):
-        return self.desc_corta + str(self.valor_minimo) +"-"+ str(self.valor_maximo)
-
-
+ 
 class Cultivos(models.Model):
     TIPOS_SIEMBRA = (
         ('D', 'Directa'),
@@ -126,30 +112,63 @@ class Cultivos(models.Model):
     familia = models.CharField(max_length=3, choices=FAMILIA)
     nombre_cientifico = models.CharField(max_length=50, blank=True)
     nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=255, blank=True)
+    descripcion = models.TextField(blank=True)
     tipo_siembra = models.CharField(max_length=1, choices=TIPOS_SIEMBRA)
     luna_siembra = models.CharField(max_length=1, choices=LUNA, null=True, blank=True)
 
     def __str__(self):
-        return self.familia +"-"+ self.nombre
+        return f"{self.nombre} ({self.familia})"
+
+
+
 
 
 class Fecha_Siembra(models.Model):
     semana= models.CharField(max_length=1, choices=SEMANA, null=True)
     mes= models.CharField(max_length=3, choices=MES, null=True)
+    def __str__(self):
+        return f"{self.cultivo.mes} - {self.semana}"
+
     
 
 class Variedades_Cultivos(models.Model):
-    nombre = models.CharField(max_length=50, blank=True)
-    cultivo = models.ForeignKey(Temperaturas_Cultivos,on_delete=models.CASCADE, null=True, blank=True)
-    luz = models.ForeignKey(Luz_Necesaria_Cultivo,on_delete=models.CASCADE, null=True, blank=True)
-    descripcion = models.CharField(max_length=255, blank=True)
-    imagen = models.ImageField(upload_to='cultivos',blank=True)
+    nombre = models.CharField(max_length=50)
+    cultivo = models.ForeignKey(Cultivos,on_delete=models.CASCADE, related_name="variedades")
+    imagen = models.ImageField(upload_to='cultivos',blank=True, null=True)
+    descripcion = models.TextField(blank=True)
+    class Meta:
+        ordering = ["nombre"]
+    
+    def __str__(self):
+        return f"{self.cultivo.nombre} - {self.nombre}"
 
-class Mes_Siembra_Variedades_Cultivos(models.Model):
-    variedad_cultivo = models.ForeignKey(Variedades_Cultivos,on_delete=models.CASCADE, null=True, blank=True)
+class Luz_Variedades_Cultivos(models.Model):
+    variedad_cultivo = models.ForeignKey(Variedades_Cultivos,on_delete=models.CASCADE,related_name="luz")
+    desc_corta = models.CharField(max_length=30, blank=True)
+    valor_minimo = models.IntegerField( blank=True, null=True)
+    valor_maximo = models.IntegerField( blank=True, null=True)
+    descripcion = models.CharField(max_length=255, blank=True)
+    def __str__(self):
+        return f"{self.variedad_cultivo.nombre} - {self.desc_corta} / {self.valor_minimo} - {self.valor_maximo}"
+
+
+class Temperaturas_Variedades_Cultivos(models.Model):
+    variedad_cultivo = models.ForeignKey(Variedades_Cultivos,on_delete=models.CASCADE,related_name="temperatura")
+    desc_corta = models.CharField(max_length=30, blank=True)
+    valor_minimo = models.IntegerField( blank=True, null=True)
+    valor_maximo = models.IntegerField( blank=True, null=True)
+    descripcion = models.CharField(max_length=255, blank=True)
+    def __str__(self):
+        return self.variedad_cultivo.nombre + self.desc_corta + str(self.valor_minimo) +"-"+ str(self.valor_maximo)
+
+
+
+class Fecha_Siembra_Variedades_Cultivos(models.Model):
+    variedad_cultivo = models.ForeignKey(Variedades_Cultivos,on_delete=models.CASCADE, null=True, blank=True, related_name="fecha_siembra")
     fecha_siembra_desde = models.ForeignKey(Fecha_Siembra,on_delete=models.CASCADE, null=True, blank=True, related_name="fecha_siembra_desde")
     fecha_siembra_hasta = models.ForeignKey(Fecha_Siembra,on_delete=models.CASCADE, null=True, blank=True, related_name="fecha_siembra_hasta")
+    def __str__(self):
+        return f"Desde: {self.fecha_siembra_desde} hasta: {self.fecha_siembra_hasta}"
 
 class Tiempos_Variedades_Cultivos(models.Model):
     TIPO = (

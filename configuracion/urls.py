@@ -19,21 +19,26 @@ urlpatterns= [
        path('carga_inicial_cultivos', views.carga_inicial_cultivos, name = 'carga_inicial_cultivos'),
        path('eliminar_todo_cultivos', views.eliminar_todo_cultivos, name = 'eliminar_todo_cultivos'),
        
+       path('variedades_cultivos_agregar/<int:cultivo_id>', views.variedades_cultivos_agregar, name='variedades_cultivos_agregar'),
+       path('variedades_cultivos_eliminar/<int:id>', views.variedades_cultivos_eliminar, name='variedades_cultivos_eliminar'),
+       path('variedades_cultivos_editar/<int:id>', views.variedades_cultivos_editar, name='variedades_cultivos_editar'),
+       
+       path('luz_variedades_cultivos_agregar/<int:id>', views.luz_variedades_cultivos_agregar, name='luz_variedades_cultivos_agregar'),
+       path('luz_variedades_cultivos_eliminar/<int:id>', views.luz_variedades_cultivos_eliminar, name='luz_variedades_cultivos_eliminar'),
+       path('luz_variedades_cultivos_editar/<int:id>', views.luz_variedades_cultivos_editar, name='luz_variedades_cultivos_editar'),
 
        path('gestion_tierras_cultivo/', views.gestion_tierras_cultivo, name = 'gestion_tierras_cultivo'),
        path('configuracion/tierras_cultivo_agregar/', views.tierras_cultivo_agregar, name='tierras_cultivo_agregar'),
        path('configuracion/tierras_cultivo_eliminar/<int:id>/', views.tierras_cultivo_eliminar, name='tierras_cultivo_eliminar'),
        path('configuracion/tierras_cultivo_editar/<int:id>/', views.tierras_cultivo_editar, name='tierras_cultivo_editar'),
 
-       path('gestion_temperaturas/', views.gestion_temperaturas, name = 'gestion_temperaturas'),
-       path('configuracion/temperaturas_agregar/', views.temperaturas_agregar, name='temperaturas_agregar'),
-       path('configuracion/temperaturas_eliminar/<int:id>/', views.temperaturas_eliminar, name='temperaturas_eliminar'),
-       path('configuracion/temperaturas_editar/<int:id>/', views.temperaturas_editar, name='temperaturas_editar'),
+       path('configuracion/temperaturas_variedades_cultivos_agregar/<int:id>/', views.temperaturas_variedades_cultivos_agregar, name='temperaturas_variedades_cultivos_agregar'),
+       path('configuracion/temperaturas_variedades_cultivos_eliminar/<int:id>/', views.temperaturas_variedades_cultivos_eliminar, name='temperaturas_variedades_cultivos_eliminar'),
+       path('configuracion/temperaturas_variedades_cultivos_editar/<int:id>/', views.temperaturas_variedades_cultivos_editar, name='temperaturas_variedades_cultivos_editar'),
 
-       path('gestion_luz_cultivos/', views.gestion_luz_cultivos, name = 'gestion_luz_cultivos'),
-       path('configuracion/luz_cultivos_agregar/', views.luz_cultivos_agregar, name='luz_cultivos_agregar'),
-       path('configuracion/luz_cultivos_eliminar/<int:id>/', views.luz_cultivos_eliminar, name='luz_cultivos_eliminar'),
-       path('configuracion/luz_cultivos_editar/<int:id>/', views.luz_cultivos_editar, name='luz_cultivos_editar'),
+       path('configuracion/fechas_siembra_variedades_cultivos_agregar/<int:id>/', views.fechas_siembra_variedades_cultivos_agregar, name='fechas_siembra_variedades_cultivos_agregar'),
+       path('configuracion/fechas_siembra_variedades_cultivos_eliminar/<int:id>/', views.fechas_siembra_variedades_cultivos_eliminar, name='fechas_siembra_variedades_cultivos_eliminar'),
+       path('configuracion/fechas_siembra_variedades_cultivos_editar/<int:id>/', views.fechas_siembra_variedades_cultivos_editar, name='fechas_siembra_variedades_cultivos_editar'),
 
        path('gestion_riego_cultivos/', views.gestion_riego_cultivos, name = 'gestion_riego_cultivos'),
        path('configuracion/riego_cultivos_agregar/', views.riego_cultivos_agregar, name='riego_cultivos_agregar'),
@@ -53,12 +58,11 @@ urlpatterns= [
 
        path('configuracion_carga_inicial', views.configuracion_carga_inicial,name='configuracion_carga_inicial'),
        path('carga_inicial_tierra_cultivo', views.carga_inicial_tierra_cultivo,name='carga_inicial_tierra_cultivo'),
-       path('eliminar_todo_tierra_cultivo', views.eliminar_todo_tierra_cultivo,name='eliminar_todo_tierra_cultivo'),
 
 
- 
-       path('carga_inicial_temperaturas_cultivo', views.carga_inicial_temperaturas_cultivo,name='carga_inicial_temperaturas_cultivo'),
-       path('eliminar_toda_temperatura_cultivo', views.eliminar_toda_temperatura_cultivo,name='eliminar_toda_temperatura_cultivo'),
+       path('carga_inicial_fechas', views.carga_inicial_fechas,name='carga_inicial_fechas'),
+       path('eliminar_todo_fechas', views.eliminar_todo_fechas,name='eliminar_todo_fechas'),
+
 
  
        path('carga_inicial_riegos_cultivo', views.carga_inicial_riegos_cultivo,name='carga_inicial_riegos_cultivo'),

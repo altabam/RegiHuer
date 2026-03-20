@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
-from .models import   Cultivos, Suelos, Enfermedades, Plagas,GaleriaImagen, Temperaturas_Cultivos, Luz_Necesaria_Cultivo, Riego_Cultivo
+from .models import   Cultivos, Suelos, Enfermedades, Plagas,GaleriaImagen, Temperaturas_Variedades_Cultivos, Luz_Variedades_Cultivos, Riego_Cultivo, Variedades_Cultivos,Fecha_Siembra_Variedades_Cultivos
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=140, required=True)
@@ -27,15 +27,39 @@ class CultivosForm(forms.ModelForm):
         model = Cultivos
         fields = '__all__'
 
-class TemperaturasForm(forms.ModelForm):
-    class Meta:
-        model = Temperaturas_Cultivos
+        
+class Variedades_CultivosForm(forms.ModelForm):
+     class Meta:
+        model = Variedades_Cultivos
         fields = '__all__'
+        widgets = {
+            'cultivo': forms.HiddenInput()
+        }
 
-class LuzForm(forms.ModelForm):
+
+class Temperaturas_Variedades_CultivosForm(forms.ModelForm):
     class Meta:
-        model = Luz_Necesaria_Cultivo
+        model = Temperaturas_Variedades_Cultivos
         fields = '__all__'
+        widgets = {
+            'variedad_cultivo': forms.HiddenInput()
+        }
+class Luz_Variedades_CultivosForm(forms.ModelForm):
+    class Meta:
+        model = Luz_Variedades_Cultivos
+        fields = '__all__'
+        widgets = {
+            'variedad_cultivo': forms.HiddenInput()
+        }
+
+class Fecha_Siembra_Variedades_CultivosForm(forms.ModelForm):
+    class Meta:
+        model = Fecha_Siembra_Variedades_Cultivos
+        fields = '__all__'
+        widgets = {
+            'variedad_cultivo': forms.HiddenInput()
+        }
+
 
 class RiegoForm(forms.ModelForm):
     class Meta:

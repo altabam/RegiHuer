@@ -10,8 +10,8 @@ from django.core import serializers
 import csv
 
 
-from .models import Cultivos, Variedades_Cultivos, Hortelano,  Suelos, Enfermedades, Plagas, GaleriaImagen, Temperaturas_Cultivos, Luz_Necesaria_Cultivo, Riego_Cultivo
-from .forms import  CultivosForm, SuelosForm, EnfermedadesForm, PlagasForm,GaleriaImagenForm, TemperaturasForm, LuzForm, RiegoForm
+from .models import Cultivos, Variedades_Cultivos, Hortelano,  Enfermedades, Plagas, GaleriaImagen, Temperaturas_Variedades_Cultivos, Luz_Variedades_Cultivos, Riego_Cultivo, Fecha_Siembra_Variedades_Cultivos,Fecha_Siembra
+from .forms import  CultivosForm,  EnfermedadesForm, PlagasForm,GaleriaImagenForm, Luz_Variedades_CultivosForm, Temperaturas_Variedades_CultivosForm, RiegoForm,Variedades_CultivosForm, Fecha_Siembra_Variedades_CultivosForm
 from accesibilidad.views import generarMenu
 
 import json
@@ -91,21 +91,63 @@ def cultivo_agregar(request):
          } 
     return render(request, "cultivo_editar.html", contexto )
 
-def cultivo_editar(request,id):
-    cultivo = Cultivos.objects.get(id = id)
+
+def variedades_cultivos_agregar(request,cultivo_id):
+    cultivo = Cultivos.objects.get(id=cultivo_id)
     if request.method == 'POST':
-        form= CultivosForm(request.POST, request.FILES, instance=cultivo)
+        form= Variedades_CultivosForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/configuracion/gestion_cultivos')
     else:
-            form = CultivosForm( instance=cultivo)
+        form =Variedades_CultivosForm(initial={'cultivo': cultivo})
+
+    contexto ={ 
+            "accion":"Agregar", 
+            "form": form,
+            "cultivo": cultivo,
+         } 
+    return render(request, "variedades_cultivos_editar.html", contexto )
+
+def variedades_cultivos_eliminar(request,id):
+    variedades_cultivo = Variedades_Cultivos.objects.get(id=id)
+    variedades_cultivo.delete()
+    listadoCultivos = Cultivos.objects.all()
+    messages.success(request,"¡Variedades Cultivos Listadas!")
+    contexto ={ "listadoCultivos": listadoCultivos,  } 
+    return redirect('/configuracion/gestion_cultivos', contexto)
+
+def variedades_cultivos_editar(request,id):
+    variedades_cultivo = Variedades_Cultivos.objects.get(id = id)
+    if request.method == 'POST':
+        form= Variedades_CultivosForm(request.POST, request.FILES, instance=variedades_cultivo)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_cultivos')
+    else:
+            form = Variedades_CultivosForm( instance=variedades_cultivo)
     
     contexto ={ 
             "accion":"Editar", 
             "form": form,
          } 
-    return render(request, "cultivo_editar.html",contexto)
+    return render(request, "variedades_cultivos_editar.html",contexto)
+
+def cultivo_editar(request,id):
+    variedades_cultivo = Variedades_Cultivos.objects.get(id = id)
+    if request.method == 'POST':
+        form= Variedades_CultivosForm(request.POST, request.FILES, instance=variedades_cultivo)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_cultivos')
+    else:
+            form = Variedades_CultivosForm( instance=variedades_cultivo)
+    
+    contexto ={ 
+            "accion":"Editar", 
+            "form": form,
+         } 
+    return render(request, "variedades_cultivo_editar.html",contexto)
 
 
 def cultivo_eliminar(request,id):
@@ -425,109 +467,131 @@ def galeria_imagenes_eliminar(request):
     return gestion_img_galeria_principal(request)
 
 
-
-def gestion_temperaturas(request):
-    listadoTemperaturas = Temperaturas_Cultivos.objects.all()
-    messages.success(request,"¡Cultivos Listados!")
-    menu = generarMenu("hola")
-
-    contexto ={ "listadoTemperaturas": listadoTemperaturas,  
-               "menu":menu,
-    } 
-    return render(request, "temperaturas_listar.html",  contexto)
-
-
-def temperaturas_agregar(request):
+def temperaturas_variedades_cultivos_agregar(request, id):
+    variedad_cultivo = Variedades_Cultivos.objects.get(id=id)
     if request.method == 'POST':
-        form= TemperaturasForm(request.POST)
+        form= Temperaturas_Variedades_CultivosForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/configuracion/gestion_temperaturas')
+            return redirect('/configuracion/gestion_cultivos')
     else:
-        form =TemperaturasForm()
+        form =Temperaturas_Variedades_CultivosForm(initial={'variedad_cultivo': variedad_cultivo})
 
     contexto ={ 
             "accion":"Agregar", 
             "form": form,
          } 
-    return render(request, "temperatura_editar.html", contexto )
+    return render(request, "temperaturas_variedades_cultivos_editar.html", contexto )
 
-def temperaturas_editar(request,id):
-    temperatura = Temperaturas_Cultivos.objects.get(id = id)
+
+def temperaturas_variedades_cultivos_editar(request,id):
+    temperatura = Temperaturas_Variedades_Cultivos.objects.get(id = id)
     if request.method == 'POST':
-        form= TemperaturasForm(request.POST, request.FILES, instance=temperatura)
+        form= Temperaturas_Variedades_CultivosForm(request.POST, request.FILES, instance=lutemperaturaz)
         if form.is_valid():
             form.save()
-            return redirect('/configuracion/gestion_temperaturas')
+            return redirect('/configuracion/gestion_cultivos')
     else:
-            form = TemperaturasForm( instance=temperatura)
+            form = Temperaturas_Variedades_CultivosForm( instance=temperatura)
     
     contexto ={ 
             "accion":"Editar", 
             "form": form,
          } 
-    return render(request, "temperatura_editar.html",contexto)
+    return render(request, "temperaturas_variedades_cultivos_editar.html",contexto)
 
 
-def temperaturas_eliminar(request,id):
-    temperatura = Temperaturas_Cultivos.objects.get(id=id)
-    temperatura.delete()
-    listadoTemperaturas = Temperaturas_Cultivos.objects.all()
-    messages.success(request,"¡Temperaturas Listadas!")
-    contexto ={ "listadoTemperaturas": listadoTemperaturas,  } 
-    return redirect('/configuracion/gestion_temperaturas', contexto)
+def temperaturas_variedades_cultivos_eliminar(request,id):
+    temperaturas = Temperaturas_Variedades_Cultivos.objects.get(id=id)
+    temperaturas.delete()
+    messages.success(request,"¡Luz necesaria para los cultivos. Listadas!")
+    contexto ={   } 
+    return redirect('/configuracion/gestion_cultivos', contexto)
 
 
-def gestion_luz_cultivos(request):
-    listado = Luz_Necesaria_Cultivo.objects.all()
-    messages.success(request,"¡Luz Necesaria para cultivos Listadas!")
-    menu = generarMenu("hola")
-
-    contexto ={ "listado": listado,  
-               "menu":menu,
-    } 
-    return render(request, "luz_cultivo_listar.html",  contexto)
-
-
-def luz_cultivos_agregar(request):
+def fechas_siembra_variedades_cultivos_agregar(request, id):
+    variedad_cultivo = Variedades_Cultivos.objects.get(id=id)
     if request.method == 'POST':
-        form= LuzForm(request.POST)
+        form= Fecha_Siembra_Variedades_CultivosForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/configuracion/gestion_luz_cultivos')
+            return redirect('/configuracion/gestion_cultivos')
     else:
-        form =LuzForm()
+        form =Fecha_Siembra_Variedades_CultivosForm(initial={'variedad_cultivo': variedad_cultivo})
 
     contexto ={ 
             "accion":"Agregar", 
             "form": form,
          } 
-    return render(request, "luz_cultivo_editar.html", contexto )
+    return render(request, "fechas_siembra_variedades_cultivos_editar.html", contexto )
 
-def luz_cultivos_editar(request,id):
-    luz = Luz_Necesaria_Cultivo.objects.get(id = id)
+
+def fechas_siembra_variedades_cultivos_editar(request,id):
+    temperatura = Temperaturas_Variedades_Cultivos.objects.get(id = id)
     if request.method == 'POST':
-        form= LuzForm(request.POST, request.FILES, instance=luz)
+        form= Temperaturas_Variedades_CultivosForm(request.POST, request.FILES, instance=lutemperaturaz)
         if form.is_valid():
             form.save()
-            return redirect('/configuracion/gestion_luz_cultivos')
+            return redirect('/configuracion/gestion_cultivos')
     else:
-            form = TemperaturasForm( instance=luz)
+            form = Temperaturas_Variedades_CultivosForm( instance=temperatura)
     
     contexto ={ 
             "accion":"Editar", 
             "form": form,
          } 
-    return render(request, "luz_cultivo_editar.html",contexto)
+    return render(request, "temperaturas_variedades_cultivos_editar.html",contexto)
 
 
-def luz_cultivos_eliminar(request,id):
-    luz = Luz_Necesaria_Cultivo.objects.get(id=id)
+def fechas_siembra_variedades_cultivos_eliminar(request,id):
+    temperaturas = Temperaturas_Variedades_Cultivos.objects.get(id=id)
+    temperaturas.delete()
+    messages.success(request,"¡Luz necesaria para los cultivos. Listadas!")
+    contexto ={   } 
+    return redirect('/configuracion/gestion_cultivos', contexto)
+
+
+
+def luz_variedades_cultivos_agregar(request, id):
+    variedad_cultivo = Variedades_Cultivos.objects.get(id=id)
+    if request.method == 'POST':
+        form= Luz_Variedades_CultivosForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_cultivos')
+    else:
+        form =Luz_Variedades_CultivosForm(initial={'variedad_cultivo': variedad_cultivo})
+
+    contexto ={ 
+            "accion":"Agregar", 
+            "form": form,
+         } 
+    return render(request, "luz_variedades_cultivos_editar.html", contexto )
+
+def luz_variedades_cultivos_editar(request,id):
+    luz = Luz_Variedades_Cultivos.objects.get(id = id)
+    if request.method == 'POST':
+        form= Luz_Variedades_CultivosForm(request.POST, request.FILES, instance=luz)
+        if form.is_valid():
+            form.save()
+            return redirect('/configuracion/gestion_cultivos')
+    else:
+            form = Luz_Variedades_CultivosForm( instance=luz)
+    
+    contexto ={ 
+            "accion":"Editar", 
+            "form": form,
+         } 
+    return render(request, "luz_variedades_cultivos_editar.html",contexto)
+
+
+def luz_variedades_cultivos_eliminar(request,id):
+    luz = Luz_Variedades_Cultivos.objects.get(id=id)
     luz.delete()
-    listado = Luz_Necesaria_Cultivo.objects.all()
+    listado = Luz_Variedades_Cultivos.objects.all()
     messages.success(request,"¡Luz necesaria para los cultivos. Listadas!")
     contexto ={ "listado": listado,  } 
-    return redirect('/configuracion/gestion_luz_cultivos', contexto)
+    return redirect('/configuracion/gestion_cultivos', contexto)
 
 
 def gestion_riego_cultivos(request):
@@ -620,29 +684,26 @@ def listadoCargaInicial():
             'nombre': "Carga Cultivos",
         },
 
-        {
-            'urlAgregar':"configuracion:carga_inicial_tierra_cultivo",
-            'urlEliminar':"configuracion:eliminar_todo_tierra_cultivo",
-            'nombre': "Carga Tipos de Suelos",
-        },
-        {
-            'urlAgregar':"configuracion:carga_inicial_temperaturas_cultivo",
-            'urlEliminar':"configuracion:eliminar_toda_temperatura_cultivo",
-            'nombre': "Carga Temperatura Cultivos",
-        },
 
         {
             'urlAgregar':"configuracion:carga_inicial_riegos_cultivo",
             'urlEliminar':"configuracion:eliminar_todo_riego_cultivo",
             'nombre': "Carga Riego Cultivos",
         },
+        
+        {
+            'urlAgregar':"configuracion:carga_inicial_fechas",
+            'urlEliminar':"configuracion:eliminar_todo_fechas",
+            'nombre': "Carga Fechas",
+        },
+
         ]
                
     return listado
 
-def eliminar_todo_tierra_cultivo(request):
-    Tierras_Cultivo.objects.all().delete()
-    mensaje ="registrso borrados con exito"
+def eliminar_todo_fechas(request):
+    Fecha_Siembra.objects.all().delete()
+    mensaje ="registros borrados con exito"
     contexto ={  
         "mensaje":mensaje , 
         "menu": generarMenu(request.user),
@@ -674,13 +735,14 @@ def eliminar_todo_luz_cultivo(request):
     } 
     return render (request, "carga_inicial.html",contexto)
 
-def carga_inicial_luz_cultivo(request):
-    template_name = "configuracion/migrations/luz.csv"
-    #Disciplinas.objects.all().delete()
+
+
+def carga_inicial_fechas(request):
+    template_name = "configuracion/migrations/fechas.csv"
     with open (template_name) as f:
         reader = csv.reader(f )
         for row in reader:
-           Luz_Necesaria_Cultivo.objects.create( cantidad= row[0], desc_corta = row[1],descripcion =row[2] )
+           Fecha_Siembra.objects.create( mes= row[0], semana = row[1])
     mensaje ="carga con exito"
     contexto ={  
         "mensaje":mensaje , 
@@ -690,33 +752,6 @@ def carga_inicial_luz_cultivo(request):
     } 
     return render (request, "carga_inicial.html",contexto)
 
-
-def carga_inicial_temperaturas_cultivo(request):
-    template_name = "configuracion/migrations/temperaturas.csv"
-    #Disciplinas.objects.all().delete()
-    with open (template_name) as f:
-        reader = csv.reader(f )
-        for row in reader:
-           Temperaturas_Cultivos.objects.create( desc_corta= row[0], valor_minimo = row[1], valor_maximo =row[2] , descripcion =row[3] )
-    mensaje ="carga con exito"
-    contexto ={  
-        "mensaje":mensaje , 
-        "menu": generarMenu(request.user),
-        "listado": listadoCargaInicial()
-
-    } 
-    return render (request, "carga_inicial.html",contexto)
-
-def eliminar_toda_temperatura_cultivo(request):
-    Temperaturas_Cultivos.objects.all().delete()
-    mensaje ="registros borrados con exito"
-    contexto ={  
-        "mensaje":mensaje , 
-        "menu": generarMenu(request.user),
-        "listado": listadoCargaInicial()
-
-    } 
-    return render (request, "carga_inicial.html",contexto)
 
 def carga_inicial_cultivos(request):
     template_name = "configuracion/migrations/cultivos.csv"

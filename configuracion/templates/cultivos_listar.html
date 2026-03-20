@@ -43,45 +43,113 @@
         <div class="tabla-listar">
             <div class="agregar">
                 <a href="{% url 'configuracion:cultivo_agregar'  %}" class="btn-agregar">➕</a>
-
             </div>
-
-
             {% if listadoCultivos %}
             {% for listadoCultivos in listadoCultivos%}
                 <details >
                     <summary>
-                        {{forloop.counter}} - {{listadoCultivos.nombre}} &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-                        <a href="{% url 'configuracion:cultivo_editar' listadoCultivos.id %}" class="btn-editar">✏️</a>
-                        <a href="{% url 'configuracion:cultivo_eliminar' listadoCultivos.id %}" class="btn-eliminar">🗑</a>
+                        <span class="cultivo-titulo">
+                            {{forloop.counter}} - {{listadoCultivos.nombre}}
+                        </span>
+                        <span class="acciones">
+                            <a href="{% url 'configuracion:cultivo_editar' listadoCultivos.id %}" class="btn-editar">✏️</a>
+                            <a href="{% url 'configuracion:cultivo_eliminar' listadoCultivos.id %}" class="btn-eliminar">🗑</a>
+                        </span>
                     </summary>
                     <div class="cultivos">
-                        <span>{%if listadoCultivos.descripcion %}  {{listadoCultivos.descripcion}}
+                        <span class="texto">{%if listadoCultivos.descripcion %}  {{listadoCultivos.descripcion}}
                             Pertenece a la familia: {{listadoCultivos.get_familia_display }} 
                             {%endif%} <i> Nombre Cientifico:</i> {{listadoCultivos.nombre_cientifico}}
                         </span>
 
-                        <figure>
-                                    {% if listadoCultivos.imagen %}
-                                        <img  src="{{ listadoCultivos.imagen.url}}" height="200px" width="200px" >
-                                    {% endif %}
-                                    <figcaption>
-                                    </figcaption>
-                        </figure>
                         <br><br>
-                        <H2>Variedades</H2>
-                        <span>
-                                &nbsp; &nbsp;desde : <b>{{listadoCultivos.get_semana_siembra_desde_display}}</b> de <b>{{listadoCultivos.get_mes_siembra_desde_display}}</b><br>
-                                &nbsp; &nbsp; &nbsp;hasta : <b>{{listadoCultivos.get_semana_siembra_hasta_display}}</b> de <b>{{listadoCultivos.get_mes_siembra_hasta_display}}</b>
-                        </span>
-                        <br><br>
-                        <H2>Requisitos de sol y temperatura</H2><br>
-                        <span>
-                             Luz:<b>{{listadoCultivos.luz.descripcion}}</b> <br>
-                        </span>
-                        <span>                            
-                             temperatura: <b>{{listadoCultivos.temperaturas.desc_corta}}</b> y el rango esta entre: <b>{{listadoCultivos.temperaturas.valor_minimo}} - {{listadoCultivos.temperaturas.valor_maximo}}</b><br>
-                             </span>
+                        <div class="items"> 
+                            <div class="items-header">
+                                <h2>Variedades</h2>
+                                <a href="{% url 'configuracion:variedades_cultivos_agregar' listadoCultivos.id %}" class="btn-agregar-variedad">➕</a>
+                            </div>
+                            <div class="variedad-grid">
+                            {% for variedad in listadoCultivos.variedades.all %}
+                                <div class="card-variedad">
+                                    <div class="variedad-titulo">
+                                        <span class="nombre-variedad">{{ variedad.nombre }}</span>
+                                        <div class="acciones">
+                                            <a href="{% url 'configuracion:variedades_cultivos_editar' variedad.id %}" class="">✏️</a>
+                                            <a href="{% url 'configuracion:variedades_cultivos_eliminar' variedad.id %}" class="">🗑</a>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <div class="variedad-datos">
+                                       {% if variedad.imagen %}
+                                        <figure class="imagen-variedad">
+                                            <img src="{{variedad.imagen.url}}">
+                                        </figure>
+                                        {% endif %}
+                                        <div class="items-header">
+                                            <p class="texto"><b>Luz</b></p>
+                                            <a href="{% url 'configuracion:luz_variedades_cultivos_agregar' variedad.id %}" class="btn-agregar-variedad">+</a>
+                                        </div>  
+                                            {% for luz in variedad.luz.all %}
+                                                <div class="variedad-texto">
+                                                    <p class="texto1">{{luz.desc_corta }} entre: {{luz.valor_minimo}} y {{luz.valor_maximo}} horas</p>{% if not forloop.last %}, {% endif %}
+                                                    <div class="acciones">
+                                                      <a href="{% url 'configuracion:luz_variedades_cultivos_editar' luz.id %}" >✏️</a>
+                                                      <a href="{% url 'configuracion:luz_variedades_cultivos_eliminar' luz.id %}" > 🗑 </a>
+                                                  </div>
+                                                </div>
+                                            {% empty %}
+                                               <p class="texto">No se han cargado necesidades</p>
+                                            {% endfor %}
+                                        <br><br>
+                                        <div class="items-header">
+                                            <p class="texto"><b>Temperatura</b></p>
+                                            <a href="{% url 'configuracion:temperaturas_variedades_cultivos_agregar' variedad.id %}" class="btn-agregar-variedad">+</a>
+                                        </div>  
+                                        {% for temperatura in variedad.temperatura.all %}
+                                                <div class="variedad-texto">
+                                                    <p class="texto1">{{temperatura.desc_corta }} entre: {{temperatura.valor_minimo}} y {{temperatura.valor_maximo}} grados</p>{% if not forloop.last %}, {% endif %}
+                                                    <div class="acciones">
+                                                      <a href="{% url 'configuracion:temperaturas_variedades_cultivos_editar' temperatura.id %}" >✏️</a>
+                                                      <a href="{% url 'configuracion:temperaturas_variedades_cultivos_eliminar' temperatura.id %}" > 🗑 </a>
+                                                  </div>
+                                                </div>
+                                            {% empty %}
+                                               <p class="texto">No se han cargado necesidades</p>
+                                            {% endfor %}
+
+                                        <br><br>
+                                        <div class="items-header">
+                                            <p class="texto"><b>Fecha de Siembra</b></p>
+                                            <a href="{% url 'configuracion:fechas_siembra_variedades_cultivos_agregar' variedad.id %}" class="btn-agregar-variedad">+</a>
+                                        </div>  
+                                        {% for fecha_siembra in variedad.fecha_siembra.all %}
+                                                <div class="variedad-texto">
+                                                    <p class="texto1">Desde: {{fecha_siembra}}</p>{% if not forloop.last %}, {% endif %}
+                                                    <div class="acciones">
+                                                      <a href="{% url 'configuracion:fechas_siembra_variedades_cultivos_editar' fecha_siembra.id %}" >✏️</a>
+                                                      <a href="{% url 'configuracion:fechas_siembra_variedades_cultivos_eliminar' fecha_siembra.id %}" > 🗑 </a>
+                                                  </div>
+                                                </div>
+                                            {% empty %}
+                                               <p class="texto">No se han cargado necesidades</p>
+                                            {% endfor %}
+
+                                        <br><br>
+                                        {% if variedad.descripcion %}
+                                            <p class="texto"><b>Descripción:</b> {{ variedad.descripcion }}</p>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+
+                                    {% empty %}
+                                    <p class="texto">No hay variedades cargadas.</p>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        
+                        <div class="items">
+                            <div class="items-header">
                             <br><br>
                             <H2>Requisitos de suelo</H2>
                         <span>
@@ -108,10 +176,6 @@
                             <br>
                             <H2>Plagas y Enfermedades</H2><br>
                             <span></span>
-                            <br>
-                            <H2>Variedades</H2><br>
-                            <span></span>
-                            <br>
                     </div>
                 </details>
             {% endfor %}
