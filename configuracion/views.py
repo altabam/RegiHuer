@@ -66,7 +66,6 @@ def hortelano_modificar(request):
 # Create your views here.
 def gestion_cultivos(request):
     listadoCultivos = Cultivos.objects.all()
-    listadoVariedades = Variedades_Cultivos.objects.all()
     messages.success(request,"¡Cultivos Listados!")
     menu = generarMenu("hola")
 
@@ -527,20 +526,20 @@ def fechas_siembra_variedades_cultivos_agregar(request, id):
 
 
 def fechas_siembra_variedades_cultivos_editar(request,id):
-    temperatura = Temperaturas_Variedades_Cultivos.objects.get(id = id)
+    fecha_siembra = Fecha_Siembra_Variedades_Cultivos.objects.get(id = id)
     if request.method == 'POST':
-        form= Temperaturas_Variedades_CultivosForm(request.POST, request.FILES, instance=lutemperaturaz)
+        form= Fecha_Siembra_Variedades_CultivosForm(request.POST, request.FILES, instance=fecha_siembra)
         if form.is_valid():
             form.save()
             return redirect('/configuracion/gestion_cultivos')
     else:
-            form = Temperaturas_Variedades_CultivosForm( instance=temperatura)
+            form = Fecha_Siembra_Variedades_CultivosForm( instance=fecha_siembra)
     
     contexto ={ 
             "accion":"Editar", 
             "form": form,
          } 
-    return render(request, "temperaturas_variedades_cultivos_editar.html",contexto)
+    return render(request, "fechas_siembra_variedades_cultivos_editar.html",contexto)
 
 
 def fechas_siembra_variedades_cultivos_eliminar(request,id):
