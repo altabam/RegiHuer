@@ -101,13 +101,15 @@ class Cultivos(models.Model):
         ('UMB','Cruciferas'),
         ('SOL','Solanaceas'),
         ('GRA','Gramineas'),
-        ('LEG','Leguminosas'),
+        ('FAB','Fabaceae'),
         ('QUE','Quenopoidaceas'),
         ('ALL','Alliaceas'),
         ('CUC','Cucurbitaceas'),
         ('CON','Convolvulaceas'),
         ('ASP','Asparagaceae'),
         ('API','Apiaceae'),
+        ('LAM','Lamiaceae'),
+        ('AMA','Amaranthaceae '),
     )
     familia = models.CharField(max_length=3, choices=FAMILIA)
     nombre_cientifico = models.CharField(max_length=50, blank=True)
@@ -124,8 +126,8 @@ class Cultivos(models.Model):
 
 
 class Fecha_Siembra(models.Model):
-    semana= models.CharField(max_length=1, choices=SEMANA, null=True)
-    mes= models.CharField(max_length=3, choices=MES, null=True)
+    semana= models.CharField(max_length=10)
+    mes= models.CharField(max_length=10)
     def __str__(self):
         return f"{self.mes} - {self.semana}"
 

@@ -1,11 +1,37 @@
-CRU,Raphanus sativus,Rabanito,Hortaliza de raíz pequeña crecimiento muy rápido y sabor picante.,D,C
+CRU,Raphanus sativus,Rabanito,Hortaliza de raíz pequeña crecimiento muy rápido y sabor picante.,D,M
 CRU,Eruca sativa,Rúcula,Hortaliza de hoja con sabor intenso y algo picante.,D,C
-CRU,Brassica juncea,Mostaza roja / mostaza,	Cultivo de hojas verdes o rojizas sabor picante crecimiento rápido.,D,C
-CRU,Brassica oleracea (var. capitata),Repollo,Forma una cabeza compacta de hojas grandes.,S,C
-CRU,Brassica oleracea (var. italica),Brócoli,Produce inflorescencias verdes comestibles.	,S,C
-CRU,Brassica oleracea (var. botrytis),Coliflor	,produce una inflorescencia blanca compacta.,S,C
-CRU,Brassica oleracea (var. acephala),Kale / col rizada,Cultivo de hojas rizadas muy nutritivas.	,T,C
-CRU,Brassica rapa,Nabo,Raíz comestible redondeada; también se consumen las hojas.,T,C
-CRU,Brassica rapa,Pak choi / bok choy,Hortaliza asiática con hojas y tallos carnosos.,T,C
+CRU,Brassica juncea,Mostaza,Cultivo de hojas verdes o rojizas sabor picante crecimiento rápido.,S,C
+CRU,Brassica oleracea var. capitata,Repollo,Forma una cabeza compacta de hojas grandes.,S,C
+CRU,Brassica oleracea var. gemmifera,Brúselas,Hortaliza de brotes pequeños y verdes, S,M
+CRU,Brassica oleracea var. italica,Brócoli,Produce inflorescencias verdes comestibles.	,S,C
+CRU,Brassica oleracea var. botrytis,Coliflor	,produce una inflorescencia blanca compacta.,S,C
+CRU,Brassica oleracea var. acephala,Kale,Cultivo de hojas rizadas muy nutritivas.	,T,C
+CRU,Brassica rapa,Nabo,Raíz comestible redondeada; también se consumen las hojas.,T,M
 CRU,Brassica rapa,Mizuna,Hortaliza japonesa de hojas finas y sabor suave.,T,C
+CRU,Brassica rapa subsp. chinensis,Col china,Tambien llamado Akusay. Hortaliza de hojas verdes y tallos tiernos, S,C
 API,Coriandrum sativum, Cilantro, hierba aromática muy utilizada en cocina. Es fácil de cultivar y crece bien en huertas familiares.,D,C
+API,Apium graveolens,Apio,Hortaliza de tallo crujiente y hojas aromáticas,S,C
+API,Daucus carota,Zanahoria,Hortaliza de raíz alargada dulce y nutritiva,D,M
+API,Petroselinum crispum, Perejil,Hortaliza de hojas aromáticas,S,C
+ALL,Allium cepa,Cebolla,Hortaliza bulbosa usada en múltiples platos,S,C
+ALL,Allium sativum,Ajo,Hortaliza bulbosa de uso culinario y medicinal,D,C
+ALL,Allium fistulosum,Cebollino,Hortaliza aromática de hojas finas,T,C
+ALL,Allium ampeloprasum,Puerro,Hortaliza de tallo alargado y comestible,T,C
+SOL,Solanum lycopersicum,Tomate,Hortaliza de fruto comestible y nutritivo,T,C
+SOL,Capsicum annuum,Pimiento,Hortaliza de fruto carnoso y dulce,T,C
+SOL,Solanum melongena,Berenjena,Hortaliza de fruto comestible de piel morada,T,C
+SOL,Solanum tuberosum,Papa,Tambie llamada Patata. Hortaliza de tubérculo comestible,D,C
+AMA,Beta vulgaris,Remolacha,Hortaliza de raíz y hojas comestibles,D,C
+AMA,Spinacia oleracea,Espinaca,Hortaliza de hojas verdes,T,C
+AMA,Beta vulgaris var. cicla,Acelga,Hortaliza de hojas y pencas comestibles,T,C
+CUC,Cucumis sativus,Pepino,Hortaliza trepadora de fruto alargado y refrescante,D,C
+CUC,Cucurbita maxima,Calabaza,Hortaliza de fruto grande y dulce,T,C
+CUC,Cucumis melo,Melón,Hortaliza de fruto dulce y aromático,D,C
+CUC,Luffa aegyptiaca,Lufa,Hortaliza trepadora de fruto fibroso,D,C
+FAB,Phaseolus vulgaris,Judía,Hortaliza de vaina comestible rica en proteína,D,C
+FAB,Cicer arietinum,Garbanzos,Hortaliza de vaina seca rica en proteína,D,C
+FAB,Vigna unguiculata,Frijol caupí,Hortaliza de vaina y semilla nutritiva,D,C
+AMA,Chenopodium quinoa,Quinoa,Hortaliza de hojas y semillas nutritivas,D,C
+LAM,Ocimum basilicum,Albahaca,Hortaliza aromática de hojas verdes,T,C
+LAM,Salvia officinalis,Salvia,Hortaliza aromática de hojas duras,T,C
+FAB,Phaseolus coccineus,Frijol de enrame,Hortaliza de vaina larga,D,C
